@@ -1,0 +1,183 @@
+unit pril5;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Grids, DBGrids, Mask, DBCtrls, WordXP,
+  OleServer;
+
+type
+  TfPril3 = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    Label8: TLabel;
+    Label9: TLabel;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBGrid1: TDBGrid;
+    Label12: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    DBEdit8: TDBEdit;
+    WordApplication1: TWordApplication;
+    WordDocument1: TWordDocument;
+    Label10: TLabel;
+    DBEdit9: TDBEdit;
+    DBMemo1: TDBMemo;
+    DBCheckBox1: TDBCheckBox;
+    Button3: TButton;
+    Button4: TButton;
+    procedure Edit2Change(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+  //  procedure DBCheckBox1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fPril3: TfPril3;
+  s,scode:string;
+  mode:boolean;
+implementation
+
+uses DM, spravorg, editor;
+
+{$R *.dfm}
+
+procedure TfPril3.Edit2Change(Sender: TObject);
+begin
+  //если в поле Edit1 есть хоть одна буква,
+  if Edit2.Text <> '' then begin
+    fDM.TMKB.Filtered := False; //отключаем фильтр
+    ed := Edit2.Text; //передаем в fDM новый текст
+    fDM.TMKB.Filtered := True; //включаем фильтр
+  end
+  //если букв нет, фильтрацию отключаем:
+  else fDM.TMKB.Filtered := False;
+end;
+
+procedure TfPril3.DBGrid1DblClick(Sender: TObject);
+var
+COUNTMKB:integer;
+query:string;
+
+begin
+  if not(fDM.TRab.FieldValues['mkb']=Null) then
+  begin
+   if MessageDlg('Поменять заболевание?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+    fDM.TRab.Edit;
+    fDM.TRab.FieldbyName('mkb').asstring:=fDM.TMKB.FieldValues['NAIM'];
+    fDM.TRab.FieldbyName('mkb_code').asstring:=fDM.TMKB.FieldValues['CODE'];
+    fDM.TRab.Post;
+  end;
+end Else begin
+    fDM.TRab.Edit;
+    fDM.TRab.FieldbyName('mkb').asstring:=fDM.TMKB.FieldValues['NAIM'];
+    fDM.TRab.FieldbyName('mkb_code').asstring:=fDM.TMKB.FieldValues['CODE'];
+    fDM.TRab.Post;
+    end;
+end;
+
+procedure TfPril3.Button1Click(Sender: TObject);
+begin
+    if MessageDlg('Сохранить изменения?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+    fDM.TRab.Edit;
+    fDM.TRab.Post;
+  end;
+end;
+
+procedure TfPril3.Button2Click(Sender: TObject);
+var Shablon:OleVariant;
+begin
+Shablon:=ExtractFileDir(ParamStr(0))+'\Шаблоны\pril3.doc';
+  WordApplication1.Connect;
+  WordApplication1.Visible:=true;
+  WordApplication1.Documents.Add(Shablon,EmptyParam, EmptyParam,EmptyParam);
+  WordDocument1.ConnectTo(WordApplication1.ActiveDocument);
+
+  WordApplication1.Visible:=True;
+
+  fEditor.WordGotoBookmark('f');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('fam').AsString);
+
+  fEditor.WordGotoBookmark('i');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('imya').AsString);
+
+  fEditor.WordGotoBookmark('o');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('fath').AsString);
+
+  fEditor.WordGotoBookmark('org');
+  fEditor.WordInsertText(fDM.TOrg.FieldByName('imya_org').AsString);
+
+  fEditor.WordGotoBookmark('strukt_p');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('imya_strukt_podr').AsString);
+
+  fEditor.WordGotoBookmark('prof');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('profes').AsString);
+
+  fEditor.WordGotoBookmark('vred_f');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('vredn_fact').AsString);
+
+  fEditor.WordGotoBookmark('mkb');
+  fEditor.WordInsertText(fDM.TRab.FieldByName('mkb').AsString);
+
+  WordApplication1.Disconnect;
+end;
+
+
+{procedure TfPril3.DBCheckBox1Click(Sender: TObject);
+var query:string;
+begin
+  if fDM.TRab.FieldValues['firstb']=true then begin
+  //fDM.TRab.Edit;
+    query:='UPDATE [mkb10] SET [mkb10].COUNT=COUNT-1 WHERE [mkb10].CODE='+quotedstr(fDM.TRab.FieldValues['mkb_code']);
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.ExecSQL
+    end else begin
+    query:='UPDATE [mkb10] SET [mkb10].COUNT=COUNT+1 WHERE [mkb10].CODE='+quotedstr(fDM.TRab.FieldValues['mkb_code']);
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    end;
+end;  }
+
+
+procedure TfPril3.Button3Click(Sender: TObject);
+var query:string;
+begin
+   if MessageDlg('Очистить МКБ10 у сотрудника?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+    fDM.TRab.Edit;
+    fDM.TRab.FieldbyName('mkb').asstring:='';
+    fDM.TRab.FieldbyName('mkb_code').asstring:='';
+    fDM.TRab.FieldbyName('firstb').asstring:='false';
+    fDM.TRab.Post;
+   end;
+end;
+
+procedure TfPril3.Button4Click(Sender: TObject);
+begin
+ Close;
+end;
+
+end.

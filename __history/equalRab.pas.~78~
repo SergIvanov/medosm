@@ -1,0 +1,109 @@
+unit equalRab;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, OleServer, ComObj, ShellApi;
+
+type
+  TfEqualRab = class(TForm)
+    Edit1: TEdit;
+    OpenDialog1: TOpenDialog;
+    Button1: TButton;
+    Label1: TLabel;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fEqualRab: TfEqualRab;
+  ExelTab: Variant;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TfEqualRab.Button1Click(Sender: TObject);
+begin
+  OpenDialog1.Execute();
+  Edit1.Text := OpenDialog1.FileName;
+end;
+
+procedure TfEqualRab.Button2Click(Sender: TObject);
+var
+  Shablon, vschange, h, s: OleVariant;
+  i,k: integer;
+  st_in: string;
+begin
+  st_in := ExtractFilePath(Application.ExeName);
+  ExelTab := CreateOleObject('Excel.Application');
+  ExelTab.Workbooks.Open[Edit1.Text];
+
+  fDM.Query.SQL.Clear;
+  fDM.Query.SQL.Add('DELETE FROM TempList');
+  fDM.Query.ExecSQL;
+  fDM.Query.Close;
+  i:=2;
+  while (ExelTab.Cells.Item[i, 1].Value<>'') do
+  begin
+    fDM.TTempList.Open;
+    fDM.TTempList.Insert;
+    fDM.TTempList.FieldByName('fam').AsString:= ExelTab.Cells.Item[i, 1].value;
+    fDM.TTempList.FieldByName('Im').AsString:= ExelTab.Cells.Item[i, 2].value;
+    fDM.TTempList.FieldByName('Ot').AsString:= ExelTab.Cells.Item[i, 3].value;
+    try
+    fDM.TTempList.FieldByName('DR').AsString:= ExelTab.Cells.Item[i, 4].value;
+    except
+
+    end;
+    fDM.TTempList.Post;
+    fDM.TTempList.Next;
+    inc(i);
+  end;
+  fDM.TTempList.Close;
+  ExelTab.ActiveWorkbook.Close;
+  ExelTab.Quit;
+
+  ExelTab.Workbooks.Open[st_in + '\Шаблоны\equalSotr.xls'];
+
+  fDM.Query.SQL.Clear;
+  fDM.Query.SQL.Add('SELECT TempList.fam, TempList.im, TempList.ot, TempList.dr, rabotnik.fam, rabotnik.imya, rabotnik.fath, rabotnik.data_r, rabotnik.id_org'+
+' FROM TempList LEFT JOIN rabotnik ON (TempList.dr = rabotnik.data_r) AND (TempList.ot = rabotnik.fath) AND (TempList.im = rabotnik.imya) AND (TempList.fam = rabotnik.fam) WHERE (rabotnik.fam is NULL)');
+  fDM.Query.Open;
+
+  fDM.Query.First;
+  i:=2;
+  k:=1;
+  while not(fDM.Query.eof) do
+  begin
+    ExelTab.Cells.Item[i, 1] :=k;
+    ExelTab.Cells.Item[i, 2] :=fDM.Query.FieldByName('TempList.fam').AsString;
+    ExelTab.Cells.Item[i, 3] :=fDM.Query.FieldByName('im').AsString;
+    ExelTab.Cells.Item[i, 4] :=fDM.Query.FieldByName('ot').AsString;
+    if (fDM.Query.FieldByName('dr').AsString = '30.12.1899')then
+    ExelTab.Cells.Item[i, 5].ColorIndex:=3 else
+    ExelTab.Cells.Item[i, 5] :=fDM.Query.FieldByName('dr').AsString;
+
+    inc(k);
+    inc(i);
+    fDM.Query.Next;
+  end;
+  ExelTab.ActiveWorkbook.SaveAs(st_in + 'Журнал\экономист\Списки сотрудников\Список соответствия' +
+    FormatDateTime('_yyyy_mm_dd', Date) + FormatDateTime('_hh_mm', time) +
+    '.xls', EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam,
+    EmptyParam, false, EmptyParam, EmptyParam, EmptyParam);
+    ShellExecute(Self.Handle,'open', Pchar(st_in + '\Журнал\экономист\Списки сотрудников'),nil,nil,SW_SHOWNORMAL);
+    ExelTab.ActiveWorkbook.Close;
+    ExelTab.Quit;
+    ExelTab:=0;
+end;
+
+end.

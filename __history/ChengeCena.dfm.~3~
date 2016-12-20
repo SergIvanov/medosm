@@ -1,0 +1,40 @@
+object fChengeCena: TfChengeCena
+  Left = 0
+  Top = 0
+  Caption = 'fChengeCena'
+  ClientHeight = 161
+  ClientWidth = 344
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 120
+    Width = 344
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    ExplicitLeft = 64
+    ExplicitTop = 56
+    ExplicitWidth = 185
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 344
+    Height = 120
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 96
+    ExplicitTop = 96
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+  end
+end

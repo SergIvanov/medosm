@@ -1,0 +1,715 @@
+unit pril9;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, Grids, DBGrids, WordXP, OleServer, ComCtrls,ComObj;
+
+type
+  TfPril9 = class(TForm)
+    Button1: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBGrid1: TDBGrid;
+    Edit1: TEdit;
+    WordApplication1: TWordApplication;
+    WordDocument1: TWordDocument;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    Label6: TLabel;
+    Label7: TLabel;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fPril9: TfPril9;
+
+implementation
+
+uses DM, editor;
+
+{$R *.dfm}
+
+
+
+procedure TfPril9.DBGrid1DblClick(Sender: TObject);
+begin
+  Edit1.Text := fDM.TOrgNew.FieldValues['imya_org'];
+end;
+
+procedure TfPril9.FormCreate(Sender: TObject);
+begin
+  DateTimePicker1.Date := Date;
+  DateTimePicker2.Date := Date;
+end;
+
+
+procedure Reestr();
+
+var Excel: Variant;
+query, st: string;
+VSEGO,i:Integer;
+begin
+
+Excel := CreateOleObject('Excel.Application');
+Excel.Workbooks.Open[ExtractFileDir(ParamStr(0)) + '\Шаблоны\reestr.xls'];
+Excel.Visible := True;
+
+
+
+query := 'SELECT fam,imya,fath,sex,data_r,staz_rab_fact,vredn_fact2,vredn_fact2,vredn_fact,needobslprof,needambl,needstcl,skl,ProfSan.NAME,needd,PredDZ,firstb,VUPZ'+
+          ' FROM (rabotnik LEFT JOIN organiz ON rabotnik.id_org = organiz.id_org) LEFT JOIN ProfSan ON rabotnik.id = ProfSan.id'+
+          ' WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(fPril9.Edit1.Text) + ') ORDER BY fam';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', fPril9.DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', fPril9.DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+   VSEGO := fDM.QVSEGO.RecordCount;
+
+  for i := 1 to VSEGO do
+  begin
+
+      excel.Cells[i+8, 2]:=fDM.QVSEGO.FieldByName('fam').AsString + ' ' +
+      fDM.QVSEGO.FieldByName('imya').AsString + ' ' + fDM.QVSEGO.FieldByName
+      ('fath').AsString;
+
+      excel.Cells[i+8, 3]:=fDM.QVSEGO.FieldByName('sex').AsString;
+      excel.Cells[i+8, 4]:=fDM.QVSEGO.FieldByName('data_r').AsString;
+
+      excel.Cells[i+8, 5]:=fDM.QVSEGO.FieldByName('staz_rab_fact').AsString;
+      excel.Cells[i+8, 6]:=fDM.QVSEGO.FieldByName('vredn_fact2').AsString;
+      excel.Cells[i+8, 7]:=fDM.QVSEGO.FieldByName('vredn_fact').AsString;
+      //excel.Cells[i+8, 8]:=fDM.QVSEGO.FieldByName('needd').AsString;
+      excel.Cells[i+8, 9]:=fDM.QVSEGO.FieldByName('needobslprof').AsString;
+      excel.Cells[i+8, 10]:=fDM.QVSEGO.FieldByName('needambl').AsString;
+      excel.Cells[i+8, 11]:=fDM.QVSEGO.FieldByName('needstcl').AsString;
+      excel.Cells[i+8, 12]:=fDM.QVSEGO.FieldByName('skl').AsString;
+      excel.Cells[i+9, 13]:=fDM.QVSEGO.FieldByName('NAME').AsString;
+      excel.Cells[i+8, 14]:=fDM.QVSEGO.FieldByName('needd').AsString;
+      excel.Cells[i+8, 15]:=fDM.QVSEGO.FieldByName('PredDZ').AsString;
+      excel.Cells[i+8, 16]:=fDM.QVSEGO.FieldByName('firstb').AsString;
+      excel.Cells[i+8, 17]:=fDM.QVSEGO.FieldByName('VUPZ').AsString;
+
+
+
+  fDM.QVSEGO.Next;
+  end;
+
+
+end;
+
+
+// Переделать
+procedure TfPril9.Button1Click(Sender: TObject);
+var
+  query, st: string;
+  VSEGO, VSEGOG, VSEGOVF, VSEGOVFG, i, staj, stajd: integer;
+  Shablon: OleVariant;
+  myDate: TDateTime;
+  myYear, myMonth, myDay: Word;
+begin
+  Shablon := ExtractFileDir(ParamStr(0)) + '\Шаблоны\pril9.doc';
+  WordApplication1.Connect;
+  WordApplication1.Visible := true;
+  WordApplication1.Documents.Add(Shablon, EmptyParam, EmptyParam, EmptyParam);
+  WordDocument1.ConnectTo(WordApplication1.ActiveDocument);
+
+  WordApplication1.Visible := true;
+
+  query := 'SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) AND (idusl<>9) AND (idusl<>1001) AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ')';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  VSEGO := fDM.QVSEGO.Fields[0].AsInteger;
+
+  query := 'SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) AND (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') and (rabotnik.sex=' + QuotedStr('Жен') + ')';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  VSEGOG := fDM.QVSEGO.Fields[0].AsInteger;
+
+  query := 'SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') and (len(rabotnik.vredn_fact)>0)';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  VSEGOVF := fDM.QVSEGO.Fields[0].AsInteger;
+
+  query := 'SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') and (len(rabotnik.vredn_fact)>0)' +
+    ' and (rabotnik.sex=' + QuotedStr('Жен') + ')';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  VSEGOVFG := fDM.QVSEGO.Fields[0].AsInteger;
+
+  fEditor.WordGotoBookmark('VSEGO');
+  fEditor.WordInsertText(inttostr(VSEGO));
+
+  fEditor.WordGotoBookmark('VSEGOG');
+  fEditor.WordInsertText(inttostr(VSEGOG));
+
+  fEditor.WordGotoBookmark('VSEGOVF');
+  fEditor.WordInsertText(inttostr(VSEGOVF));
+
+  fEditor.WordGotoBookmark('VSEGOVFG');
+  fEditor.WordInsertText(inttostr(VSEGOVFG));
+
+  fEditor.WordGotoBookmark('D');
+  fEditor.WordInsertText(Edit2.Text);
+
+  fEditor.WordGotoBookmark('M');
+  fEditor.WordInsertText(Edit3.Text);
+
+  fEditor.WordGotoBookmark('Y');
+  fEditor.WordInsertText(Edit4.Text);
+
+  fEditor.WordGotoBookmark('Y2');
+  fEditor.WordInsertText(Edit4.Text);
+
+  fEditor.WordGotoBookmark('Org');
+  fEditor.WordInsertText(fDM.TOrgNew.FieldByName('imya_poln').AsString);
+
+  query := 'SELECT * FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') ORDER BY fam';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+
+  fEditor.WordGotoBookmark('tab');
+  for i := 1 to VSEGO do
+  begin
+    fEditor.WordInsertText(inttostr(i));
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('fam').AsString + ' ' +
+      fDM.QVSEGO.FieldByName('imya').AsString + ' ' + fDM.QVSEGO.FieldByName
+      ('fath').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('sex').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('data_r').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('imya_strukt_podr').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('profes').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('vredn_fact').AsString);
+
+    WordApplication1.Run('NextCell');
+    st := fDM.QVSEGO.FieldByName('staz_rab_fact').AsString;
+
+    if length(st) = 4 then
+    begin
+      staj := strtoint(st);
+      stajd := currentyear;
+      staj := stajd - staj;
+      st := inttostr(staj);
+    end;
+    fEditor.WordInsertText(st);
+
+    // fEditor.WordInsertText(fDM.QVSEGO.FieldByName('staz_rab_fact').asstring); //Заменить дату на количество лет
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('mkb_code').AsString);
+    if fDM.QVSEGO.FieldByName('mkb_code').AsString <> '' then
+      fEditor.WordInsertText(', ');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('disp_gr').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('firstb').AsString);
+    // fEditor.WordInsertText(fDM.QVSEGO.FieldByName('firstb').asstring);
+
+    WordApplication1.Run('NextCell');
+    if (fDM.QVSEGO.FieldByName('prkrab').AsString = '') and
+      (fDM.QVSEGO.FieldByName('dop_pri_usl').AsString = '') and
+      (pos('не', fDM.QVSEGO.FieldByName('goden').AsString) = 0) then
+      fEditor.WordInsertText('Мед. противопоказания не выявлены');
+
+    if (fDM.QVSEGO.FieldByName('prkrab').AsString = '') and
+      (fDM.QVSEGO.FieldByName('dop_pri_usl').AsString <> '') and
+      (pos('не', fDM.QVSEGO.FieldByName('goden').AsString) = 0) then
+      fEditor.WordInsertText('Допущен ' + fDM.QVSEGO.FieldByName('dop_pri_usl')
+        .AsString);
+
+    if (fDM.QVSEGO.FieldByName('prkrab').AsString <> '') and
+      (fDM.QVSEGO.FieldByName('dop_pri_usl').AsString <> '') and
+      (pos('не', fDM.QVSEGO.FieldByName('goden').AsString) = 0) then
+      fEditor.WordInsertText('Выявлены мед. противопоказания, допущен ' +
+        fDM.QVSEGO.FieldByName('dop_pri_usl').AsString);
+
+    if (pos('не', fDM.QVSEGO.FieldByName('goden').AsString) > 0) then
+      fEditor.WordInsertText('Выявлены мед. противопоказания ' +
+        fDM.QVSEGO.FieldByName('prkrab').AsString);
+
+    WordApplication1.Run('NextCell');
+    // fEditor.WordInsertText(fDM.QVSEGO.FieldByName('dop_pri_usl').asstring);
+
+    WordApplication1.Run('NextCell');
+    if (pos('не', fDM.QVSEGO.FieldByName('goden').AsString) > 0) then
+      fEditor.WordInsertText(fDM.QVSEGO.FieldByName('goden').AsString);
+
+    WordApplication1.Run('NextCell');
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needobslprof').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needambl').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needstcl').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('skl').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needlpit').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needd').AsString);
+
+    WordApplication1.Run('NextCell');
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('needmse').AsString);
+
+    WordApplication1.Run('NextCell');
+    fDM.QVSEGO.Next;
+  end;
+
+  query := 'SELECT rabotnik.mkb_code, rabotnik.id_org, rabotnik.firstb, SUM(1) AS [count] FROM rabotnik WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (rabotnik.id_org='
+    + inttostr(fDM.TOrgNew.FieldValues['id_org']) +
+    ') and (rabotnik.firstb="Да") GROUP BY rabotnik.mkb_code, rabotnik.id_org, rabotnik.firstb';
+  fDM.mkbfirst.SQL.Clear;
+  fDM.mkbfirst.SQL.Add(query);
+  fDM.mkbfirst.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.mkbfirst.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.mkbfirst.Open;
+
+  fDM.mkbfirst.first;
+  i := 0;
+  fEditor.WordGotoBookmark('tab1');
+  while not(fDM.mkbfirst.Eof) do
+  begin
+    inc(i);
+    fEditor.WordInsertText(inttostr(i));
+    WordApplication1.Run('NextCell');
+
+    fEditor.WordInsertText(fDM.mkbfirst.FieldByName('mkb_code').AsString);
+    WordApplication1.Run('NextCell');
+
+    fEditor.WordInsertText(fDM.mkbfirst.FieldByName('count').AsString);
+    WordApplication1.Run('NextCell');
+
+    fDM.mkbfirst.Next;
+  end;
+
+  // Сводная таблица 8.1
+  // всего годных
+  fEditor.WordGotoBookmark('tab2');
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) +
+    ') AND ((goden="Годен") OR (goden="Годна")OR (goden="Годена"))';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // годных в том числе женщин
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) +
+    ') AND ((goden="Годен") OR (goden="Годна")OR (goden="Годена")) AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // временно негоден
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND ((goden="Годен") OR (goden="Годна")OR (goden="Годена")) AND (sex="жен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+
+  // временно негоден женщины
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND ((goden="Годен") OR (goden="Годна")OR (goden="Годена")) AND (sex="жен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // не годен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (goden="не годен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // не годен жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (goden="не годен") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // нужд в дообследовании
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND (goden="не годен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+
+  // нужд в дообследовании жен
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND (goden="не годен") AND (sex="жен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // подозрение на проф заболевание
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND (goden="не годен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+
+  // подозрение на проф заболевание жен
+  { query:='SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (organiz.imya_org='+QuotedStr(Edit1.Text)+') AND (goden="не годен") AND (sex="жен")';
+    fDM.QVSEGO.SQL.Clear;
+    fDM.QVSEGO.SQL.Add(query);
+    fDM.QVSEGO.Open;
+    fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').asstring); }
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // центр профпоталогии
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needobslprof<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // центр профпоталогии жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needobslprof<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // амб обсл
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needambl<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // амб обсл жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needambl<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // стац обсл
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needstcl<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // стац обсл жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needstcl<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // сан кур обсл
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (skl<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // сан кур обсл жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (skl<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // леч проф пит
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needlpit<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // леч проф пит жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE(data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needlpit<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // дисп набл
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needd<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // дисп набл жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needd<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+  WordApplication1.Run('NextCell');
+
+  // мсэ
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needmse<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+  WordApplication1.Run('NextCell');
+
+  // мсэ жен
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needmse<>"") AND (sex="жен")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+  // 9
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND ((idusl=10) OR (idusl=11))';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordGotoBookmark('profpat');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (skl<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordGotoBookmark('skur');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needlpit<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordGotoBookmark('diet');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+  query := 'SELECT COUNT(*) as kol FROM rabotnik WHERE (data_proh BETWEEN :date1 AND :date2) and (idusl<>9) AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND (rabotnik.id_org='
+    + inttostr(fDM.TOrgNew.FieldValues['id_org']) +
+    ') and (rabotnik.firstb="Да")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordGotoBookmark('dispn');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+
+  query := 'SELECT COUNT(*) as kol FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE (data_proh BETWEEN :date1 AND :date2)and (idusl<>9)AND (idusl<>1001)AND (idusl<>1002) AND (rabotnik.cat_osv not Like "п%") AND  (organiz.imya_org='
+    + QuotedStr(Edit1.Text) + ') AND (needmse<>"")';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Parameters.ParamByName('date1').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QVSEGO.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QVSEGO.Open;
+  fEditor.WordGotoBookmark('medexp');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('kol').AsString);
+
+  WordApplication1.Disconnect;
+  Reestr();
+end;
+
+end.

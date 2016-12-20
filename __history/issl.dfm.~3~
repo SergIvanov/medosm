@@ -1,0 +1,61 @@
+object fIssl: TfIssl
+  Left = 0
+  Top = 0
+  Caption = 'fIssl'
+  ClientHeight = 300
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 248
+    Width = 635
+    Height = 52
+    Align = alBottom
+    TabOrder = 0
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 248
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 104
+    ExplicitTop = 104
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object DBGridEh1: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 633
+      Height = 246
+      Align = alClient
+      DataGrouping.GroupLevels = <>
+      Flat = False
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -11
+      FooterFont.Name = 'Tahoma'
+      FooterFont.Style = []
+      IndicatorOptions = [gioShowRowIndicatorEh]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+end

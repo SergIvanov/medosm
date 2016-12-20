@@ -1,0 +1,24 @@
+unit SprProvpatolog;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TSprProf = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SprProf: TSprProf;
+
+implementation
+
+{$R *.dfm}
+
+end.

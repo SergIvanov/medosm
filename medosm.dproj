@@ -1,0 +1,197 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{19AB6734-0687-4D54-B96F-9342274B116B}</ProjectGuid>
+			<MainSource>medosm.dpr</MainSource>
+			<Base>True</Base>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>12.3</ProjectVersion>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;qrpt;AnyDAC_PhysSQLITE_D15;AnyDAC_Phys_D15;AnyDAC_ComI_D15;AnyDAC_PhysPg_D15;AnyDAC_PhysIB_D15;AnyDAC_PhysTDBX_D15;AnyDAC_PhysADS_D15;AnyDAC_PhysASA_D15;AnyDAC_PhysODBC_D15;AnyDAC_PhysOracle_D15;AnyDAC_PhysMySQL_D15;AnyDAC_PhysDb2_D15;AnyDAC_PhysMSSQL_D15;AnyDAC_PhysMSAcc_D15;AnyDAC_GUIxForms_D15;AnyDAC_Comp_D15</DCC_UsePackage>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_E>false</DCC_E>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_F>false</DCC_F>
+			<DCC_K>false</DCC_K>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+			<DCC_Optimize>false</DCC_Optimize>
+			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="medosm.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="main.pas">
+				<Form>fMain</Form>
+			</DCCReference>
+			<DCCReference Include="DM.pas">
+				<Form>fDM</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="editor.pas">
+				<Form>fEditor</Form>
+			</DCCReference>
+			<DCCReference Include="spravorg.pas">
+				<Form>fSpravOrg</Form>
+			</DCCReference>
+			<DCCReference Include="pril5.pas">
+				<Form>fPril3</Form>
+			</DCCReference>
+			<DCCReference Include="edspravorg.pas">
+				<Form>fEdSpravOrg</Form>
+			</DCCReference>
+			<DCCReference Include="pril9.pas">
+				<Form>fPril9</Form>
+			</DCCReference>
+			<DCCReference Include="addmkb.pas">
+				<Form>fAddMKB</Form>
+			</DCCReference>
+			<DCCReference Include="user.pas">
+				<Form>fUser</Form>
+			</DCCReference>
+			<DCCReference Include="sumuslrep.pas">
+				<Form>fUsl</Form>
+			</DCCReference>
+			<DCCReference Include="comUsl.pas">
+				<Form>fCommonUsl</Form>
+			</DCCReference>
+			<DCCReference Include="fys.pas">
+				<Form>fFYS</Form>
+			</DCCReference>
+			<DCCReference Include="stacrep.pas">
+				<Form>fStacRep</Form>
+			</DCCReference>
+			<DCCReference Include="periodvigr.pas">
+				<Form>fPeriodVigr</Form>
+			</DCCReference>
+			<DCCReference Include="issl.pas">
+				<Form>fIssl</Form>
+			</DCCReference>
+			<DCCReference Include="journal.pas">
+				<Form>fJournal</Form>
+			</DCCReference>
+			<DCCReference Include="exJournal.pas">
+				<Form>fExJournal</Form>
+			</DCCReference>
+			<DCCReference Include="factor.pas">
+				<Form>fFactor</Form>
+			</DCCReference>
+			<DCCReference Include="ChengeCena.pas">
+				<Form>fChengeCena</Form>
+			</DCCReference>
+			<DCCReference Include="susl.pas">
+				<Form>fSUsl</Form>
+			</DCCReference>
+			<DCCReference Include="RepJASO.pas">
+				<Form>fRepJASO</Form>
+			</DCCReference>
+			<DCCReference Include="repJASOPat.pas">
+				<Form>fRepJASOPat</Form>
+			</DCCReference>
+			<DCCReference Include="repNidSkl.pas">
+				<Form>fRepNidSKL</Form>
+			</DCCReference>
+			<DCCReference Include="equalRab.pas">
+				<Form>fEqualRab</Form>
+			</DCCReference>
+			<DCCReference Include="SprProvpatolog.pas">
+				<Form>SprProf</Form>
+			</DCCReference>
+			<DCCReference Include="RepSogaz.pas">
+				<Form>fRepSogaz</Form>
+			</DCCReference>
+			<DCCReference Include="repSogazPat.pas">
+				<Form>FrepSogazPat</Form>
+			</DCCReference>
+			<DCCReference Include="RepSogaz2.pas">
+				<Form>Form1</Form>
+			</DCCReference>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType>VCLApplication</Borland.ProjectType>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">medosm.dpr</Source>
+					</Source>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1049</VersionInfo>
+						<VersionInfo Name="CodePage">1251</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k150.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>False</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

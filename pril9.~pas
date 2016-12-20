@@ -1,0 +1,204 @@
+unit pril9;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, Grids, DBGrids, WordXP, OleServer;
+
+type
+  TfPril9 = class(TForm)
+    Button1: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBGrid1: TDBGrid;
+    Edit1: TEdit;
+    WordApplication1: TWordApplication;
+    WordDocument1: TWordDocument;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fPril9: TfPril9;
+
+implementation
+
+uses DM, editor;
+
+{$R *.dfm}
+
+procedure TfPril9.DBGrid1DblClick(Sender: TObject);
+begin
+Edit1.Text:=fDM.TOrgNew.FieldValues['imya_org'];
+end;
+
+procedure TfPril9.Button1Click(Sender: TObject);
+var query:string;
+    VSEGO, VSEGOG, VSEGOVF, VSEGOVFG,COUNTMKB, i:integer;
+    Shablon:OleVariant;
+begin
+  Shablon:=ExtractFileDir(ParamStr(0))+'\Шаблоны\pril9.doc';
+  WordApplication1.Connect;
+  WordApplication1.Visible:=true;
+  WordApplication1.Documents.Add(Shablon,EmptyParam, EmptyParam,EmptyParam);
+  WordDocument1.ConnectTo(WordApplication1.ActiveDocument);
+
+  WordApplication1.Visible:=True;
+
+
+  query:='SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE organiz.imya_org='+QuotedStr(Edit1.Text);
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+  VSEGO:=fDM.QVSEGO.Fields[0].AsInteger;
+
+
+  query:='SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE organiz.imya_org='+QuotedStr(Edit1.Text)+' and rabotnik.sex='+QuotedStr('Жен');
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+  VSEGOG:=fDM.QVSEGO.Fields[0].AsInteger;
+
+
+  query:='SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE organiz.imya_org='+QuotedStr(Edit1.Text)+' and len(rabotnik.vredn_fact)>0';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+  VSEGOVF:=fDM.QVSEGO.Fields[0].AsInteger;
+
+
+  query:='SELECT Count(*) FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE organiz.imya_org='+QuotedStr(Edit1.Text)+' and len(rabotnik.vredn_fact)>0'+' and rabotnik.sex='+QuotedStr('Жен');
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+  VSEGOVFG:=fDM.QVSEGO.Fields[0].AsInteger;
+
+
+  fEditor.WordGotoBookmark('VSEGO');
+  fEditor.WordInsertText(inttostr(VSEGO));
+
+  fEditor.WordGotoBookmark('VSEGOG');
+  fEditor.WordInsertText(inttostr(VSEGOG));
+
+  fEditor.WordGotoBookmark('VSEGOVF');
+  fEditor.WordInsertText(inttostr(VSEGOVF));
+
+  fEditor.WordGotoBookmark('VSEGOVFG');
+  fEditor.WordInsertText(inttostr(VSEGOVFG));
+
+  fEditor.WordGotoBookmark('D');
+  fEditor.WordInsertText(Edit2.Text);
+
+  fEditor.WordGotoBookmark('M');
+  fEditor.WordInsertText(Edit3.Text);
+
+  fEditor.WordGotoBookmark('Y');
+  fEditor.WordInsertText(Edit4.Text);
+
+  fEditor.WordGotoBookmark('Y2');
+  fEditor.WordInsertText(Edit4.Text);
+
+  fEditor.WordGotoBookmark('Org');
+  fEditor.WordInsertText(Edit1.Text);
+
+  query:='SELECT * FROM rabotnik inner join organiz ON rabotnik.id_org=organiz.id_org WHERE organiz.imya_org='+QuotedStr(Edit1.Text);
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+
+  fEditor.WordGotoBookmark('tab');
+  for i:=1 to VSEGO do
+  begin
+   fEditor.WordInsertText(inttostr(i));
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('fam').asstring+' '+fDM.QVSEGO.FieldByName('imya').asstring+' '+fDM.QVSEGO.FieldByName('fath').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('sex').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('data_r').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('imya_strukt_podr').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('profes').asstring);
+
+      WordApplication1.Run('NextCell');
+  fEditor.WordInsertText(fDM.QVSEGO.FieldByName('vredn_fact').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('staz_rab_fact').asstring);
+
+   WordApplication1.Run('NextCell');
+   fEditor.WordInsertText(fDM.QVSEGO.FieldByName('mkb_code').asstring);
+
+   WordApplication1.Run('NextCell');
+   if fDM.QVSEGO.FieldByName('firstb').asboolean then fEditor.WordInsertText('Да');
+   //fEditor.WordInsertText(fDM.QVSEGO.FieldByName('firstb').asstring);
+
+   WordApplication1.Run('NextCell');
+
+   WordApplication1.Run('NextCell');
+
+   WordApplication1.Run('NextCell');
+
+   WordApplication1.Run('NextCell');
+
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   WordApplication1.Run('NextCell');
+   fDM.QVSEGO.Next;
+  end;
+
+ query:='SELECT rabotnik.mkb_code, rabotnik.id_org, rabotnik.firstb, SUM(1) AS [count] FROM rabotnik WHERE (rabotnik.id_org='+inttostr(fDM.TOrgNew.FieldValues['id_org'])+') and (rabotnik.firstb=true) GROUP BY rabotnik.mkb_code, rabotnik.id_org, rabotnik.firstb';
+ fDM.mkbfirst.SQL.Clear;
+ fDM.mkbfirst.SQL.Add(query);
+ fDM.mkbfirst.Open;
+ //COUNTMKB:=fDM.mkbfirst.RecordCount;
+
+
+ {
+  query:='SELECT COUNT(*) FROM [mkbfirst] WHERE ([mkbfirst].COUNT>0) and (([mkbfirst].id_org='+inttostr(fDM.TOrgNew.FieldValues['id_org'])+'))';
+  fDM.QVSEGO.SQL.Clear;
+  fDM.QVSEGO.SQL.Add(query);
+  fDM.QVSEGO.Open;
+  COUNTMKB:=fDM.QVSEGO.Fields[0].AsInteger;  }
+   i:=0;
+  fEditor.WordGotoBookmark('tab1');
+ while not(fDM.mkbfirst.Eof) do
+  begin
+   inc(i);
+   fEditor.WordInsertText(inttostr(i));
+   WordApplication1.Run('NextCell');
+
+   fEditor.WordInsertText(fDM.mkbfirst.FieldByName('mkb_code').asstring);
+   WordApplication1.Run('NextCell');
+
+   fEditor.WordInsertText(fDM.mkbfirst.FieldByName('count').asstring);
+   WordApplication1.Run('NextCell');
+
+   fDM.mkbfirst.Next;
+ end;
+               
+  WordApplication1.Disconnect;
+end;
+
+end.

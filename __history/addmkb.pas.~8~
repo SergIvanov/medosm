@@ -1,0 +1,97 @@
+unit addmkb;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, Grids, DBGrids, Mask, ExtCtrls;
+
+type
+  TfAddMKB = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label12: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBGrid1: TDBGrid;
+    Edit2: TEdit;
+    Button1: TButton;
+    DBEdit8: TDBEdit;
+    DBEdit9: TDBEdit;
+    Button4: TButton;
+    DBComboBox1: TDBComboBox;
+    Label13: TLabel;
+    Edit1: TEdit;
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fAddMKB: TfAddMKB;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TfAddMKB.Button1Click(Sender: TObject);
+begin
+    fDM.TRab.Edit;
+    fDM.TRab.Post;
+    fAddMkb.Close;
+end;
+
+procedure TfAddMKB.Button4Click(Sender: TObject);
+begin
+ fAddMkb.Close;
+end;
+
+procedure TfAddMKB.DBGrid1DblClick(Sender: TObject);
+begin
+  if not(fDM.TRab.FieldValues['mkb']=Null) then
+  begin
+   if MessageDlg('Добавить заболевание?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+    fDM.TRab.Edit;
+    fDM.TRab.FieldbyName('mkb').asstring:=fDM.TRab.FieldbyName('mkb').asstring+'; '+fDM.TMKB.FieldValues['NAIM'];
+    fDM.TRab.FieldbyName('mkb_code').asstring:=fDM.TRab.FieldbyName('mkb_code').asstring+'; '+fDM.TMKB.FieldValues['CODE'];
+    fDM.TRab.Post;
+  end;
+end;
+end;
+
+procedure TfAddMKB.Edit1Change(Sender: TObject);
+begin
+ fDM.MKBLocate(Edit1.Text);
+end;
+
+procedure TfAddMKB.Edit2Change(Sender: TObject);
+begin
+  //если в поле Edit1 есть хоть одна буква,
+  if Edit2.Text <> '' then begin
+    fDM.TMKB.Filtered := False; //отключаем фильтр
+    ed := Edit2.Text; //передаем в fDM новый текст
+    fDM.TMKB.Filtered := True; //включаем фильтр
+  end
+  //если букв нет, фильтрацию отключаем:
+  else fDM.TMKB.Filtered := False;
+end;
+
+end.

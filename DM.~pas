@@ -1,0 +1,86 @@
+unit DM;
+
+interface
+
+uses
+  SysUtils, Classes, DB, ADODB;
+
+type
+  TfDM = class(TDataModule)
+    ADOConnection1: TADOConnection;
+    TRab: TADOTable;
+    DSRab: TDataSource;
+    TRabid: TAutoIncField;
+    TRabid_org: TIntegerField;
+    TRabfam: TWideStringField;
+    TRabimya: TWideStringField;
+    TRabfath: TWideStringField;
+    TRabsex: TWideStringField;
+    TRabser_pasp: TWideStringField;
+    TRabnom_pasp: TWideStringField;
+    TRabkem_vid_pasp: TWideStringField;
+    TRabadres: TWideStringField;
+    TRabphone: TWideStringField;
+    TRabpolis: TWideStringField;
+    TRabvid_ek_deat: TWideStringField;
+    TRabprofes: TWideStringField;
+    TRabmed_organ: TWideStringField;
+    TRabplan_osm: TWideStringField;
+    TOrg: TADOTable;
+    DSOrg: TDataSource;
+    TOrgid_org: TAutoIncField;
+    TOrgimya_org: TWideStringField;
+    TOrgform_sobstv: TWideStringField;
+    TRabimya_strukt_podr: TWideStringField;
+    DSorgnew: TDataSource;
+    TOrgNew: TADOTable;
+    TOrgNewid_org: TAutoIncField;
+    TOrgNewimya_org: TWideStringField;
+    TOrgNewform_sobstv: TWideStringField;
+    TRabOrg: TStringField;
+    DSQOrg: TDataSource;
+    QOrg: TADOQuery;
+    TRabusl_tr: TWideStringField;
+    QNewSotr: TADOQuery;
+    TRabnom_pasp_zd: TWideStringField;
+    TRabdate_of: TWideStringField;
+    DSMKB: TDataSource;
+    TMKB: TADOTable;
+    TRabmkb: TWideStringField;
+    TRabstaz_rab_fact: TWideStringField;
+    TRabmkb_code: TWideStringField;
+    TRabvredn_fact: TMemoField;
+    QVSEGO: TADOQuery;
+    TRabfirstb: TBooleanField;
+    Qmkbfirst: TADOQuery;
+    mkbfirst: TADOQuery;
+    TRabdata_r: TWideStringField;
+    TRabdata_vid_pasp: TWideStringField;
+    TRabdata_proh: TWideStringField;
+    TRabsrok_proh: TWideStringField;
+    procedure TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fDM: TfDM;
+  ed: String; //текст из Edit1
+implementation
+
+{$R *.dfm}
+
+procedure TfDM.TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+var
+  s: String; //для значения поля
+begin
+  //получаем столько начальных букв из поля Фамилия,
+  //сколько букв имеется в переменной ed:
+  s := Copy(DataSet['NAIM'], 1, Length(ed));
+  //делаем проверку на совпадение значений:
+  Accept := s = ed;
+end;
+
+end.

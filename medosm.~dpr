@@ -1,0 +1,25 @@
+program medosm;
+
+uses
+  Forms,
+  main in 'main.pas' {fMain},
+  DM in 'DM.pas' {fDM: TDataModule},
+  editor in 'editor.pas' {fEditor},
+  spravorg in 'spravorg.pas' {fSpravOrg},
+  newsotr in 'newsotr.pas' {fNewSotr},
+  pril5 in 'pril5.pas' {fPril3},
+  edspravorg in 'edspravorg.pas' {fEdSpravOrg};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfMain, fMain);
+  Application.CreateForm(TfDM, fDM);
+  Application.CreateForm(TfEditor, fEditor);
+  Application.CreateForm(TfSpravOrg, fSpravOrg);
+  Application.CreateForm(TfNewSotr, fNewSotr);
+  Application.CreateForm(TfPril3, fPril3);
+  Application.CreateForm(TfEdSpravOrg, fEdSpravOrg);
+  Application.Run;
+end.

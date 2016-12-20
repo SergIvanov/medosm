@@ -1,0 +1,62 @@
+object fSUsl: TfSUsl
+  Left = 0
+  Top = 0
+  Caption = 'fSUsl'
+  ClientHeight = 300
+  ClientWidth = 635
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 256
+    Width = 635
+    Height = 44
+    Align = alBottom
+    TabOrder = 0
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 635
+    Height = 256
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 152
+    ExplicitTop = 168
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object DBGridEh1: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 633
+      Height = 254
+      Align = alClient
+      DataGrouping.GroupLevels = <>
+      DataSource = fDM.DSFYS
+      Flat = False
+      FooterColor = clWindow
+      FooterFont.Charset = DEFAULT_CHARSET
+      FooterFont.Color = clWindowText
+      FooterFont.Height = -11
+      FooterFont.Name = 'Tahoma'
+      FooterFont.Style = []
+      IndicatorOptions = [gioShowRowIndicatorEh]
+      TabOrder = 0
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+end

@@ -1,0 +1,39 @@
+object SprProf: TSprProf
+  Left = 0
+  Top = 0
+  Caption = #1055#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075#1080
+  ClientHeight = 432
+  ClientWidth = 436
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBGridEh1: TDBGridEh
+    Left = 8
+    Top = 8
+    Width = 420
+    Height = 416
+    DataGrouping.GroupLevels = <>
+    Flat = False
+    FooterColor = clWindow
+    FooterFont.Charset = DEFAULT_CHARSET
+    FooterFont.Color = clWindowText
+    FooterFont.Height = -11
+    FooterFont.Name = 'Tahoma'
+    FooterFont.Style = []
+    IndicatorOptions = [gioShowRowIndicatorEh]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+end

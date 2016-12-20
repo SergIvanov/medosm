@@ -1,0 +1,414 @@
+unit main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Buttons, Menus, Grids, DBGrids, ComCtrls,
+  Mask, DBCtrls, DBGridEhGrouping, GridsEh, DBGridEh, EhLibADO, DBGridEhImpExp,
+  DateUtils, ADODB,
+  ToolWin, ImgList;
+
+type
+  TfMain = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N5: TMenuItem;
+    N101: TMenuItem;
+    N9: TMenuItem;
+    DBGrid1: TDBGridEh;
+    PopupMenu1: TPopupMenu;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    Label1: TLabel;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    N12: TMenuItem;
+    N13: TMenuItem;
+    N14: TMenuItem;
+    DateTimePicker2: TDateTimePicker;
+    DateTimePicker3: TDateTimePicker;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    ImageList1: TImageList;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
+    ToolButton7: TToolButton;
+    N6: TMenuItem;
+    N15: TMenuItem;
+    ToolButton8: TToolButton;
+    N16: TMenuItem;
+    N17: TMenuItem;
+    N18: TMenuItem;
+    N19: TMenuItem;
+    N20: TMenuItem;
+    N21: TMenuItem;
+    N4: TMenuItem;
+    N22: TMenuItem;
+    procedure Button4Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure DBGridEh1DblClick(Sender: TObject);
+    procedure N7Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure N8Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure N10Click(Sender: TObject);
+    procedure N11Click(Sender: TObject);
+    procedure N12Click(Sender: TObject);
+    procedure N13Click(Sender: TObject);
+    procedure N14Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+    procedure ToolButton4Click(Sender: TObject);
+    procedure ToolButton6Click(Sender: TObject);
+    procedure N6Click(Sender: TObject);
+    procedure N15Click(Sender: TObject);
+    procedure ToolButton8Click(Sender: TObject);
+    procedure ToolButton7Click(Sender: TObject);
+    procedure N16Click(Sender: TObject);
+    procedure N17Click(Sender: TObject);
+    procedure N18Click(Sender: TObject);
+    procedure N19Click(Sender: TObject);
+    procedure N20Click(Sender: TObject);
+    procedure N21Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N22Click(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fMain: TfMain;
+
+implementation
+
+uses DM, editor, edspravorg, pril9, pril5, addmkb, user, sumuslrep,
+  comUsl, fys, stacrep, periodvigr, countdispgr, issl, journal, factor,
+  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ;
+
+{$R *.dfm}
+
+procedure TfMain.Button4Click(Sender: TObject);
+begin
+  fDM.TRab.Append;
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.Button5Click(Sender: TObject);
+begin
+  if user.us <> 'Администратор' then
+  begin
+    fDM.TRab.Append;
+    // fDM.TRab.FieldByName('nom_pasp_zd').AsString:=' ';
+    fDM.TRab.FieldByName('user').AsString := user.us;
+    fDM.TRab.Post;
+  end;
+end;
+
+procedure TfMain.CheckBox1Click(Sender: TObject);
+begin
+  if CheckBox1.Checked then
+  begin
+    fDM.TRab.Active := false;
+    if user.us <> 'Администратор' then
+      // Если не администратор, то выводить записи только конкретного пользователя
+      fDM.TRab.CommandText :=
+        'SELECT * FROM rabotnik WHERE (data_proh BETWEEN :date1 AND :date2) and (user='
+        + quotedstr(us) + ')'
+      // Иначе выводить записи всех пользователей
+    else
+      fDM.TRab.CommandText :=
+        'SELECT * FROM rabotnik WHERE (data_proh BETWEEN :date1 AND :date2)';
+    fDM.TRab.Parameters.ParamByName('date1').Value :=
+      FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+    fDM.TRab.Parameters.ParamByName('date2').Value :=
+      FormatDateTime('dd.mm.yyyy', DateTimePicker3.Date);
+    fDM.TRab.Active := true;
+  end
+  else
+  begin
+    fDM.TRab.Active := false;
+    if user.us <> 'Администратор' then
+      fDM.TRab.CommandText := 'SELECT * FROM rabotnik where user=(' +
+        quotedstr(us) + ') AND (data_proh BETWEEN :date1 AND :date2)'
+    else
+      fDM.TRab.CommandText :=
+        'SELECT * FROM rabotnik WHERE (data_proh BETWEEN :date1 AND :date2)';
+    fDM.TRab.Parameters.ParamByName('date1').Value := StartOfTheMonth(Date);
+    fDM.TRab.Parameters.ParamByName('date2').Value := EndOfTheMonth(Date);
+    fDM.TRab.Active := true;
+  end;
+end;
+
+procedure TfMain.CheckBox2Click(Sender: TObject);
+begin
+  if CheckBox2.Checked then
+  begin
+    fDM.TRab.Active := false;
+    if user.us <> 'Администратор' then
+      fDM.TRab.CommandText := 'SELECT * FROM rabotnik where user=' +
+        quotedstr(us)
+    else
+      fDM.TRab.CommandText := 'SELECT * FROM rabotnik';
+    fDM.TRab.Active := true;
+  end
+  else
+  begin
+    fDM.TRab.Active := false;
+    if user.us <> 'Администратор' then
+      fDM.TRab.CommandText := 'SELECT * FROM rabotnik where user=(' +
+        quotedstr(us) + ') AND (data_proh BETWEEN :date1 AND :date2)'
+    else
+      fDM.TRab.CommandText :=
+        'SELECT * FROM rabotnik where data_proh BETWEEN :date1 AND :date2';
+    fDM.TRab.Parameters.ParamByName('date1').Value := StartOfTheMonth(Date);
+    fDM.TRab.Parameters.ParamByName('date2').Value := EndOfTheMonth(Date);
+    fDM.TRab.Active := true;
+  end;
+end;
+
+procedure TfMain.Button2Click(Sender: TObject);
+var
+  exe_dir: string;
+begin
+  exe_dir := ExtractFileDir(ParamStr(0));
+  SaveDBGridEhToExportFile(TDBGridEhExportAsXLS, DBGrid1,
+    exe_dir + '\Журнал\Журнал_' + FormatDateTime('yyyy_mm_dd', Date) +
+    FormatDateTime('_hh_mm', time) + '.xls', true);
+end;
+
+procedure TfMain.Button3Click(Sender: TObject);
+begin
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.DBGrid1DblClick(Sender: TObject); // Удалить!!!!!!!!!!
+begin
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.DBGridEh1DblClick(Sender: TObject);
+begin
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.FormCreate(Sender: TObject);
+begin
+  DateTimePicker2.Date := Date;
+  DateTimePicker3.Date := Date;
+end;
+
+procedure TfMain.FormShow(Sender: TObject);
+begin
+  fUser.ShowModal;
+  if user.us = '' then
+  begin
+    //Showmessage('Вы зашли как незарегистрированный пользователь!');
+    fMain.Close;
+  end;
+  Label1.Caption := 'Вы зашли как ' + us;
+end;
+
+procedure TfMain.Button1Click(Sender: TObject);
+var
+  query: string;
+begin
+  if MessageDlg('Удалить запись? ', mtConfirmation, [mbYes, mbNo], 0)
+    = mrYes then
+  begin
+    fDM.TRab.Delete;
+  end;
+end;
+
+procedure TfMain.N10Click(Sender: TObject);
+begin
+  fUsl.ShowModal;
+end;
+
+procedure TfMain.N11Click(Sender: TObject);
+begin
+  fCommonUsl.ShowModal;
+end;
+
+procedure TfMain.N12Click(Sender: TObject);
+begin
+  fFYS.ShowModal;
+end;
+
+procedure TfMain.N13Click(Sender: TObject);
+begin
+  fStacRep.ShowModal;
+end;
+
+procedure TfMain.N14Click(Sender: TObject);
+begin
+  fPeriodVigr.Show;
+end;
+
+procedure TfMain.N15Click(Sender: TObject);
+begin
+  ToolButton7Click(Sender);
+end;
+
+procedure TfMain.N16Click(Sender: TObject);
+begin
+  fFactor.Caption := 'Вредные факторы ' + fDM.TRab.FieldByName('fam').AsString +
+    ' ' + fDM.TRab.FieldByName('imya').AsString + ' ' +
+    fDM.TRab.FieldByName('fath').AsString;
+  fFactor.ShowModal;
+end;
+
+procedure TfMain.N17Click(Sender: TObject);
+begin
+  fChengeCena.ShowModal;
+end;
+
+procedure TfMain.N18Click(Sender: TObject);
+begin
+  fSUsl.ShowModal;
+end;
+
+procedure TfMain.N19Click(Sender: TObject);
+begin
+ fRepJASO.ShowModal;
+end;
+
+procedure TfMain.N20Click(Sender: TObject);
+begin
+ fRepNidSKL.ShowModal;
+end;
+
+procedure TfMain.N21Click(Sender: TObject);
+begin
+ fEqualRab.ShowModal;
+end;
+
+procedure TfMain.N22Click(Sender: TObject);
+begin
+frepSogaz.ShowModal;
+end;
+
+procedure TfMain.N4Click(Sender: TObject);
+begin
+SprProf.ShowModal;
+end;
+
+procedure TfMain.N5Click(Sender: TObject);
+begin
+  fEdSpravOrg.Show;
+end;
+
+procedure TfMain.N6Click(Sender: TObject);
+begin
+  fIssl.ShowModal;
+end;
+
+procedure TfMain.N7Click(Sender: TObject);
+begin
+  fPril3.ShowModal;
+end;
+
+procedure TfMain.N8Click(Sender: TObject);
+begin
+  fAddMkb.ShowModal;
+end;
+
+procedure TfMain.N9Click(Sender: TObject);
+begin
+  fPril9.ShowModal;
+end;
+
+procedure TfMain.ToolButton1Click(Sender: TObject);
+begin
+  if user.us <> 'Администратор' then
+  begin
+    fDM.TRab.Append;
+    fDM.TRab.FieldByName('user').AsString := user.us;
+    fDM.TRab.Post;
+  end;
+end;
+
+procedure TfMain.ToolButton2Click(Sender: TObject);
+begin
+  fDM.TRab.Append;
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.ToolButton3Click(Sender: TObject);
+begin
+  fEditor.ShowModal;
+end;
+
+procedure TfMain.ToolButton4Click(Sender: TObject);
+var
+  query: string;
+begin
+  if MessageDlg('Удалить запись? ', mtConfirmation, [mbYes, mbNo], 0)
+    = mrYes then
+  begin
+    fDM.TRab.Delete;
+  end;
+end;
+
+procedure TfMain.ToolButton6Click(Sender: TObject);
+var
+  exe_dir: string;
+begin
+  exe_dir := ExtractFileDir(ParamStr(0));
+  SaveDBGridEhToExportFile(TDBGridEhExportAsXLS, DBGrid1,
+    exe_dir + '\Журнал\Журнал_' + FormatDateTime('yyyy_mm_dd', Date) +
+    FormatDateTime('_hh_mm', time) + '.xls', true);
+  Showmessage('База выгружена в файл ' + exe_dir + '\Журнал\Журнал_' +
+    FormatDateTime('yyyy_mm_dd', Date) + FormatDateTime('_hh_mm', time)
+    + '.xls');
+end;
+
+procedure TfMain.ToolButton7Click(Sender: TObject);
+begin
+  fDM.TJournal.Active := false;
+  if user.us <> 'Администратор' then
+    fDM.TJournal.CommandText :=
+      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE (prkrab<>"")and (user='
+      + quotedstr(us) + ')' + 'ORDER BY id ASC'
+  else
+    fDM.TJournal.CommandText :=
+      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE prkrab<>"" ORDER BY id ASC';
+  // fDM.TJournal.CommandText:='SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE prkrab<>"" ORDER BY id ASC';
+  fDM.TJournal.Active := true;
+  fJournal.Show;
+end;
+
+procedure TfMain.ToolButton8Click(Sender: TObject);
+begin
+  if MessageDlg('Выйти из программы? ', mtConfirmation, [mbYes, mbNo], 0)
+    = mrYes then
+  begin
+    Close;
+  end;
+end;
+
+end.

@@ -1,0 +1,2 @@
+SELECT TempList.fam, TempList.im, TempList.ot, TempList.dr, rabotnik.fam, rabotnik.imya, rabotnik.fath, rabotnik.data_r, rabotnik.id_org
+FROM TempList LEFT JOIN rabotnik ON (TempList.dr = rabotnik.data_r) AND (TempList.ot = rabotnik.fath) AND (TempList.im = rabotnik.imya) AND (TempList.fam = rabotnik.fam) WHERE (rabotnik.id_org=:id_org) AND (rabotnik.fam is NULL)

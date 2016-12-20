@@ -1,0 +1,313 @@
+object fDM: TfDM
+  OldCreateOrder = False
+  Left = 1295
+  Top = 123
+  Height = 583
+  Width = 265
+  object ADOConnection1: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=meddb.mdb;Persist S' +
+      'ecurity Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 72
+    Top = 16
+  end
+  object TRab: TADOTable
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    TableName = 'rabotnik'
+    Left = 24
+    Top = 80
+    object TRabnom_pasp_zd: TWideStringField
+      DisplayLabel = #8470' '#1087#1072#1089#1087#1086#1088#1090#1072' '#1079#1076#1086#1088#1086#1074#1100#1103
+      FieldName = 'nom_pasp_zd'
+    end
+    object TRabid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+      Visible = False
+    end
+    object TRabfam: TWideStringField
+      DisplayLabel = #1060#1072#1084#1080#1083#1080#1103
+      DisplayWidth = 18
+      FieldName = 'fam'
+      Size = 30
+    end
+    object TRabimya: TWideStringField
+      DisplayLabel = #1048#1084#1103
+      DisplayWidth = 18
+      FieldName = 'imya'
+      Size = 15
+    end
+    object TRabfath: TWideStringField
+      DisplayLabel = #1054#1090#1095#1077#1089#1090#1074#1086
+      DisplayWidth = 18
+      FieldName = 'fath'
+    end
+    object TRabdata_r: TWideStringField
+      FieldName = 'data_r'
+      Size = 50
+    end
+    object TRabsex: TWideStringField
+      DisplayLabel = #1055#1086#1083
+      DisplayWidth = 6
+      FieldName = 'sex'
+      Size = 3
+    end
+    object TRabOrg: TStringField
+      DisplayLabel = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
+      DisplayWidth = 30
+      FieldKind = fkLookup
+      FieldName = 'Org'
+      LookupDataSet = TOrg
+      LookupKeyFields = 'id_org'
+      LookupResultField = 'imya_org'
+      KeyFields = 'id_org'
+      Size = 30
+      Lookup = True
+    end
+    object TRabid_org: TIntegerField
+      FieldName = 'id_org'
+    end
+    object TRabser_pasp: TWideStringField
+      DisplayLabel = #1057#1077#1088#1080#1103' '#1087#1072#1089#1087#1086#1088#1090#1072
+      DisplayWidth = 9
+      FieldName = 'ser_pasp'
+      Visible = False
+      Size = 5
+    end
+    object TRabnom_pasp: TWideStringField
+      DisplayLabel = #1053#1086#1084#1077#1088' '#1087#1072#1089#1087#1086#1088#1090#1072
+      DisplayWidth = 12
+      FieldName = 'nom_pasp'
+      Visible = False
+      Size = 10
+    end
+    object TRabkem_vid_pasp: TWideStringField
+      DisplayLabel = #1050#1077#1084' '#1074#1099#1076#1072#1085
+      DisplayWidth = 18
+      FieldName = 'kem_vid_pasp'
+      Visible = False
+      Size = 100
+    end
+    object TRabdata_vid_pasp: TWideStringField
+      FieldName = 'data_vid_pasp'
+      Size = 50
+    end
+    object TRabdata_proh: TWideStringField
+      FieldName = 'data_proh'
+      Size = 50
+    end
+    object TRabsrok_proh: TWideStringField
+      FieldName = 'srok_proh'
+      Size = 50
+    end
+    object TRabadres: TWideStringField
+      DisplayLabel = #1040#1076#1088#1077#1089
+      DisplayWidth = 18
+      FieldName = 'adres'
+      Visible = False
+      Size = 255
+    end
+    object TRabphone: TWideStringField
+      DisplayLabel = #1058#1077#1083#1077#1092#1086#1085
+      DisplayWidth = 18
+      FieldName = 'phone'
+      Visible = False
+      Size = 255
+    end
+    object TRabpolis: TWideStringField
+      DisplayLabel = #1055#1086#1083#1080#1089
+      DisplayWidth = 18
+      FieldName = 'polis'
+      Visible = False
+      Size = 255
+    end
+    object TRabvid_ek_deat: TWideStringField
+      DisplayLabel = #1042#1080#1076' '#1101#1082#1086#1085#1086#1084#1080#1095#1077#1089#1082#1086#1081' '#1076#1077#1103#1090#1077#1083#1100#1085#1089#1090#1080
+      DisplayWidth = 18
+      FieldName = 'vid_ek_deat'
+      Visible = False
+      Size = 255
+    end
+    object TRabprofes: TWideStringField
+      DisplayLabel = #1055#1088#1086#1092#1077#1089#1089#1080#1103
+      DisplayWidth = 18
+      FieldName = 'profes'
+      Size = 255
+    end
+    object TRabvredn_fact: TMemoField
+      FieldName = 'vredn_fact'
+      Visible = False
+      BlobType = ftMemo
+    end
+    object TRabmed_organ: TWideStringField
+      DisplayLabel = #1052#1077#1076#1080#1094#1080#1085#1089#1082#1080#1081' '#1086#1088#1075#1072#1085
+      DisplayWidth = 18
+      FieldName = 'med_organ'
+      Visible = False
+      Size = 255
+    end
+    object TRabstaz_rab_fact: TWideStringField
+      FieldName = 'staz_rab_fact'
+      Visible = False
+      Size = 15
+    end
+    object TRabplan_osm: TWideStringField
+      DisplayLabel = #1055#1083#1072#1085' '#1086#1089#1084#1086#1090#1088#1072
+      DisplayWidth = 18
+      FieldName = 'plan_osm'
+      Visible = False
+      Size = 255
+    end
+    object TRabimya_strukt_podr: TWideStringField
+      DisplayLabel = #1048#1084#1103' '#1089#1090#1088#1091#1082#1090#1091#1088#1085#1086#1075#1086' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1103
+      DisplayWidth = 10
+      FieldName = 'imya_strukt_podr'
+      Size = 150
+    end
+    object TRabusl_tr: TWideStringField
+      DisplayLabel = #1059#1089#1083#1086#1074#1080#1103' '#1090#1088#1091#1076#1072
+      FieldName = 'usl_tr'
+      Visible = False
+      Size = 100
+    end
+    object TRabdate_of: TWideStringField
+      DisplayLabel = #1044#1072#1090#1072' '#1086#1092#1086#1088#1084#1083#1077#1085#1080#1103
+      FieldName = 'date_of'
+      Visible = False
+      Size = 15
+    end
+    object TRabmkb: TWideStringField
+      DisplayLabel = #1052#1050#1041'-10'
+      DisplayWidth = 25
+      FieldName = 'mkb'
+      Size = 255
+    end
+    object TRabmkb_code: TWideStringField
+      DisplayWidth = 7
+      FieldName = 'mkb_code'
+      Size = 100
+    end
+    object TRabfirstb: TBooleanField
+      FieldName = 'firstb'
+    end
+  end
+  object DSRab: TDataSource
+    DataSet = TRab
+    Left = 104
+    Top = 80
+  end
+  object TOrg: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    IndexFieldNames = 'id_org'
+    MasterFields = 'id_org'
+    MasterSource = DSRab
+    TableName = 'organiz'
+    Left = 24
+    Top = 136
+    object TOrgid_org: TAutoIncField
+      DisplayWidth = 8
+      FieldName = 'id_org'
+      ReadOnly = True
+    end
+    object TOrgimya_org: TWideStringField
+      DisplayWidth = 59
+      FieldName = 'imya_org'
+      Size = 150
+    end
+    object TOrgform_sobstv: TWideStringField
+      DisplayWidth = 28
+      FieldName = 'form_sobstv'
+      Size = 50
+    end
+  end
+  object DSOrg: TDataSource
+    DataSet = TOrg
+    Left = 104
+    Top = 136
+  end
+  object DSorgnew: TDataSource
+    DataSet = TOrgNew
+    Left = 104
+    Top = 192
+  end
+  object TOrgNew: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    TableName = 'organiz'
+    Left = 24
+    Top = 192
+    object TOrgNewid_org: TAutoIncField
+      DisplayWidth = 12
+      FieldName = 'id_org'
+      ReadOnly = True
+    end
+    object TOrgNewimya_org: TWideStringField
+      DisplayWidth = 52
+      FieldName = 'imya_org'
+      Size = 150
+    end
+    object TOrgNewform_sobstv: TWideStringField
+      DisplayWidth = 27
+      FieldName = 'form_sobstv'
+      Size = 50
+    end
+  end
+  object DSQOrg: TDataSource
+    DataSet = QOrg
+    Left = 104
+    Top = 256
+  end
+  object QOrg: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 24
+    Top = 256
+  end
+  object QNewSotr: TADOQuery
+    Connection = ADOConnection1
+    DataSource = DSRab
+    Parameters = <>
+    Left = 24
+    Top = 312
+  end
+  object DSMKB: TDataSource
+    DataSet = TMKB
+    Left = 104
+    Top = 368
+  end
+  object TMKB: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    OnFilterRecord = TMKBFilterRecord
+    TableName = 'mkb10'
+    Left = 24
+    Top = 368
+  end
+  object QVSEGO: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 24
+    Top = 416
+  end
+  object Qmkbfirst: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 104
+    Top = 424
+  end
+  object mkbfirst: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 32
+    Top = 480
+  end
+end

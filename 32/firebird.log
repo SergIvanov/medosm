@@ -1,0 +1,66 @@
+
+IVANOV_SI_NUZ	Tue Apr 26 16:25:22 2016
+	INET/inet_error: send errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Tue Apr 26 20:07:41 2016
+	INET/inet_error: send errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 08:13:57 2016
+	INET/inet_error: send errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 08:14:01 2016
+	INET/inet_error: send errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 12:31:18 2016
+	INET/inet_error: send errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 12:31:19 2016
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+IVANOV_SI_NUZ	Wed Apr 27 16:09:02 2016
+	INET/inet_error: read errno = 10053, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 16:09:03 2016
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+IVANOV_SI_NUZ	Wed Apr 27 17:14:17 2016
+	INET/inet_error: read errno = 10053, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Wed Apr 27 17:14:24 2016
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+IVANOV_SI_NUZ	Thu May 05 15:28:14 2016
+	INET/inet_error: read errno = 10053, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+IVANOV_SI_NUZ	Thu May 05 15:28:19 2016
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+
+
+USER-ой	Tue Sep 20 16:30:38 2016
+	INET/inet_error: read errno = 10053, server host = 172.31.8.123, address = 172.31.8.123/3050
+
+
+USER-ой	Tue Sep 20 16:30:45 2016
+	REMOTE INTERFACE/gds__detach: Unsuccesful detach from database.
+	Uncommitted work may have been lost.
+	Error writing data to the connection.
+

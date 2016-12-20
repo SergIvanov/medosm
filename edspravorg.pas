@@ -1,0 +1,55 @@
+unit edspravorg;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, DBCtrls, Grids, DBGrids, StdCtrls, DBGridEhGrouping,
+  GridsEh, DBGridEh;
+
+type
+  TfEdSpravOrg = class(TForm)
+    Button1: TButton;
+    Panel1: TPanel;
+    DBGridEh1: TDBGridEh;
+    DBNavigator1: TDBNavigator;
+    Panel2: TPanel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fEdSpravOrg: TfEdSpravOrg;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TfEdSpravOrg.Button1Click(Sender: TObject);
+begin
+ fDM.TOrg.Close;
+ fDM.TOrg.Open;
+end;
+
+procedure TfEdSpravOrg.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  if fDM.TOrgNew.Modified then
+  begin
+   fDM.TOrgNew.Post;
+   fDM.TOrgNew.Close;
+   fDM.TOrgNew.Open;
+   fDM.TOrg.Close;
+   fDM.TOrg.Open;
+   fDM.TRab.Close;
+   fDM.TRab.Open;
+  end;
+end;
+
+end.

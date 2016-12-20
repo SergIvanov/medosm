@@ -1,0 +1,24 @@
+unit pr302;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  Tf302pr = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  f302pr: Tf302pr;
+
+implementation
+
+{$R *.dfm}
+
+end.

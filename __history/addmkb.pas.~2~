@@ -1,0 +1,63 @@
+unit addmkb;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DBCtrls, Grids, DBGrids, Mask, ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label12: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBGrid1: TDBGrid;
+    Edit2: TEdit;
+    Button1: TButton;
+    DBEdit8: TDBEdit;
+    DBEdit9: TDBEdit;
+    Button4: TButton;
+    DBComboBox1: TDBComboBox;
+    Label13: TLabel;
+    procedure DBGrid1DblClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses DM;
+
+{$R *.dfm}
+
+procedure TForm1.DBGrid1DblClick(Sender: TObject);
+begin
+  if not(fDM.TRab.FieldValues['mkb']=Null) then
+  begin
+   if MessageDlg('Добавить заболевание?',mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+   begin
+    fDM.TRab.Edit;
+    fDM.TRab.FieldbyName('mkb').asstring:=fDM.TRab.FieldbyName('mkb').asstring+', '+fDM.TMKB.FieldValues['NAIM'];
+    fDM.TRab.FieldbyName('mkb_code').asstring:=fDM.TRab.FieldbyName('mkb_code').asstring+', '+fDM.TMKB.FieldValues['CODE'];
+    fDM.TRab.Post;
+  end;
+end;
+end;
+
+end.

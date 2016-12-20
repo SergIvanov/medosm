@@ -1,0 +1,24 @@
+unit susl;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs;
+
+type
+  TfSUsl = class(TForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fSUsl: TfSUsl;
+
+implementation
+
+{$R *.dfm}
+
+end.
