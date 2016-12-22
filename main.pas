@@ -7,7 +7,8 @@ uses
   Dialogs, StdCtrls, ExtCtrls, Buttons, Menus, Grids, DBGrids, ComCtrls,
   Mask, DBCtrls, DBGridEhGrouping, GridsEh, DBGridEh, EhLibADO, DBGridEhImpExp,
   DateUtils, ADODB,
-  ToolWin, ImgList;
+  ToolWin, ImgList, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, System.ImageList,
+  EhLibVCL, DBAxisGridsEh;
 
 type
   TfMain = class(TForm)

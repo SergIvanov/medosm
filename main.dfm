@@ -185,9 +185,9 @@ object fMain: TfMain
       Height = 437
       Align = alClient
       Ctl3D = False
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSRab
       DrawMemoText = True
+      DynProps = <>
       EditActions = [geaCopyEh, geaSelectAllEh]
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -195,13 +195,8 @@ object fMain: TfMain
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
       FooterRowCount = 1
+      FooterParams.Color = clWindow
       ImeMode = imDisable
       IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -218,15 +213,12 @@ object fMain: TfMain
       SumList.Active = True
       SumList.VirtualRecords = True
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = [fsBold]
-      TitleHeight = 60
+      TitleParams.RowHeight = 60
       OnDblClick = DBGridEh1DblClick
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'id'
           Footer.Alignment = taCenter
@@ -237,6 +229,8 @@ object fMain: TfMain
           Visible = False
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           EditMask = '##.##.####'
           FieldName = 'data_proh'
@@ -247,6 +241,8 @@ object fMain: TfMain
           Width = 60
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'npp'
           Footers = <>
@@ -254,6 +250,8 @@ object fMain: TfMain
           Width = 76
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'lpu'
           Footers = <>
@@ -264,6 +262,8 @@ object fMain: TfMain
           Width = 120
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'sex'
           Footers = <>
@@ -274,6 +274,8 @@ object fMain: TfMain
           Width = 38
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'fam'
           Footers = <>
@@ -282,6 +284,8 @@ object fMain: TfMain
           Width = 120
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'imya'
           Footers = <>
@@ -289,6 +293,8 @@ object fMain: TfMain
           Title.Caption = #1048#1084#1103
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'fath'
           Footers = <>
@@ -297,6 +303,8 @@ object fMain: TfMain
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           EditMask = '##.##.####'
           FieldName = 'data_r'
@@ -305,6 +313,8 @@ object fMain: TfMain
           Width = 69
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'org'
           Footers = <>
@@ -312,8 +322,11 @@ object fMain: TfMain
           STFilter.ListField = 'imya_org'
           STFilter.ListSource = fDM.DSOrg
           Title.Caption = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
+          Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'imya_strukt_podr'
           Footers = <>
@@ -321,6 +334,8 @@ object fMain: TfMain
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'profes'
           Footers = <>
@@ -329,6 +344,8 @@ object fMain: TfMain
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'UslM'
           Footers = <>
@@ -341,8 +358,11 @@ object fMain: TfMain
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
+          Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           EditMask = '#'
           FieldName = 'extest'
@@ -353,6 +373,8 @@ object fMain: TfMain
           Width = 42
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'vredn_fact2'
           Footers = <>
@@ -360,6 +382,8 @@ object fMain: TfMain
           Width = 133
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'vredn_fact'
           Footers = <>
@@ -373,6 +397,8 @@ object fMain: TfMain
           Width = 133
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'staz_rab_fact'
           Footers = <>
@@ -381,6 +407,8 @@ object fMain: TfMain
           Width = 51
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cat_osv'
           Footers = <>
@@ -388,6 +416,8 @@ object fMain: TfMain
           Width = 44
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'ch_osm'
           Footers = <>
@@ -400,6 +430,8 @@ object fMain: TfMain
           Width = 55
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'prkrab'
           Footers = <>
@@ -407,6 +439,8 @@ object fMain: TfMain
           Width = 118
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'goden'
           Footers = <>
@@ -417,6 +451,8 @@ object fMain: TfMain
           Width = 60
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'srok_proh'
           Footers = <>
@@ -425,6 +461,8 @@ object fMain: TfMain
           Width = 55
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'dop_pri_usl'
           Footers = <>
@@ -432,6 +470,8 @@ object fMain: TfMain
           Width = 113
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'mkb_code'
           Footers = <>
@@ -441,6 +481,8 @@ object fMain: TfMain
           Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'disp_gr'
           Footers = <>
@@ -449,6 +491,8 @@ object fMain: TfMain
           Width = 35
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'firstb'
           Footers = <>
@@ -457,6 +501,8 @@ object fMain: TfMain
           Width = 40
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'VUPZ'
           Footers = <>
@@ -464,6 +510,8 @@ object fMain: TfMain
           Width = 80
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'rekom'
           Footers = <>
@@ -471,6 +519,8 @@ object fMain: TfMain
           Width = 103
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needobslprof'
           Footers = <>
@@ -482,6 +532,8 @@ object fMain: TfMain
           Width = 142
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needambl'
           Footers = <>
@@ -493,6 +545,8 @@ object fMain: TfMain
           Width = 117
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needstcl'
           Footers = <>
@@ -504,6 +558,8 @@ object fMain: TfMain
           Width = 115
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needlpit'
           Footers = <>
@@ -515,6 +571,8 @@ object fMain: TfMain
           Width = 102
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'skl'
           Footers = <>
@@ -526,12 +584,17 @@ object fMain: TfMain
           Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'LookUpProfSan'
           Footers = <>
           Title.Caption = #1055#1088#1086#1092#1080#1083#1100' '#1089#1072#1085#1072#1090#1086#1088#1080#1103
+          Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needd'
           Footers = <>
@@ -539,6 +602,8 @@ object fMain: TfMain
           Width = 82
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'needmse'
           Footers = <>
@@ -550,6 +615,8 @@ object fMain: TfMain
           Width = 72
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PredDZ'
           Footers = <>
@@ -557,6 +624,8 @@ object fMain: TfMain
           Width = 97
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'prof'
           Footers = <>
@@ -564,18 +633,24 @@ object fMain: TfMain
           STFilter.ListField = 'Naim'
           STFilter.ListSource = fDM.DSProfPatolog
           Title.Caption = #1055#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075
+          Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'user'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'psih'
           Footers = <>
           Title.Caption = #1055#1089#1080#1093'.'#13#10#1042#1050
+          Width = 50
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end
@@ -685,7 +760,7 @@ object fMain: TfMain
     Left = 800
     Top = 16
     Bitmap = {
-      494C010107000800C00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000800C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFDBC7
       BBFFD0BBAFFFCFAD9AFFD4A589FFD4A684FFD4A582FFD6A27DFFD9A079FFDB9C

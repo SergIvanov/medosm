@@ -4,9 +4,7 @@ interface
 
 uses
   SysUtils, Classes, DB, ADODB, MemTableDataEh, DataDriverEh, ADODataDriverEh,
-  MemTableEh, DBXFirebird, SqlExpr, uADStanIntf, uADStanOption, uADStanError,
-  uADGUIxIntf, uADPhysIntf, uADStanDef, uADStanPool, uADStanAsync,
-  uADPhysManager, uADCompClient;
+  MemTableEh, DBXFirebird, SqlExpr;
 
 type
   TfDM = class(TDataModule)
@@ -315,7 +313,7 @@ begin
     fDM.TRab.FieldByName('sostexp').AsString :=
       'Кривощекова Ю.В. Ерофеева Л. В. Демидова Н. С. Ковалева Н.В. Аксенов А.М. Дейнеко Т.Я.';
   end;
-   FDM.TRab.FieldByName('psih').Value:=True;
+   FDM.TRab.FieldByName('psih').Value:=False;
   { Добавление месяца в поле mesyac }
 end;
 
