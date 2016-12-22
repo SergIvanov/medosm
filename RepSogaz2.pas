@@ -152,7 +152,7 @@ begin
 
 
 
-
+          ExelTab.Cells.Item[i, 7] := fDM.QStacRep.FieldByName('data_proh').AsString;
           ExelTab.Cells.Item[i, 8] := fDM.Query.FieldByName('kod_usl').AsString;
           ExelTab.Cells.Item[i, 9] := fDM.Query.FieldByName('naimusl').AsString;
           ExelTab.Cells.Item[i, 11] := fDM.Query.FieldByName('kol').AsString;
