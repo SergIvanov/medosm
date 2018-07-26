@@ -64,3 +64,7 @@ USER-ой	Tue Sep 20 16:30:45 2016
 	Uncommitted work may have been lost.
 	Error writing data to the connection.
 
+
+BERLINPC	Fri Feb 10 15:42:58 2017
+	INET/inet_error: read errno = 10054, server host = 172.31.8.123, address = 172.31.8.123/3050
+

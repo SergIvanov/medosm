@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Mask, DBCtrlsEh, ExtCtrls, DBGridEh, DBLookupEh,
-  DBGridEhGrouping, GridsEh, DBCtrls, ComCtrls;
+  DBGridEhGrouping, GridsEh, DBCtrls, ComCtrls, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, EhLibVCL, DBAxisGridsEh;
 
 type
   TfFYS = class(TForm)

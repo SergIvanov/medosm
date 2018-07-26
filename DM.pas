@@ -4,7 +4,12 @@ interface
 
 uses
   SysUtils, Classes, DB, ADODB, MemTableDataEh, DataDriverEh, ADODataDriverEh,
-  MemTableEh, DBXFirebird, SqlExpr;
+  MemTableEh, DBXFirebird, SqlExpr, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
+  FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.IBBase;
 
 type
   TfDM = class(TDataModule)
@@ -252,12 +257,17 @@ type
     wdstrngfldTRabmrd: TWideStringField;
     wdstrngfldTRabmrk: TWideStringField;
     wdstrngfldTRabmrkv: TWideStringField;
+    con1: TFDConnection;
+    fdphysfbdrvrlnk1: TFDPhysFBDriverLink;
+    fdqry1: TFDQuery;
+    wdmfldTJournalvredn_fact: TWideMemoField;
     procedure TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure TRabAfterInsert(DataSet: TDataSet);
     procedure TRabprkrabChange(Sender: TField);
     procedure TRabAfterEdit(DataSet: TDataSet);
     procedure TRabdata_rChange(Sender: TField);
     procedure TSFactorFilterRecord(DataSet: TDataSet; var Accept: Boolean);
+    procedure DataModuleCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -275,6 +285,14 @@ implementation
 uses user, main;
 
 {$R *.dfm}
+
+procedure TfDM.DataModuleCreate(Sender: TObject);
+begin
+
+fdphysfbdrvrlnk1.VendorLib:= ExtractFileDir(ParamStr(0))+'\32\fbclient.dll';
+
+
+end;
 
 procedure TfDM.MKBLocate(s: string);
 begin

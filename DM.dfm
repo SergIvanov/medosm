@@ -1,7 +1,8 @@
 object fDM: TfDM
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 745
-  Width = 1053
+  Width = 1013
   object ADOConnection1: TADOConnection
     Connected = True
     ConnectionString = 
@@ -745,7 +746,9 @@ object fDM: TfDM
       FieldName = 'data'
     end
     object TUslkod_usl: TWideStringField
+      DisplayWidth = 40
       FieldName = 'kod_usl'
+      Size = 40
     end
     object TUslkod_vr: TIntegerField
       FieldName = 'kod_vr'
@@ -896,9 +899,141 @@ object fDM: TfDM
       'select user,id, npp, data_proh, fam, imya, fath, id_org, data_r,' +
       ' sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, d' +
       'ef, result,  datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp,' +
-      ' podpis from rabotnik WHERE prkrab<>'#39#39' ORDER BY id ASC'
+      ' podpis, vredn_fact from rabotnik WHERE prkrab<>'#39#39' ORDER BY id A' +
+      'SC'
+    FieldDefs = <
+      item
+        Name = 'user'
+        DataType = ftWideString
+        Size = 50
+      end
+      item
+        Name = 'id'
+        Attributes = [faReadonly, faFixed]
+        DataType = ftAutoInc
+      end
+      item
+        Name = 'npp'
+        Attributes = [faFixed]
+        DataType = ftInteger
+      end
+      item
+        Name = 'data_proh'
+        Attributes = [faFixed]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'fam'
+        DataType = ftWideString
+        Size = 30
+      end
+      item
+        Name = 'imya'
+        DataType = ftWideString
+        Size = 15
+      end
+      item
+        Name = 'fath'
+        DataType = ftWideString
+        Size = 20
+      end
+      item
+        Name = 'id_org'
+        Attributes = [faFixed]
+        DataType = ftInteger
+      end
+      item
+        Name = 'data_r'
+        Attributes = [faFixed]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'sex'
+        DataType = ftWideString
+        Size = 3
+      end
+      item
+        Name = 'profes'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'mkb_code'
+        DataType = ftWideString
+        Size = 100
+      end
+      item
+        Name = 'prkrab'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'dop_pri_usl'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'lpu'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'slexp'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'otkl'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'def'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'result'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'datezaklMSE'
+        Attributes = [faFixed]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'datenaprMSE'
+        Attributes = [faFixed]
+        DataType = ftDateTime
+      end
+      item
+        Name = 'zaklMSE'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'dopinf'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'sostexp'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'podpis'
+        DataType = ftWideString
+        Size = 255
+      end
+      item
+        Name = 'vredn_fact'
+        DataType = ftWideMemo
+      end>
     IndexFieldNames = 'data_proh'
     Parameters = <>
+    StoreDefs = True
     Left = 336
     Top = 535
     object TJournalnpp: TIntegerField
@@ -1002,6 +1137,10 @@ object fDM: TfDM
     object TJournaluser: TWideStringField
       FieldName = 'user'
       Size = 50
+    end
+    object wdmfldTJournalvredn_fact: TWideMemoField
+      FieldName = 'vredn_fact'
+      BlobType = ftWideMemo
     end
   end
   object DSJournal: TDataSource
@@ -1329,5 +1468,28 @@ object fDM: TfDM
     DataSet = tblProfSan
     Left = 224
     Top = 304
+  end
+  object con1: TFDConnection
+    Params.Strings = (
+      'Database=C:\NUZService\Sprav.fdb'
+      'Server=172.31.8.123'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Protocol=TCPIP'
+      'CharacterSet=UTF8'
+      'DriverID=FB')
+    Left = 832
+    Top = 32
+  end
+  object fdphysfbdrvrlnk1: TFDPhysFBDriverLink
+    Left = 888
+    Top = 32
+  end
+  object fdqry1: TFDQuery
+    Connection = con1
+    SQL.Strings = (
+      'Select * from POLISSOGAZMED')
+    Left = 832
+    Top = 96
   end
 end

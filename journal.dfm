@@ -31,17 +31,12 @@
       Height = 387
       Align = alClient
       Ctl3D = False
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSJournal
       DrawMemoText = True
+      DynProps = <>
       Flat = True
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
       FooterRowCount = 1
+      FooterParams.Color = clWindow
       IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
       ParentCtl3D = False
@@ -49,27 +44,28 @@
       STFilter.Local = True
       STFilter.Visible = True
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
-      TitleHeight = 60
+      TitleParams.RowHeight = 60
       OnDblClick = DBGridEh1DblClick
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'npp'
           Footers = <>
           Title.Caption = #8470' '#1087#1088#1086#1090#1086#1082#1086#1083#1072
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'data_proh'
           Footers = <>
           Title.Caption = #1044#1072#1090#1072' '#1101#1082#1089#1087#1077#1088#1090#1080#1079#1099
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'lpu'
           Footers = <>
@@ -77,6 +73,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'fam'
           Footers = <>
@@ -84,18 +82,24 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'imya'
           Footers = <>
           Title.Caption = #1048#1084#1103
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'fath'
           Footers = <>
           Title.Caption = #1054#1090#1095#1077#1089#1090#1074#1086
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'data_r'
           Footers = <>
@@ -103,6 +107,8 @@
           Width = 70
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'lookOrg'
           Footers = <>
@@ -110,6 +116,8 @@
           Width = 102
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'sex'
           Footers = <>
@@ -117,6 +125,8 @@
           Width = 30
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'profes'
           Footers = <>
@@ -124,6 +134,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'mkb_code'
           Footers = <>
@@ -131,6 +143,8 @@
           Width = 90
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'slexp'
           Footers = <>
@@ -138,6 +152,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'prkrab'
           Footers = <>
@@ -145,6 +161,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'otkl'
           Footers = <>
@@ -152,6 +170,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'def'
           Footers = <>
@@ -159,6 +179,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'result'
           Footers = <>
@@ -168,6 +190,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'dop_pri_usl'
           Footers = <>
@@ -175,12 +199,16 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'datenaprMSE'
           Footers = <>
           Title.Caption = #1044#1072#1090#1072' '#1085#1072#1087#1088#1072#1074#1083'-'#1103' '#1074' '#1052#1057#1069
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'zaklMSE'
           Footers = <>
@@ -188,12 +216,16 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'datezaklMSE'
           Footers = <>
           Title.Caption = #1044#1072#1090#1072' '#1087#1086#1083#1091#1095#1077#1085#1080#1103' '#1079#1072#1082#1083'-'#1103' '#1052#1057#1069
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'dopinf'
           Footers = <>
@@ -201,6 +233,8 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'sostexp'
           Footers = <>
@@ -208,11 +242,20 @@
           Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'podpis'
           Footers = <>
           Title.Caption = #1055#1086#1076#1087#1080#1089#1080' '#1101#1082#1089#1087#1077#1088#1090#1086#1074
           Width = 150
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'vredn_fact'
+          Footers = <>
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end

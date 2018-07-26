@@ -120,6 +120,7 @@ object fFYS: TfFYS
       Height = 21
       DataField = 'fam'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       TabOrder = 1
       Visible = True
@@ -131,6 +132,7 @@ object fFYS: TfFYS
       Height = 21
       DataField = 'imya'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       TabOrder = 2
       Visible = True
@@ -142,6 +144,7 @@ object fFYS: TfFYS
       Height = 21
       DataField = 'fath'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       TabOrder = 3
       Visible = True
@@ -151,6 +154,8 @@ object fFYS: TfFYS
       Top = 75
       Width = 336
       Height = 21
+      DynProps = <>
+      DataField = ''
       EditButtons = <>
       KeyField = 'id'
       ListField = #1057#1087#1077#1094#1080#1072#1083#1100#1085#1086#1089#1090#1100
@@ -164,6 +169,8 @@ object fFYS: TfFYS
       Top = 117
       Width = 488
       Height = 21
+      DynProps = <>
+      DataField = ''
       DropDownBox.Columns = <
         item
           AutoFitColWidth = False
@@ -226,6 +233,7 @@ object fFYS: TfFYS
       Height = 21
       DataField = 'data_r'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       Kind = dtkDateEh
       TabOrder = 10
@@ -238,6 +246,7 @@ object fFYS: TfFYS
       Height = 21
       DataField = 'polis'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       TabOrder = 11
       Visible = True
@@ -284,43 +293,40 @@ object fFYS: TfFYS
       Width = 732
       Height = 210
       Align = alClient
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSUsl
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
+      DynProps = <>
+      FooterParams.Color = clWindow
       IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
       OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'kod_usl'
           Footers = <>
-          Width = 79
+          Width = 150
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'naimusl'
           Footers = <>
           Width = 276
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'kol'
           Footers = <>
           Width = 35
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'cena'
           Footer.ValueType = fvtSum
@@ -328,24 +334,32 @@ object fFYS: TfFYS
           Width = 38
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'kod_vr'
           Footers = <>
           Width = 47
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'kod_ms'
           Footers = <>
           Width = 46
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'mkb'
           Footers = <>
           Width = 57
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'data'
           Footers = <>

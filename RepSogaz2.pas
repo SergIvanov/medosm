@@ -74,6 +74,32 @@ rez:=0;
 
   Result := rez;
 end;
+function PolisSogaz(FAM: String; IM: String;OT: String;DATAR: String): string;
+var
+q : string;
+rez:string;
+begin
+rez:='';
+     fDM.fdqry1.SQL.Clear;
+    q := 'SELECT * FROM POLISSOGAZMED WHERE (POLISSOGAZMED.FAM=:FAM AND POLISSOGAZMED.IM=:IM) and (POLISSOGAZMED.OT=:OT) and (POLISSOGAZMED.DATAR=:DATAR);';
+
+    fDM.fdqry1.SQL.Add(q);
+     fDM.fdqry1.Params.ParamByName('FAM').Value :=FAM;
+     fDM.fdqry1.Params.ParamByName('IM').Value :=IM;
+     fDM.fdqry1.Params.ParamByName('OT').Value :=OT;
+     fDM.fdqry1.Params.ParamByName('DATAR').Value :=DATAR;
+
+
+    fDM.fdqry1.Open;
+    fDM.fdqry1.First;
+    if (not fDM.fdqry1.IsEmpty) then
+      begin
+    rez:=fDM.fdqry1.FieldByName('POLIS').AsString;
+      end;
+
+
+  Result := rez;
+end;
 
 procedure TForm1.btn1Click(Sender: TObject);
 var
@@ -125,6 +151,7 @@ begin
     ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('imya').AsString;
     ExelTab.Cells.Item[i, 4] := fDM.QStacRep.FieldByName('fath').AsString;
 
+    ExelTab.Cells.Item[i, 5] := PolisSogaz(fDM.QStacRep.FieldByName('fam').AsString, fDM.QStacRep.FieldByName('imya').AsString,fDM.QStacRep.FieldByName('fath').AsString,fDM.QStacRep.FieldByName('data_r').AsString);
     //ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('data_r').AsString;
     //ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('polis').AsString;
     ExelTab.Cells.Item[i, 7] := fDM.QStacRep.FieldByName('data_proh').AsString;
@@ -159,6 +186,8 @@ begin
 
 
           ExelTab.Cells.Item[i, 10] :=CenaSogaz(fDM.Query.FieldByName('kod_usl').AsString);
+          ExelTab.Cells.Item[i, 12] :='=J'+IntToStr(i)+'*K'+IntToStr(i);
+
           sum:=sum+CenaSogaz(fDM.Query.FieldByName('kod_usl').AsString);
           {ExelTab.Cells.Item[i, 9] := fDM.Query.FieldByName('data').AsString;
           if fDM.Query.FieldByName('kod_vr').AsString = '' then
@@ -185,7 +214,7 @@ begin
     ExelTab.Cells.Item[i, 18].Font.Bold := True;
     //ExelTab.Cells.Item[i, 18] := sum;
     sumall := sum + sumall;
-    ExelTab.Cells.Item[i, 10].Value := '=sum(J'+IntToStr(c)+':J'+IntToStr(i-1)+')';
+    ExelTab.Cells.Item[i, 12].Value := '=sum(L'+IntToStr(c)+':L'+IntToStr(i-1)+')';
     sum := 0;
     inc(i);
     fDM.QStacRep.Next;
@@ -263,6 +292,9 @@ procedure TForm1.FormCreate(Sender: TObject);
 begin
 dtp1.DateTime := StartOfTheMonth(Now);
 dtp2.DateTime := EndOfTheMonth(Now);
+
+fDM.con1.Connected:=True;
+
 end;
 
 end.

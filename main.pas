@@ -400,11 +400,12 @@ begin
   fDM.TJournal.Active := false;
   if user.us <> 'Администратор' then
     fDM.TJournal.CommandText :=
-      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE (prkrab<>"")and (user='
+      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis,vredn_fact FROM rabotnik WHERE (prkrab<>"")and (user='
       + quotedstr(us) + ')' + 'ORDER BY id ASC'
   else
     fDM.TJournal.CommandText :=
-      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE prkrab<>"" ORDER BY id ASC';
+      'SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu,'
+      +' slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis,vredn_fact FROM rabotnik WHERE prkrab<>"" ORDER BY id ASC';
   // fDM.TJournal.CommandText:='SELECT user, id ,npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis FROM rabotnik WHERE prkrab<>"" ORDER BY id ASC';
   fDM.TJournal.Active := true;
   fJournal.Show;
