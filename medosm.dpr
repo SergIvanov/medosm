@@ -29,7 +29,8 @@ uses
   SprProvpatolog in 'SprProvpatolog.pas' {SprProf},
   RepSogaz in 'RepSogaz.pas' {fRepSogaz},
   repSogazPat in 'repSogazPat.pas' {FrepSogazPat},
-  RepSogaz2 in 'RepSogaz2.pas' {Form1};
+  RepSogaz2 in 'RepSogaz2.pas' {Form1},
+  Reso in 'Reso.pas' {FormReso};
 
 {$R *.res}
 
@@ -63,5 +64,6 @@ begin
   Application.CreateForm(TfRepSogaz, fRepSogaz);
   Application.CreateForm(TFrepSogazPat, FrepSogazPat);
   Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormReso, FormReso);
   Application.Run;
 end.

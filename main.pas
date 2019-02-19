@@ -59,6 +59,7 @@ type
     N4: TMenuItem;
     N22: TMenuItem;
     N23: TMenuItem;
+    N24: TMenuItem;
     procedure Button4Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
@@ -97,6 +98,7 @@ type
     procedure N4Click(Sender: TObject);
     procedure N22Click(Sender: TObject);
     procedure N23Click(Sender: TObject);
+    procedure N24Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -111,7 +113,7 @@ implementation
 
 uses DM, editor, edspravorg, pril9, pril5, addmkb, user, sumuslrep,
   comUsl, fys, stacrep, periodvigr, countdispgr, issl, journal, factor,
-  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,REPSOGAZ2;
+  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,REPSOGAZ2,Reso;
 
 {$R *.dfm}
 
@@ -318,6 +320,11 @@ end;
 procedure TfMain.N23Click(Sender: TObject);
 begin
 REPSOGAZ2.Form1.ShowModal;
+end;
+
+procedure TfMain.N24Click(Sender: TObject);
+begin
+Reso.FormReso.ShowModal;
 end;
 
 procedure TfMain.N4Click(Sender: TObject);
