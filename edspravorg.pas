@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, DBCtrls, Grids, DBGrids, StdCtrls, DBGridEhGrouping,
-  GridsEh, DBGridEh;
+  GridsEh, DBGridEh, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  DBAxisGridsEh;
 
 type
   TfEdSpravOrg = class(TForm)

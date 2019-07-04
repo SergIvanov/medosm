@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, DBGridEhGrouping, GridsEh, DBGridEh, StdCtrls, DBCtrls,
-  WordXP, OleServer, DateUtils;
+  WordXP, OleServer, DateUtils, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, DBAxisGridsEh;
 
 type
   TfFactor = class(TForm)
@@ -51,8 +52,9 @@ function TfFactor.DuplicateStrIS(s_in: string): String;
 var
   s: TStringList;
 begin
-  try
     s := TStringList.Create;
+  try
+
     s.Sorted := true;
     s.Duplicates := dupIgnore;
     s.Text := stringReplace(s_in, ';', #13#10, [rfReplaceAll]);
@@ -66,8 +68,9 @@ function TfFactor.DuplicateStrVr(s_in: string): String;
 var
   s: TStringList;
 begin
-  try
     s := TStringList.Create;
+  try
+
     s.Sorted := true;
     s.Duplicates := dupIgnore;
     s.Text := stringReplace(s_in, ';', #13#10, [rfReplaceAll]);
@@ -75,6 +78,7 @@ begin
   finally
     s.Free;
   end;
+
 end;
 
 procedure TfFactor.MakeStr(var sfact, sfactn, sissl, svr: string);
@@ -119,7 +123,7 @@ end;
 procedure TfFactor.Button1Click(Sender: TObject);
 var
   Shablon: OleVariant;
-  sfact, sfactn, svr, sissl, st, outstr: string;
+  sfact, sfactn, svr, sissl, st: string;
   staj, stajd: integer;
 begin
   Shablon := ExtractFileDir(ParamStr(0)) + '\Шаблоны\pmarsh.doc';

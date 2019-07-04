@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Grids, DBGrids, Mask, DBCtrls, WordXP,
-  OleServer, ComCtrls;
+  OleServer, ComCtrls, Data.DB;
 
 type
   TfPril3 = class(TForm)
@@ -102,9 +102,6 @@ begin
 end;
 
 procedure TfPril3.DBGrid1DblClick(Sender: TObject);
-var
-  COUNTMKB: integer;
-  query: string;
 
 begin
   if not(fDM.TRab.FieldValues['mkb'] = Null) then

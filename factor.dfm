@@ -52,30 +52,20 @@ object fFactor: TfFactor
       Height = 188
       Align = alClient
       AllowedOperations = []
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSSFactor
       DrawMemoText = True
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
-      IndicatorOptions = [gioShowRowIndicatorEh]
+      DynProps = <>
+      FooterParams.Color = clWindow
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
       RowLines = 3
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       OnDblClick = DBGridEh1DblClick
       OnKeyDown = DBGridEh1KeyDown
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'code'
           Footers = <>
@@ -88,6 +78,8 @@ object fFactor: TfFactor
           Width = 70
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'naim'
           Footers = <>
@@ -101,6 +93,8 @@ object fFactor: TfFactor
           Width = 400
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'vrach'
           Footers = <>
@@ -113,6 +107,8 @@ object fFactor: TfFactor
           Width = 300
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'issl'
           Footers = <>
@@ -141,26 +137,16 @@ object fFactor: TfFactor
       Width = 560
       Height = 132
       Align = alCustom
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSFactor
       DrawMemoText = True
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'Tahoma'
-      FooterFont.Style = []
-      IndicatorOptions = [gioShowRowIndicatorEh]
+      DynProps = <>
+      FooterParams.Color = clWindow
       RowLines = 3
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Tahoma'
-      TitleFont.Style = []
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'code'
           Footers = <>
@@ -173,6 +159,8 @@ object fFactor: TfFactor
           Width = 70
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'vrach'
           Footers = <>
@@ -185,6 +173,8 @@ object fFactor: TfFactor
           Width = 300
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'issl'
           Footers = <>

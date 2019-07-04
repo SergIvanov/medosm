@@ -20,76 +20,84 @@ object fUsl: TfUsl
     Width = 759
     Height = 335
     Align = alClient
-    DataGrouping.GroupLevels = <>
     DataSource = fDM.DSSumUsl
     DrawMemoText = True
+    DynProps = <>
     EditActions = [geaDeleteEh]
-    Flat = False
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'Tahoma'
-    FooterFont.Style = []
     FooterRowCount = 1
-    IndicatorOptions = [gioShowRowIndicatorEh]
+    FooterParams.Color = clWindow
     SumList.Active = True
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'fam'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'imya'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'fath'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'sex'
         Footers = <>
         Width = 25
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'profes'
         Footers = <>
         Width = 90
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'vredn_fact'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'cat_osv'
         Footers = <>
         Width = 50
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'idusl'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'iduslold'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'extest'
         Footers = <>

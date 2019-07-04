@@ -151,7 +151,7 @@ begin
     ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('imya').AsString;
     ExelTab.Cells.Item[i, 4] := fDM.QStacRep.FieldByName('fath').AsString;
 
-    ExelTab.Cells.Item[i, 5] := PolisSogaz(fDM.QStacRep.FieldByName('fam').AsString, fDM.QStacRep.FieldByName('imya').AsString,fDM.QStacRep.FieldByName('fath').AsString,fDM.QStacRep.FieldByName('data_r').AsString);
+    //ExelTab.Cells.Item[i, 5] := PolisSogaz(fDM.QStacRep.FieldByName('fam').AsString, fDM.QStacRep.FieldByName('imya').AsString,fDM.QStacRep.FieldByName('fath').AsString,fDM.QStacRep.FieldByName('data_r').AsString);
     //ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('data_r').AsString;
     //ExelTab.Cells.Item[i, 3] := fDM.QStacRep.FieldByName('polis').AsString;
     ExelTab.Cells.Item[i, 7] := fDM.QStacRep.FieldByName('data_proh').AsString;

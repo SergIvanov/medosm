@@ -22,41 +22,32 @@ object fEdSpravOrg: TfEdSpravOrg
     Height = 414
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 519
     object DBGridEh1: TDBGridEh
       Left = 1
       Top = 1
       Width = 660
       Height = 412
       Align = alClient
-      DataGrouping.GroupLevels = <>
       DataSource = fDM.DSOrg
       DrawMemoText = True
-      Flat = False
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
-      IndicatorOptions = [gioShowRowIndicatorEh]
+      DynProps = <>
+      FooterParams.Color = clWindow
       STFilter.InstantApply = True
       STFilter.Local = True
       STFilter.Visible = True
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'id_org'
           Footers = <>
           Title.Caption = #1050#1086#1076
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'imya_org'
           Footers = <>
@@ -64,6 +55,8 @@ object fEdSpravOrg: TfEdSpravOrg
           Width = 80
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'imya_poln'
           Footers = <>
@@ -71,6 +64,8 @@ object fEdSpravOrg: TfEdSpravOrg
           Width = 300
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'form_sobstv'
           Footers = <>
@@ -78,6 +73,8 @@ object fEdSpravOrg: TfEdSpravOrg
           Width = 50
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'dif_price'
           Footers = <>
@@ -93,7 +90,6 @@ object fEdSpravOrg: TfEdSpravOrg
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 519
     object Button1: TButton
       Left = 16
       Top = 6

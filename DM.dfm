@@ -513,6 +513,9 @@ object fDM: TfDM
       FieldName = 'mrkv'
       Size = 10
     end
+    object wrdfldTRabZak282: TWordField
+      FieldName = 'Zak282'
+    end
   end
   object TSUslM: TADODataSet
     Active = True
@@ -1491,5 +1494,56 @@ object fDM: TfDM
       'Select * from POLISSOGAZMED')
     Left = 832
     Top = 96
+  end
+  object tblTDogovor: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Filtered = True
+    TableName = 'Dogovor'
+    Left = 768
+    Top = 416
+    object atncfldTDogovorid: TAutoIncField
+      FieldName = 'id'
+      ReadOnly = True
+    end
+    object wdstrngfldTDogovorNaim: TWideStringField
+      FieldName = 'Naim'
+      Size = 255
+    end
+  end
+  object dsDogovor: TDataSource
+    DataSet = tblTDogovor
+    Left = 848
+    Top = 416
+  end
+  object tblZak282: TADOTable
+    Active = True
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    IndexName = 'PrimaryKey'
+    TableName = 'Zak282'
+    Left = 584
+    Top = 656
+  end
+  object qryJurnal282: TADOQuery
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select user,id, npp, data_proh, fam, imya, fath, id_org, data_r,' +
+        ' sex, profes, mkb_code, prkrab, dop_pri_usl, lpu, slexp, otkl, d' +
+        'ef, result,  datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp,' +
+        ' podpis, vredn_fact from rabotnik WHERE prkrab<>'#39#39' ORDER BY id A' +
+        'SC')
+    Left = 512
+    Top = 544
+  end
+  object dsJurnal282: TDataSource
+    DataSet = qryJurnal282
+    Left = 584
+    Top = 544
   end
 end

@@ -261,6 +261,14 @@ type
     fdphysfbdrvrlnk1: TFDPhysFBDriverLink;
     fdqry1: TFDQuery;
     wdmfldTJournalvredn_fact: TWideMemoField;
+    tblTDogovor: TADOTable;
+    atncfldTDogovorid: TAutoIncField;
+    wdstrngfldTDogovorNaim: TWideStringField;
+    dsDogovor: TDataSource;
+    tblZak282: TADOTable;
+    wrdfldTRabZak282: TWordField;
+    qryJurnal282: TADOQuery;
+    dsJurnal282: TDataSource;
     procedure TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure TRabAfterInsert(DataSet: TDataSet);
     procedure TRabprkrabChange(Sender: TField);

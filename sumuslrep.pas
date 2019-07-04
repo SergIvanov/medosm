@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DBGridEhGrouping, GridsEh, DBGridEh, DBCtrls, StdCtrls, ComCtrls,
-  ExtCtrls, DBGridEhImpExp, OleServer, ComObj;
+  ExtCtrls, DBGridEhImpExp, OleServer, ComObj, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, EhLibVCL, DBAxisGridsEh;
 
 type
   TfUsl = class(TForm)
@@ -755,6 +756,7 @@ var
   i, rcount, c: integer;
   k: boolean;
 begin
+c:=0;
   fDM.TOrg.First;
   while not(fDM.TOrg.Eof) do
   begin

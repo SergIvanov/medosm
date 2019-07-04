@@ -443,6 +443,20 @@ object fMain: TfMain
           CellButtons = <>
           DynProps = <>
           EditButtons = <>
+          FieldName = 'Zak282'
+          Footers = <>
+          LookupParams.KeyFieldNames = 'Zak282'
+          LookupParams.LookupDataSet = fDM.tblZak282
+          LookupParams.LookupDisplayFieldName = 'Naim'
+          LookupParams.LookupKeyFieldNames = 'id'
+          Title.Caption = #1047#1072#1082#1083#1102#1095#1077#1085#1080#1077' '#1087#1086' 282'#1087#1088
+          Width = 199
+          WordWrap = True
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
           FieldName = 'goden'
           Footers = <>
           PickList.Strings = (
@@ -685,29 +699,43 @@ object fMain: TfMain
         Caption = #1054#1090#1095#1077#1090' '#1074' '#1089#1090#1072#1094#1080#1086#1085#1072#1088
         OnClick = N13Click
       end
-      object N15: TMenuItem
-        Caption = #1046#1091#1088#1085#1072#1083' '#1091#1095#1077#1090#1072
-        OnClick = N15Click
-      end
-      object N19: TMenuItem
-        Caption = #1054#1090#1095#1077#1090' '#1046#1040#1057#1054
-        OnClick = N19Click
+      object N28: TMenuItem
+        Caption = #1046#1091#1088#1085#1072#1083#1099
+        object N15: TMenuItem
+          Caption = #1046#1091#1088#1085#1072#1083' '#1091#1095#1077#1090#1072
+          OnClick = N15Click
+        end
+        object N2821: TMenuItem
+          Caption = #1046#1091#1088#1085#1072#1083' 282'
+          OnClick = N2821Click
+        end
       end
       object N20: TMenuItem
         Caption = #1053#1091#1078#1076#1072#1102#1097#1080#1077#1089#1103' '#1074' '#1089#1082#1083
         OnClick = N20Click
       end
-      object N22: TMenuItem
-        Caption = #1054#1090#1095#1077#1090' '#1048#1075#1086#1089#1090#1088#1072#1093
-        OnClick = N22Click
+      object N26: TMenuItem
+        Caption = #1056#1077#1077#1089#1090#1088#1099' '#1089#1090#1088#1072#1093#1086#1074#1099#1084
+        object N24: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1056#1045#1057#1054
+          OnClick = N24Click
+        end
+        object N23: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1057#1086#1075#1072#1079
+          OnClick = N23Click
+        end
+        object N22: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1048#1075#1086#1089#1090#1088#1072#1093
+          OnClick = N22Click
+        end
+        object N19: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1046#1040#1057#1054
+          OnClick = N19Click
+        end
       end
-      object N23: TMenuItem
-        Caption = #1054#1090#1095#1077#1090' '#1057#1086#1075#1072#1079
-        OnClick = N23Click
-      end
-      object N24: TMenuItem
-        Caption = #1054#1090#1095#1077#1090' '#1056#1045#1057#1054
-        OnClick = N24Click
+      object N27: TMenuItem
+        Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1091#1089#1083#1091#1075#1072#1084' '#1085#1086#1074#1099#1081
+        OnClick = N27Click
       end
     end
     object N3: TMenuItem
@@ -730,6 +758,10 @@ object fMain: TfMain
       object N4: TMenuItem
         Caption = #1055#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075#1080
         OnClick = N4Click
+      end
+      object N25: TMenuItem
+        Caption = #1044#1086#1075#1086#1074#1086#1088#1099
+        OnClick = N25Click
       end
     end
   end
@@ -765,7 +797,7 @@ object fMain: TfMain
     Left = 800
     Top = 16
     Bitmap = {
-      494C010107000800D80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010107000800E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000002000000001002000000000000020
       000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFDBC7
       BBFFD0BBAFFFCFAD9AFFD4A589FFD4A684FFD4A582FFD6A27DFFD9A079FFDB9C
