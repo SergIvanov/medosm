@@ -269,6 +269,8 @@ type
     wrdfldTRabZak282: TWordField;
     qryJurnal282: TADOQuery;
     dsJurnal282: TDataSource;
+    wdstrngfldTRabprkrab282p2: TWideStringField;
+    dsZak282: TDataSource;
     procedure TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure TRabAfterInsert(DataSet: TDataSet);
     procedure TRabprkrabChange(Sender: TField);
@@ -299,6 +301,8 @@ begin
 
 fdphysfbdrvrlnk1.VendorLib:= ExtractFileDir(ParamStr(0))+'\32\fbclient.dll';
 
+TMKB.Active := True;
+TOrgNew.Active := True;
 
 end;
 
@@ -337,7 +341,7 @@ begin
         Delete(todaystr, I, 1);
     fDM.TRab.FieldByName('data_proh').AsString := todaystr;
     fDM.TRab.FieldByName('sostexp').AsString :=
-      'Кривощекова Ю.В. Ерофеева Л. В. Демидова Н. С. Ковалева Н.В. Аксенов А.М. Дейнеко Т.Я.';
+      'Кривощекова Ю.В.Ковалева Н.В. Аксенов А.М. Жесткова Н.А. Тарасова Л.В.';
   end;
    FDM.TRab.FieldByName('psih').Value:=False;
   { Добавление месяца в поле mesyac }

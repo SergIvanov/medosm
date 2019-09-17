@@ -121,7 +121,7 @@ implementation
 
 uses DM, editor, edspravorg, pril9, pril5, addmkb, user, sumuslrep,
   comUsl, fys, stacrep, periodvigr, countdispgr, issl, journal, factor,
-  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,REPSOGAZ2,Reso,SprDogovor,RepUsl2,Jurnal282;
+  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,REPSOGAZ2,Reso,SprDogovor,RepUsl2,Jurnal282,RepUsl22;
 
 {$R *.dfm}
 
@@ -237,6 +237,9 @@ end;
 
 procedure TfMain.FormShow(Sender: TObject);
 begin
+
+  //RepUsl22.FormRepUsl22.ShowModal;
+
   fUser.ShowModal;
   if user.us = '' then
   begin
@@ -244,6 +247,8 @@ begin
     fMain.Close;
   end;
   Label1.Caption := 'Вы зашли как ' + us;
+
+
 end;
 
 procedure TfMain.Button1Click(Sender: TObject);
@@ -341,7 +346,7 @@ end;
 
 procedure TfMain.N27Click(Sender: TObject);
 begin
-RepUsl2.FormRepUsl2.ShowModal;
+RepUsl22.FormRepUsl22.ShowModal;
 end;
 
 procedure TfMain.N2821Click(Sender: TObject);

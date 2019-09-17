@@ -33,6 +33,10 @@ type
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Button2Click(Sender: TObject);
 
+
+
+
+
   private
     { Private declarations }
   public
@@ -201,17 +205,32 @@ end;
 
 procedure TfFactor.DBGridEh1DblClick(Sender: TObject);
 begin
-  fDM.TFactor.Append;
-  fDM.TFactor.FieldByName('code').AsString :=
-    fDM.TSFactor.FieldByName('code').AsString;
-  fDM.TFactor.FieldByName('naim').AsString :=
-    fDM.TSFactor.FieldByName('naim').AsString;
-  fDM.TFactor.FieldByName('vrach').AsString :=
-    fDM.TSFactor.FieldByName('vrach').AsString;
-  fDM.TFactor.FieldByName('issl').AsString :=
-    fDM.TSFactor.FieldByName('issl').AsString;
-  fDM.TFactor.Post;
-  Edit1.Clear;
+   fDM.TFactId.Active := false;
+  fDM.TFactId.CommandText := 'SELECT * FROM factor WHERE id_rab=' +
+    fDM.TRab.FieldByName('id').AsString + ' and code='+QuotedStr(fDM.TSFactor.FieldByName('code').AsString);
+  fDM.TFactId.Active := true;
+
+  if fDM.TFactId.RecordCount = 0 then
+   begin
+
+      fDM.TFactor.Append;
+      fDM.TFactor.FieldByName('code').AsString :=
+        fDM.TSFactor.FieldByName('code').AsString;
+      fDM.TFactor.FieldByName('naim').AsString :=
+        fDM.TSFactor.FieldByName('naim').AsString;
+      fDM.TFactor.FieldByName('vrach').AsString :=
+        fDM.TSFactor.FieldByName('vrach').AsString;
+      fDM.TFactor.FieldByName('issl').AsString :=
+        fDM.TSFactor.FieldByName('issl').AsString;
+      fDM.TFactor.Post;
+
+      Edit1.Clear;
+
+   end
+   else
+   begin
+     ShowMessage('Уже есть такой фактор!');
+   end;
 end;
 
 procedure TfFactor.DBGridEh1KeyDown(Sender: TObject; var Key: Word;
@@ -254,5 +273,7 @@ begin
   end;
 end;
 
-end.
 
+
+
+end.

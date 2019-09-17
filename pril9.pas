@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, DBCtrls, Grids, DBGrids, WordXP, OleServer, ComCtrls,ComObj;
+  Dialogs, StdCtrls, Mask, DBCtrls, Grids, DBGrids, WordXP, OleServer, ComCtrls,ComObj,
+  Data.DB;
 
 type
   TfPril9 = class(TForm)

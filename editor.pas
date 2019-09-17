@@ -76,6 +76,13 @@ type
     dbedtmrk: TDBEdit;
     dbedtmrkv: TDBEdit;
     btn2: TButton;
+    lbl9: TLabel;
+    dbedtpr1: TDBEdit;
+    dbedtpr2: TDBEdit;
+    lbl10: TLabel;
+    lbl11: TLabel;
+    dblkcbbzak282: TDBLookupComboBox;
+    btn3: TButton;
     procedure GroupBox1Exit(Sender: TObject);
     procedure GroupBox2Exit(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -96,6 +103,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -189,6 +197,13 @@ begin
   WordGotoBookmark('imya_org');
   WordInsertText(fDM.TOrg.FieldByName('imya_org').AsString);
 
+  WordGotoBookmark('prkrab');
+  WordInsertText(fDM.TRab.FieldByName('prkrab282p2').AsString);
+
+  WordGotoBookmark('Zak282');
+  WordInsertText(dblkcbbzak282.Text);
+
+
    d:=  fDM.TRab.FieldByName('data_r').AsDateTime;
   DecodeDate(d, Year, Month, Day);
 
@@ -246,6 +261,41 @@ begin
     end;
 
 
+end;
+
+procedure TfEditor.btn3Click(Sender: TObject);
+var
+  Shablon: OLEVariant;
+  S: string;
+begin
+  Shablon := ExtractFileDir(ParamStr(0)) + '\Шаблоны\prot1282.doc';
+  WordApplication1.Connect;
+  WordApplication1.Visible := false;
+  WordApplication1.Documents.Add(Shablon, EmptyParam, EmptyParam, EmptyParam);
+  WordDocument1.ConnectTo(WordApplication1.ActiveDocument);
+
+  WordGotoBookmark('date');
+  WordInsertText(fDM.TRab.FieldByName('data_proh').AsString);
+
+  WordGotoBookmark('npp');
+  WordInsertText(fDM.TRab.FieldByName('npp').AsString);
+
+  WordGotoBookmark('fio');
+  WordInsertText(fDM.TRab.FieldByName('fam').AsString + ' ' +
+    fDM.TRab.FieldByName('imya').AsString + ' ' + fDM.TRab.FieldByName('fath')
+    .AsString);
+
+  WordGotoBookmark('org');
+  WordInsertText(fDM.TOrg.FieldByName('imya_poln').AsString);
+
+  WordGotoBookmark('prkrab');
+  WordInsertText(fDM.TRab.FieldByName('prkrab282p2').AsString);
+
+  WordGotoBookmark('dop_pri_usl');
+  WordInsertText(fDM.TRab.FieldByName('dop_pri_usl').AsString);
+
+  WordApplication1.Visible := true;
+  WordApplication1.Disconnect;
 end;
 
 procedure TfEditor.Button1Click(Sender: TObject);

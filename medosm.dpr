@@ -34,7 +34,8 @@ uses
   SprDogovor in 'SprDogovor.pas' {FormDogovor},
   SprPrice in 'SprPrice.pas' {FormPrice},
   RepUsl2 in 'RepUsl2.pas' {FormRepUsl2},
-  Jurnal282 in 'Jurnal282.pas' {Form2};
+  Jurnal282 in 'Jurnal282.pas' {Form2},
+  RepUsl22 in 'RepUsl22.pas' {FormRepUsl22};
 
 {$R *.res}
 
@@ -73,5 +74,6 @@ begin
   Application.CreateForm(TFormPrice, FormPrice);
   Application.CreateForm(TFormRepUsl2, FormRepUsl2);
   Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TFormRepUsl22, FormRepUsl22);
   Application.Run;
 end.

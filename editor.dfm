@@ -2,7 +2,7 @@ object fEditor: TfEditor
   Left = 555
   Top = 181
   Caption = #1055#1072#1089#1087#1086#1088#1090' '#1079#1076#1086#1088#1086#1074#1100#1103
-  ClientHeight = 568
+  ClientHeight = 642
   ClientWidth = 751
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -16,8 +16,8 @@ object fEditor: TfEditor
   PixelsPerInch = 96
   TextHeight = 13
   object Label21: TLabel
-    Left = 435
-    Top = 539
+    Left = 433
+    Top = 627
     Width = 138
     Height = 13
     Caption = #1055#1077#1088#1077#1084#1077#1097#1077#1085#1080#1077' '#1087#1086' '#1079#1072#1087#1080#1089#1103#1084':'
@@ -255,6 +255,7 @@ object fEditor: TfEditor
       Height = 21
       DataField = 'data_proh'
       DataSource = fDM.DSRab
+      DynProps = <>
       EditButtons = <>
       Kind = dtkDateEh
       TabOrder = 8
@@ -346,7 +347,7 @@ object fEditor: TfEditor
     Left = 0
     Top = 293
     Width = 751
-    Height = 152
+    Height = 228
     Align = alTop
     Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100' '#1080' '#1084#1077#1089#1090#1086' '#1088#1072#1073#1086#1090#1099
     TabOrder = 10
@@ -399,6 +400,27 @@ object fEditor: TfEditor
       Width = 69
       Height = 13
       Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099':'
+    end
+    object lbl9: TLabel
+      Left = 14
+      Top = 147
+      Width = 213
+      Height = 13
+      Caption = #1042#1099#1103#1074#1083#1077#1085#1085#1099#1077' '#1087#1088#1086#1090#1080#1074#1086#1087#1086#1082#1072#1079#1072#1085#1080#1103' '#1082' '#1088#1072#1073#1086#1090#1077':'
+    end
+    object lbl10: TLabel
+      Left = 13
+      Top = 206
+      Width = 50
+      Height = 13
+      Caption = #1055#1088#1080#1082#1072#1079' 1:'
+    end
+    object lbl11: TLabel
+      Left = 287
+      Top = 206
+      Width = 50
+      Height = 13
+      Caption = #1055#1088#1080#1082#1072#1079' 2:'
     end
     object Button1: TButton
       Left = 291
@@ -477,10 +499,40 @@ object fEditor: TfEditor
       ScrollBars = ssVertical
       TabOrder = 5
     end
+    object dbedtpr1: TDBEdit
+      Left = 69
+      Top = 206
+      Width = 212
+      Height = 21
+      DataField = 'prkrab'
+      DataSource = fDM.DSRab
+      TabOrder = 8
+    end
+    object dbedtpr2: TDBEdit
+      Left = 343
+      Top = 202
+      Width = 212
+      Height = 21
+      DataField = 'prkrab282p2'
+      DataSource = fDM.DSRab
+      TabOrder = 9
+    end
+    object dblkcbbzak282: TDBLookupComboBox
+      Left = 12
+      Top = 166
+      Width = 411
+      Height = 21
+      DataField = 'Zak282'
+      DataSource = fDM.DSRab
+      KeyField = 'id'
+      ListField = 'Naim'
+      ListSource = fDM.dsZak282
+      TabOrder = 10
+    end
   end
   object Button2: TButton
-    Left = 11
-    Top = 527
+    Left = 9
+    Top = 615
     Width = 129
     Height = 25
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080' '#1074#1099#1081#1090#1080
@@ -488,8 +540,8 @@ object fEditor: TfEditor
     OnClick = Button2Click
   end
   object Button3: TButton
-    Left = 155
-    Top = 527
+    Left = 153
+    Top = 615
     Width = 145
     Height = 25
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1077#1097#1077' '#1079#1072#1087#1080#1089#1100
@@ -497,8 +549,8 @@ object fEditor: TfEditor
     OnClick = Button3Click
   end
   object DBNavigator1: TDBNavigator
-    Left = 595
-    Top = 534
+    Left = 593
+    Top = 622
     Width = 144
     Height = 18
     DataSource = fDM.DSRab
@@ -506,8 +558,8 @@ object fEditor: TfEditor
     TabOrder = 8
   end
   object Button4: TButton
-    Left = 11
-    Top = 450
+    Left = 9
+    Top = 538
     Width = 147
     Height = 25
     Caption = #1055#1077#1095#1072#1090#1100' '#1087#1072#1089#1087#1086#1088#1090#1072' '#1079#1076#1086#1088#1086#1074#1100#1103
@@ -515,8 +567,8 @@ object fEditor: TfEditor
     OnClick = Button4Click
   end
   object Button5: TButton
-    Left = 171
-    Top = 451
+    Left = 169
+    Top = 539
     Width = 161
     Height = 25
     Caption = #1047#1072#1082#1083'. '#1087#1088#1077#1076#1074#1072#1088#1080#1090'. '#1084#1077#1076#1086#1089#1084#1086#1090#1088#1072
@@ -524,8 +576,8 @@ object fEditor: TfEditor
     OnClick = Button5Click
   end
   object Button6: TButton
-    Left = 338
-    Top = 451
+    Left = 336
+    Top = 539
     Width = 371
     Height = 25
     Caption = #1052#1077#1076'. '#1079#1072#1082#1083'. '#1087#1086' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1072#1084' '#1087#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1086#1075#1086' '#1084#1077#1076#1086#1089#1084#1086#1090#1088#1072
@@ -539,8 +591,8 @@ object fEditor: TfEditor
     OnClick = Button6Click
   end
   object Button7: TButton
-    Left = 171
-    Top = 482
+    Left = 169
+    Top = 570
     Width = 161
     Height = 26
     Caption = #1047#1072#1082#1083#1102#1095#1077#1085#1080#1077' '#1087#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075#1072
@@ -548,8 +600,8 @@ object fEditor: TfEditor
     OnClick = Button7Click
   end
   object Button8: TButton
-    Left = 11
-    Top = 481
+    Left = 9
+    Top = 569
     Width = 145
     Height = 25
     Caption = #1048#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103
@@ -563,8 +615,8 @@ object fEditor: TfEditor
     OnClick = Button8Click
   end
   object Button9: TButton
-    Left = 338
-    Top = 482
+    Left = 336
+    Top = 570
     Width = 106
     Height = 25
     Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1042#1050
@@ -572,13 +624,22 @@ object fEditor: TfEditor
     OnClick = Button9Click
   end
   object btn1: TButton
-    Left = 450
-    Top = 482
+    Left = 562
+    Top = 570
     Width = 145
     Height = 25
     Caption = #1052#1077#1076'. '#1079#1072#1082#1083'. '#1086'  '#1087#1088#1080#1075#1086#1076#1085#1086#1089#1090#1080
     TabOrder = 11
     OnClick = btn1Click
+  end
+  object btn3: TButton
+    Left = 448
+    Top = 570
+    Width = 106
+    Height = 25
+    Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1042#1050' 282'
+    TabOrder = 12
+    OnClick = btn3Click
   end
   object WordApplication1: TWordApplication
     AutoConnect = False

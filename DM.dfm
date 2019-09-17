@@ -15,6 +15,7 @@ object fDM: TfDM
       'ate System Database=False;Jet OLEDB:Encrypt Database=False;Jet O' +
       'LEDB:Don'#39't Copy Locale on Compact=False;Jet OLEDB:Compact Withou' +
       't Replica Repair=False;Jet OLEDB:SFP=False'
+    CursorLocation = clUseServer
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'
@@ -68,7 +69,6 @@ object fDM: TfDM
     Top = 192
   end
   object TOrgNew: TADOTable
-    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     IndexFieldNames = 'imya_org'
@@ -167,6 +167,7 @@ object fDM: TfDM
     Top = 416
   end
   object TRab: TADODataSet
+    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     Filtered = True
@@ -515,6 +516,10 @@ object fDM: TfDM
     end
     object wrdfldTRabZak282: TWordField
       FieldName = 'Zak282'
+    end
+    object wdstrngfldTRabprkrab282p2: TWideStringField
+      FieldName = 'prkrab282p2'
+      Size = 255
     end
   end
   object TSUslM: TADODataSet
@@ -1169,6 +1174,7 @@ object fDM: TfDM
   end
   object QueryRab: TADOQuery
     Connection = ADOConnection1
+    CursorLocation = clUseServer
     Parameters = <
       item
         Name = 'fam'
@@ -1240,6 +1246,7 @@ object fDM: TfDM
     Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
+    LockType = ltReadOnly
     OnFilterRecord = TSFactorFilterRecord
     CommandText = 'select * from sfactor'
     IndexFieldNames = 'code'
@@ -1538,12 +1545,17 @@ object fDM: TfDM
         'ef, result,  datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp,' +
         ' podpis, vredn_fact from rabotnik WHERE prkrab<>'#39#39' ORDER BY id A' +
         'SC')
-    Left = 512
-    Top = 544
+    Left = 584
+    Top = 600
   end
   object dsJurnal282: TDataSource
     DataSet = qryJurnal282
-    Left = 584
-    Top = 544
+    Left = 656
+    Top = 600
+  end
+  object dsZak282: TDataSource
+    DataSet = tblZak282
+    Left = 656
+    Top = 664
   end
 end
