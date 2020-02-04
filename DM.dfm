@@ -57,6 +57,9 @@ object fDM: TfDM
     object TOrgdif_price: TWordField
       FieldName = 'dif_price'
     end
+    object blnfldTOrgzd: TBooleanField
+      FieldName = 'zd'
+    end
   end
   object DSOrg: TDataSource
     DataSet = TOrg

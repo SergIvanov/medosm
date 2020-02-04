@@ -83,6 +83,7 @@ type
     lbl11: TLabel;
     dblkcbbzak282: TDBLookupComboBox;
     btn3: TButton;
+    btn4: TButton;
     procedure GroupBox1Exit(Sender: TObject);
     procedure GroupBox2Exit(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -104,6 +105,7 @@ type
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
+    procedure btn4Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -296,6 +298,471 @@ begin
 
   WordApplication1.Visible := true;
   WordApplication1.Disconnect;
+end;
+
+procedure TfEditor.btn4Click(Sender: TObject);
+var
+  Shablon: OLEVariant;
+  StrPol, dof1, dof2, dof3, q, sfact, sfactn, sissl, svr: string;
+  i: integer;
+begin
+  Shablon := ExtractFileDir(ParamStr(0)) + '\Шаблоны\vipiska.doc';
+  WordApplication1.Connect;
+  WordApplication1.Visible := true;
+  WordApplication1.Documents.Add(Shablon, EmptyParam, EmptyParam, EmptyParam);
+  WordDocument1.ConnectTo(WordApplication1.ActiveDocument);
+
+  // Выборка исследований
+  fDM.QStacRep.SQL.Clear;
+  q := 'SELECT issl.idissl, issl.date1, issl.znach1, issl.date2, issl.znach2, issl.date3, issl.znach3 FROM issl WHERE issl.idrab='
+    + fDM.TRab.FieldByName('id').AsString;
+  fDM.QStacRep.SQL.Add(q);
+  fDM.QStacRep.Open;
+  // -------
+
+  WordApplication1.Visible := true;
+
+  WordGotoBookmark('pasp_zd');
+  WordInsertText(fDM.TRab.FieldByName('nom_pasp_zd').AsString);
+
+  { Дата оформления }
+
+  ParseP(fDM.TRab.FieldByName('date_of').AsString, dof1, dof2, dof3);
+
+  WordGotoBookmark('dateof1');
+  WordInsertText(dof1);
+
+  WordGotoBookmark('dateof2');
+  WordInsertText(dof2);
+
+  WordGotoBookmark('dateof3');
+  WordInsertText(dof3);
+
+  WordGotoBookmark('fam');
+  WordInsertText(fDM.TRab.FieldByName('fam').AsString);
+
+  WordGotoBookmark('imya');
+  WordInsertText(fDM.TRab.FieldByName('imya').AsString);
+
+  WordGotoBookmark('fath');
+  WordInsertText(fDM.TRab.FieldByName('fath').AsString);
+
+  WordGotoBookmark('sex');
+  WordInsertText(fDM.TRab.FieldByName('sex').AsString);
+
+  WordGotoBookmark('data_r');
+  WordInsertText(fDM.TRab.FieldByName('data_r').AsString);
+
+  WordGotoBookmark('ser_p');
+  WordInsertText(fDM.TRab.FieldByName('ser_pasp').AsString);
+
+  WordGotoBookmark('nom_pasp');
+  WordInsertText(fDM.TRab.FieldByName('nom_pasp').AsString);
+
+  WordGotoBookmark('data_vid_pasp');
+  WordInsertText(fDM.TRab.FieldByName('data_vid_pasp').AsString);
+
+  WordGotoBookmark('kem_vid_pasp');
+  WordInsertText(fDM.TRab.FieldByName('kem_vid_pasp').AsString);
+
+  WordGotoBookmark('adres');
+  WordInsertText(fDM.TRab.FieldByName('adres').AsString);
+
+  WordGotoBookmark('phone');
+  WordInsertText(fDM.TRab.FieldByName('phone').AsString);
+
+    if fDM.TRab.FieldByName('imya_strukt_podr').AsString <> '' then
+  begin
+    WordGotoBookmark('stuct_podr');
+    WordInsertText(fDM.TRab.FieldByName('imya_strukt_podr').AsString);
+  end;
+
+  if fDM.TOrg.FieldByName('imya_org').AsString <> '' then
+  begin
+    WordGotoBookmark('mesto_rab');
+    WordInsertText(fDM.TOrg.FieldByName('imya_org').AsString);
+  end;
+
+  if fDM.TOrg.FieldByName('imya_poln').AsString <> '' then
+  begin
+    WordGotoBookmark('org');
+    fEditor.WordInsertText(fDM.TOrg.FieldByName('imya_poln').AsString);
+  end;
+
+
+  if fDM.TRab.FieldByName('med_organ').AsString <> '' then
+  begin
+    WordGotoBookmark('med_org');
+    WordInsertText(fDM.TRab.FieldByName('med_organ').AsString);
+  end;
+
+  if fDM.TRab.FieldByName('profes').AsString <> '' then
+  begin
+    WordGotoBookmark('profes');
+    WordInsertText(fDM.TRab.FieldByName('profes').AsString);
+  end;
+
+  if fDM.TRab.FieldByName('vid_ek_deat').AsString <> '' then
+  begin
+    WordGotoBookmark('vid_ek_deat');
+    WordInsertText(fDM.TRab.FieldByName('vid_ek_deat').AsString);
+  end;
+
+
+  if fDM.TRab.FieldByName('vredn_fact').AsString <> '' then
+  begin
+    WordGotoBookmark('vredn_fact');
+    WordInsertText(fDM.TRab.FieldByName('vredn_fact').AsString);
+  end;
+
+  // Исследования
+  while not(fDM.QStacRep.Eof) do
+  begin
+    // fDM.QStacRep.First;
+    if fDM.QStacRep.FieldByName('idissl').AsString = '1' then
+    begin
+      WordGotoBookmark('is1');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '2' then
+    begin
+      WordGotoBookmark('is2');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '3' then
+    begin
+      WordGotoBookmark('is3');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '4' then
+    begin
+      WordGotoBookmark('is4');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '5' then
+    begin
+      WordGotoBookmark('is5');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '6' then
+    begin
+      WordGotoBookmark('is6');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '7' then
+    begin
+      WordGotoBookmark('is7');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '8' then
+    begin
+      WordGotoBookmark('is8');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '9' then
+    begin
+      WordGotoBookmark('is9');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '10' then
+    begin
+      WordGotoBookmark('is10');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '11' then
+    begin
+      WordGotoBookmark('is11');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '12' then
+    begin
+      WordGotoBookmark('is12');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '13' then
+    begin
+      WordGotoBookmark('is13');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '14' then
+    begin
+      WordGotoBookmark('is14');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '15' then
+    begin
+      WordGotoBookmark('is15');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '16' then
+    begin
+      WordGotoBookmark('is16');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '17' then
+    begin
+      WordGotoBookmark('is17');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '18' then
+    begin
+      WordGotoBookmark('is18');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '19' then
+    begin
+      WordGotoBookmark('is19');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+    if fDM.QStacRep.FieldByName('idissl').AsString = '20' then
+    begin
+      WordGotoBookmark('is20');
+      WordInsertText(fDM.QStacRep.FieldByName('date1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach1').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach2').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('date3').AsString);
+      WordApplication1.Run('NextCell');
+      WordInsertText(fDM.QStacRep.FieldByName('znach3').AsString);
+      fDM.QStacRep.Next;
+    end;
+
+
+  end; // While
+  // -----------------------------------
+  // WordApplication1.Disconnect;
 end;
 
 procedure TfEditor.Button1Click(Sender: TObject);

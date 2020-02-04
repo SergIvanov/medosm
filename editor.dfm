@@ -529,6 +529,15 @@ object fEditor: TfEditor
       ListSource = fDM.dsZak282
       TabOrder = 10
     end
+    object btn4: TButton
+      Left = 574
+      Top = 200
+      Width = 133
+      Height = 25
+      Caption = #1042#1099#1087#1080#1089#1082#1072
+      TabOrder = 11
+      OnClick = btn4Click
+    end
   end
   object Button2: TButton
     Left = 9

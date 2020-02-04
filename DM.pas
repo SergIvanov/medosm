@@ -271,6 +271,7 @@ type
     dsJurnal282: TDataSource;
     wdstrngfldTRabprkrab282p2: TWideStringField;
     dsZak282: TDataSource;
+    blnfldTOrgzd: TBooleanField;
     procedure TMKBFilterRecord(DataSet: TDataSet; var Accept: Boolean);
     procedure TRabAfterInsert(DataSet: TDataSet);
     procedure TRabprkrabChange(Sender: TField);

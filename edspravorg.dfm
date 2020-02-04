@@ -3,7 +3,7 @@ object fEdSpravOrg: TfEdSpravOrg
   Top = 227
   Caption = 'fEdSpravOrg'
   ClientHeight = 455
-  ClientWidth = 662
+  ClientWidth = 704
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,15 @@ object fEdSpravOrg: TfEdSpravOrg
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 662
+    Width = 704
     Height = 414
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 662
     object DBGridEh1: TDBGridEh
       Left = 1
       Top = 1
-      Width = 660
+      Width = 702
       Height = 412
       Align = alClient
       DataSource = fDM.DSOrg
@@ -78,6 +79,15 @@ object fEdSpravOrg: TfEdSpravOrg
           EditButtons = <>
           FieldName = 'dif_price'
           Footers = <>
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'zd'
+          Footers = <>
+          Title.Caption = #1046#1044' '#1087#1088#1077#1076#1087#1088#1080#1103#1090#1080#1077
+          Width = 89
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end
@@ -86,10 +96,11 @@ object fEdSpravOrg: TfEdSpravOrg
   object Panel2: TPanel
     Left = 0
     Top = 414
-    Width = 662
+    Width = 704
     Height = 41
     Align = alBottom
     TabOrder = 1
+    ExplicitWidth = 662
     object Button1: TButton
       Left = 16
       Top = 6
