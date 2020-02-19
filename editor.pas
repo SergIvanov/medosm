@@ -359,8 +359,8 @@ begin
   WordGotoBookmark('nom_pasp');
   WordInsertText(fDM.TRab.FieldByName('nom_pasp').AsString);
 
-  WordGotoBookmark('data_vid_pasp');
-  WordInsertText(fDM.TRab.FieldByName('data_vid_pasp').AsString);
+  //WordGotoBookmark('data_vid_pasp');
+  //WordInsertText(fDM.TRab.FieldByName('data_vid_pasp').AsString);
 
   WordGotoBookmark('kem_vid_pasp');
   WordInsertText(fDM.TRab.FieldByName('kem_vid_pasp').AsString);
