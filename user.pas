@@ -30,7 +30,7 @@ var
   us:string;
 implementation
 
-uses DM;
+uses DM, RepUsl22;
 
 {$R *.dfm}
 
@@ -62,23 +62,31 @@ begin
   //fUser.Close
   else
   begin
-   if ComboBox1.Text='Администратор' then
-    begin
-      us:=ComboBox1.Text;
-      fDm.TRab.Active:=false;
-      fDm.TRab.CommandText:='select * from rabotnik';
-      fDm.TRab.Active:=true;
-      fUser.Close;
-    end else begin
-    i:=ComboBox1.ItemIndex;
-   us:=ComboBox1.Items[i];
-   fDm.TRab.Active:=false;
-   fDm.TRab.CommandText:='select * from rabotnik where user=('+quotedstr(us)+') AND (data_proh BETWEEN :date1 AND :date2)';
-   fDM.TRab.Parameters.ParamByName('date1').Value:=StartOfTheMonth(Date);
-   fDM.TRab.Parameters.ParamByName('date2').Value:=EndOfTheMonth(Date);
-   fDm.TRab.Active:=true;
-   fUser.Close;
-   end;
+     if ComboBox1.Text='Экономист' then
+      begin
+      fUser.Hide;
+      RepUsl22.FormRepUsl22.ShowModal;
+
+     end;
+
+     if ComboBox1.Text='Администратор' then
+      begin
+        us:=ComboBox1.Text;
+        fDm.TRab.Active:=false;
+        fDm.TRab.CommandText:='select * from rabotnik';
+        fDm.TRab.Active:=true;
+        fUser.Close;
+      end else
+      begin
+      i:=ComboBox1.ItemIndex;
+     us:=ComboBox1.Items[i];
+     fDm.TRab.Active:=false;
+     fDm.TRab.CommandText:='select * from rabotnik where user=('+quotedstr(us)+') AND (data_proh BETWEEN :date1 AND :date2)';
+     fDM.TRab.Parameters.ParamByName('date1').Value:=StartOfTheMonth(Date);
+     fDM.TRab.Parameters.ParamByName('date2').Value:=EndOfTheMonth(Date);
+     fDm.TRab.Active:=true;
+     fUser.Close;
+     end;
   end;
 end;
 procedure TfUser.edt1KeyPress(Sender: TObject; var Key: Char);

@@ -241,7 +241,7 @@ begin
   //RepUsl22.FormRepUsl22.ShowModal;
 
   fUser.ShowModal;
-  if user.us = '' then
+  if (user.us = '') or (user.us = 'Экономист') then
   begin
     //Showmessage('Вы зашли как незарегистрированный пользователь!');
     fMain.Close;
