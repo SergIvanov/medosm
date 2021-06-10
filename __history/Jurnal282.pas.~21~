@@ -1,0 +1,125 @@
+unit Jurnal282;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls;
+
+type
+  TForm2 = class(TForm)
+    dbgrd1: TDBGrid;
+    pnl1: TPanel;
+    pnl2: TPanel;
+    lblОт: TLabel;
+    dtp1: TDateTimePicker;
+    lblдо: TLabel;
+    dtp2: TDateTimePicker;
+    btn1: TButton;
+    btn2: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+
+implementation
+uses DM,ComObj;
+{$R *.dfm}
+
+procedure TForm2.btn1Click(Sender: TObject);
+begin
+
+fDM.qryJurnal282.SQL.Text :=
+'SELECT rabotnik.user, rabotnik.id, rabotnik.npp,rabotnik.data_proh, rabotnik.fam, rabotnik.imya, organiz.imya_org, rabotnik.fath, rabotnik.data_r, rabotnik.sex,'
++'rabotnik.profes, rabotnik.mkb_code, rabotnik.prkrab, rabotnik.def, rabotnik.dopinf, rabotnik.podpis, rabotnik.sostexp,'
++' rabotnik.result, rabotnik.zaklMSE, rabotnik.datezaklMSE, rabotnik.datenaprMSE, rabotnik.dop_pri_usl, rabotnik.otkl, '
++'Zak282.Naim, rabotnik.lpu, rabotnik.med_organ '
++' FROM (rabotnik INNER JOIN organiz ON rabotnik.id_org = organiz.id_org) LEFT JOIN Zak282 ON rabotnik.Zak282 = Zak282.id WHERE (rabotnik.prkrab<>"") AND (rabotnik.data_proh BETWEEN :date1 AND :date2) AND (rabotnik.Zak282 <> 0) ORDER BY rabotnik.id ASC;';
+
+
+     //   'SELECT user, id, npp, data_proh, fam, imya, fath, id_org, data_r, sex, profes, mkb_code, prkrab, dop_pri_usl, lpu,'
+     //   + ' slexp, otkl, def, result, datezaklMSE, datenaprMSE, zaklMSE, dopinf, sostexp, podpis,vredn_fact FROM rabotnik WHERE (prkrab<>"") AND (data_proh BETWEEN :date1 AND :date2) ORDER BY id ASC';
+
+    fDM.qryJurnal282.Parameters.ParamByName('date1').Value :=
+      FormatDateTime('dd.mm.yyyy', dtp1.Date);
+    fDM.qryJurnal282.Parameters.ParamByName('date2').Value :=
+      FormatDateTime('dd.mm.yyyy', dtp2.Date);
+    fDM.qryJurnal282.Active := true;
+end;
+
+procedure TForm2.btn2Click(Sender: TObject);
+var ExelTab:Variant;
+    st_in,st,q:string;
+    i,k:integer;
+begin
+
+  st_in:=ExtractFilePath(Application.ExeName);
+ ExelTab:= CreateOleObject('Excel.Application');
+ ExelTab.Workbooks.Open[st_in+'\Шаблоны\journal.xls'];
+
+ ExelTab.Cells.Item[1,15]:='Заключение врачебной комиссии';
+
+ try
+
+ fDM.qryJurnal282.First;
+ i:=5;
+ k:=0;
+ while not(fDM.qryJurnal282.Eof) do
+ begin
+  inc(k);
+  ExelTab.Cells.Item[i,1]:=fDM.qryJurnal282.FieldByName('npp').AsString;
+  ExelTab.Cells.Item[i,2]:=fDM.qryJurnal282.FieldByName('data_proh').AsString;
+  ExelTab.Cells.Item[i,3]:=fDM.qryJurnal282.FieldByName('lpu').AsString;
+  ExelTab.Cells.Item[i,4]:=fDM.qryJurnal282.FieldByName('fam').AsString+' '+fDM.qryJurnal282.FieldByName('imya').AsString+' '+fDM.qryJurnal282.FieldByName('fath').AsString;
+  ExelTab.Cells.Item[i,5]:=fDM.qryJurnal282.FieldByName('imya_org').AsString;
+  ExelTab.Cells.Item[i,6]:=fDM.qryJurnal282.FieldByName('data_r').AsString;
+  ExelTab.Cells.Item[i,7]:=fDM.qryJurnal282.FieldByName('sex').AsString;
+  ExelTab.Cells.Item[i,8]:=fDM.qryJurnal282.FieldByName('profes').AsString;
+  ExelTab.Cells.Item[i,9]:=fDM.qryJurnal282.FieldByName('mkb_code').AsString;
+  ExelTab.Cells.Item[i,10]:='ВК проф.';
+  ExelTab.Cells.Item[i,11]:=fDM.qryJurnal282.FieldByName('prkrab').AsString;
+  ExelTab.Cells.Item[i,12]:=fDM.qryJurnal282.FieldByName('otkl').AsString;
+  ExelTab.Cells.Item[i,13]:=fDM.qryJurnal282.FieldByName('def').AsString;
+  ExelTab.Cells.Item[i,14]:=fDM.qryJurnal282.FieldByName('result').AsString;
+//  ExelTab.Cells.Item[i,15]:=fDM.qryJurnal282.FieldByName('dop_pri_usl').AsString; //доп в инд порядке
+  ExelTab.Cells.Item[i,15]:=fDM.qryJurnal282.FieldByName('Naim').AsString;
+  ExelTab.Cells.Item[i,16]:=fDM.qryJurnal282.FieldByName('datenaprMSE').AsString;
+  ExelTab.Cells.Item[i,17]:=fDM.qryJurnal282.FieldByName('zaklMSE').AsString;
+  ExelTab.Cells.Item[i,18]:=fDM.qryJurnal282.FieldByName('datezaklMSE').AsString;
+  ExelTab.Cells.Item[i,19]:=fDM.qryJurnal282.FieldByName('dopinf').AsString;
+  ExelTab.Cells.Item[i,20]:=fDM.qryJurnal282.FieldByName('sostexp').AsString;
+  ExelTab.Cells.Item[i,21]:=fDM.qryJurnal282.FieldByName('podpis').AsString;
+
+  inc(i);
+  fDM.qryJurnal282.Next;
+ end;
+ ExelTab.Range[ExelTab.Cells[5, 1], ExelTab.Cells[i-1, 21]].Select;
+ ExelTab.Selection.Borders.LineStyle:=1;
+
+ ExelTab.Visible := true;
+ except
+ ExelTab.Quit;
+ showmessage('Ошибка формирования журнала!');
+ end;
+
+
+
+
+
+end;
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+ dtp1.Date := Date;
+  dtp2.Date := Date;
+end;
+
+end.

@@ -1,0 +1,36 @@
+unit Reso;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DBGridEh, Vcl.StdCtrls, Vcl.CheckLst,
+  Vcl.Mask, DBCtrlsEh, DBLookupEh, Vcl.ComCtrls, Vcl.ExtCtrls;
+
+type
+  TFormReso = class(TForm)
+    pnl1: TPanel;
+    lbl1: TLabel;
+    lbl‰Ó: TLabel;
+    dtp1: TDateTimePicker;
+    dtp2: TDateTimePicker;
+    chk1: TCheckBox;
+    btn1: TButton;
+    cbb1: TDBLookupComboboxEh;
+    btn2: TButton;
+    pnl2: TPanel;
+    chklst1: TCheckListBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormReso: TFormReso;
+
+implementation
+uses DM,DateUtils;
+{$R *.dfm}
+
+end.

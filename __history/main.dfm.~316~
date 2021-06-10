@@ -1,0 +1,1016 @@
+object fMain: TfMain
+  Left = 530
+  Top = 192
+  Caption = #1052#1077#1076#1086#1089#1084#1086#1090#1088#1099' 302 '#1087#1088#1080#1082#1072#1079
+  ClientHeight = 546
+  ClientWidth = 981
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  Menu = MainMenu1
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 981
+    Height = 107
+    Align = alTop
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 326
+      Top = 28
+      Width = 5
+      Height = 16
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -15
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 4
+      Top = 51
+      Width = 13
+      Height = 13
+      Caption = #1054#1090
+    end
+    object Label4: TLabel
+      Left = 118
+      Top = 51
+      Width = 12
+      Height = 13
+      Caption = #1076#1086
+    end
+    object Label5: TLabel
+      Left = 4
+      Top = 31
+      Width = 84
+      Height = 13
+      Caption = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1076#1072#1090#1077':'
+    end
+    object DateTimePicker2: TDateTimePicker
+      Left = 23
+      Top = 50
+      Width = 89
+      Height = 21
+      Date = 40983.463102777780000000
+      Time = 40983.463102777780000000
+      TabOrder = 0
+    end
+    object DateTimePicker3: TDateTimePicker
+      Left = 136
+      Top = 48
+      Width = 81
+      Height = 21
+      Date = 40983.463178530090000000
+      Time = 40983.463178530090000000
+      TabOrder = 1
+    end
+    object CheckBox1: TCheckBox
+      Left = 231
+      Top = 50
+      Width = 97
+      Height = 17
+      Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+      TabOrder = 2
+      OnClick = CheckBox1Click
+    end
+    object CheckBox2: TCheckBox
+      Left = 6
+      Top = 79
+      Width = 267
+      Height = 17
+      Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1079#1072' '#1075#1086#1076'/'#1090#1077#1082#1091#1097#1080#1081' '#1084#1077#1089#1103#1094
+      TabOrder = 3
+      OnClick = CheckBox2Click
+    end
+    object ToolBar1: TToolBar
+      Left = 1
+      Top = 1
+      Width = 979
+      Height = 29
+      Caption = 'ToolBar1'
+      Color = clBtnFace
+      Images = ImageList1
+      ParentColor = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      object ToolButton1: TToolButton
+        Left = 0
+        Top = 0
+        Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
+        Caption = 'ToolButton1'
+        ImageIndex = 0
+        OnClick = ToolButton1Click
+      end
+      object ToolButton2: TToolButton
+        Left = 23
+        Top = 0
+        Hint = #1053#1086#1074#1072#1103' '#1079#1072#1087#1080#1089#1100
+        Caption = 'ToolButton2'
+        ImageIndex = 1
+        OnClick = ToolButton2Click
+      end
+      object ToolButton3: TToolButton
+        Left = 46
+        Top = 0
+        Hint = #1056#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100
+        Caption = 'ToolButton3'
+        ImageIndex = 2
+        OnClick = ToolButton3Click
+      end
+      object ToolButton4: TToolButton
+        Left = 69
+        Top = 0
+        Hint = #1059#1076#1072#1083#1080#1090#1100
+        Caption = 'ToolButton4'
+        ImageIndex = 3
+        OnClick = ToolButton4Click
+      end
+      object ToolButton5: TToolButton
+        Left = 92
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton5'
+        ImageIndex = 4
+        Style = tbsSeparator
+      end
+      object ToolButton6: TToolButton
+        Left = 100
+        Top = 0
+        Hint = #1069#1082#1089#1087#1086#1088#1090' '#1074' Excel'
+        Caption = 'ToolButton6'
+        ImageIndex = 4
+        OnClick = ToolButton6Click
+      end
+      object ToolButton7: TToolButton
+        Left = 123
+        Top = 0
+        Hint = #1046#1091#1088#1085#1072#1083' '#1091#1095#1077#1090#1072
+        Caption = 'ToolButton7'
+        ImageIndex = 5
+        OnClick = ToolButton7Click
+      end
+      object ToolButton8: TToolButton
+        Left = 146
+        Top = 0
+        Hint = #1042#1099#1093#1086#1076
+        Caption = 'ToolButton8'
+        ImageIndex = 6
+        OnClick = ToolButton8Click
+      end
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 107
+    Width = 981
+    Height = 439
+    Align = alClient
+    TabOrder = 1
+    object DBGrid1: TDBGridEh
+      Left = 1
+      Top = 1
+      Width = 979
+      Height = 437
+      Align = alClient
+      Ctl3D = False
+      DataSource = fDM.DSRab
+      DrawMemoText = True
+      DynProps = <>
+      EditActions = [geaCopyEh, geaSelectAllEh]
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      FooterRowCount = 1
+      FooterParams.Color = clWindow
+      ImeMode = imDisable
+      IndicatorOptions = [gioShowRowIndicatorEh, gioShowRecNoEh]
+      Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghFitRowHeightToText, dghDialogFind, dghShowRecNo, dghColumnResize, dghColumnMove, dghExtendVertLines]
+      ParentCtl3D = False
+      ParentFont = False
+      PopupMenu = PopupMenu1
+      RowHeight = 2
+      RowLines = 3
+      SortLocal = True
+      STFilter.InstantApply = True
+      STFilter.Local = True
+      STFilter.Visible = True
+      SumList.Active = True
+      SumList.VirtualRecords = True
+      TabOrder = 0
+      TitleParams.RowHeight = 60
+      OnDblClick = DBGridEh1DblClick
+      Columns = <
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'id'
+          Footer.Alignment = taCenter
+          Footer.Color = clSilver
+          Footer.Value = #1050#1086#1083'-'#1074#1086
+          Footer.ValueType = fvtStaticText
+          Footers = <>
+          Visible = False
+        end
+        item
+          CellButtons = <>
+          DisplayFormat = 'dd/mm/yyyy'
+          DynProps = <>
+          EditButtons = <>
+          EditMask = '##.##.####'
+          FieldName = 'data_proh'
+          Footers = <>
+          MaxWidth = 1000
+          STFilter.ListSource = fDM.DSRab
+          Title.Caption = #1044#1072#1090#1072
+          Width = 60
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'npp'
+          Footers = <>
+          Title.Caption = #8470' '#1087#1088#1086#1090#1086#1082#1086#1083#1072' '#1042#1050
+          Width = 76
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'lpu'
+          Footers = <>
+          PickList.Strings = (
+            #1044#1077#1084#1080#1076#1086#1074#1072
+            #1045#1088#1086#1092#1077#1077#1074#1072)
+          Title.Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1051#1055#1059
+          Width = 120
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'sex'
+          Footers = <>
+          PickList.Strings = (
+            #1084#1091#1078
+            #1078#1077#1085)
+          Title.Caption = #1055#1086#1083
+          Width = 38
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'fam'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1060#1072#1084#1080#1083#1080#1103
+          Width = 120
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'imya'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1048#1084#1103
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'fath'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1054#1090#1095#1077#1089#1090#1074#1086
+          Width = 100
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          EditMask = '##.##.####'
+          FieldName = 'data_r'
+          Footers = <>
+          Title.Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103
+          Width = 69
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'org'
+          Footers = <>
+          STFilter.KeyField = 'id_org'
+          STFilter.ListField = 'imya_org'
+          STFilter.ListSource = fDM.DSOrg
+          Title.Caption = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1103
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'imya_strukt_podr'
+          Footers = <>
+          Title.Caption = #1057#1090#1088#1091#1082#1090#1091#1088#1085#1086#1077' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1077#1085#1080#1077
+          Width = 150
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'profes'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1055#1088#1086#1092#1077#1089#1089#1080#1103
+          Width = 100
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'UslM'
+          Footers = <>
+          STFilter.KeyField = 'id'
+          STFilter.ListField = 'naim'
+          STFilter.ListSource = fDM.DSSUslM
+          Title.Caption = #1062#1077#1085#1072
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          EditMask = '#'
+          FieldName = 'extest'
+          Footers = <>
+          PickList.Strings = (
+            '1')
+          Title.Caption = #1069#1082#1089'.- '#1090#1077#1089#1090
+          Width = 42
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'vredn_fact2'
+          Footers = <>
+          MaxWidth = 1000
+          Width = 133
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'vredn_fact'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1042#1088#1077#1076#1085#1099#1077' '#1092#1072#1082#1090#1086#1088#1099
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 133
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'staz_rab_fact'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1057#1090#1072#1078' '#1088#1072#1073#1086#1090#1099
+          Width = 51
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'cat_osv'
+          Footers = <>
+          Title.Caption = #1050#1072#1090#1077#1075#1086#1088#1080#1103' '#1086#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086#1074#1072#1085#1080#1103
+          Width = 44
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'ch_osm'
+          Footers = <>
+          Title.Caption = #1063#1080#1089#1083#1086' '#1086#1089#1084#1086#1090#1088#1086#1074
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 55
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'prkrab'
+          Footers = <>
+          Title.Caption = #1042#1099#1103#1074#1083#1077#1085#1099' '#1087#1088#1090#1080#1074#1086#1087#1086#1082#1072#1079#1072#1085#1080#1103' '#1082' '#1088#1072#1073#1086#1090#1077' '#1087#1088'1'
+          Width = 118
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'prkrab282p2'
+          Footers = <>
+          Title.Caption = #1042#1099#1103#1074#1083#1077#1085#1099' '#1087#1088'-'#1080#1103' '#1082' '#1088#1072#1073#1086#1090#1077' '#1087#1088'2'
+          Width = 118
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'Zak282'
+          Footers = <>
+          LookupParams.KeyFieldNames = 'Zak282'
+          LookupParams.LookupDataSet = fDM.tblZak282
+          LookupParams.LookupDisplayFieldName = 'Naim'
+          LookupParams.LookupKeyFieldNames = 'id'
+          Title.Caption = #1047#1072#1082#1083#1102#1095#1077#1085#1080#1077' '#1087#1086' 282'#1087#1088
+          Width = 199
+          WordWrap = True
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'goden'
+          Footers = <>
+          PickList.Strings = (
+            #1075#1086#1076#1077#1085
+            #1085#1077' '#1075#1086#1076#1077#1085)
+          Title.Caption = #1043#1086#1076#1077#1085
+          Width = 60
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'srok_proh'
+          Footers = <>
+          MaxWidth = 1000
+          Title.Caption = #1057#1088#1086#1082' '#1087#1077#1088#1077#1086#1089#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086#1074#1072#1085#1080#1103
+          Width = 55
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'dop_pri_usl'
+          Footers = <>
+          Title.Caption = #1044#1086#1087#1091#1097#1077#1085' '#1074' '#1080#1085#1076#1080#1074#1080#1076#1091#1072#1083#1100#1085#1086#1084' '#1087#1086#1088#1103#1076#1082#1077' '#1087#1088#1080' '#1091#1089#1083#1086#1074#1080#1103#1093
+          Width = 113
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'mkb_code'
+          Footers = <>
+          MaxWidth = 1000
+          ReadOnly = True
+          Title.Caption = #1052#1050#1041'-10'
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'disp_gr'
+          Footers = <>
+          STFilter.ListSource = fDM.DSRab
+          Title.Caption = #1075#1088' '#1044
+          Width = 35
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'firstb'
+          Footers = <>
+          ReadOnly = True
+          Title.Caption = #1042#1087#1077#1088#1074#1099#1077' '#1074#1099#1103#1074#1083#1077#1085#1086
+          Width = 40
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'VUPZ'
+          Footers = <>
+          Title.Caption = #1042#1087#1077#1088#1074#1099#1077' '#1091#1089#1090#1072#1085#1086#1074#1083#1077#1085#1085#1099#1077' '#1079#1072#1073#1086#1083#1077#1074#1072#1085#1080#1103
+          Width = 80
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'rekom'
+          Footers = <>
+          Title.Caption = #1056#1077#1082#1086#1084#1077#1085#1076#1072#1094#1080#1080
+          Width = 103
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needobslprof'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1053#1091#1078'-'#1089#1103' '#1074' '#1086#1073#1089#1083' '#1074' '#1087#1088#1086#1092#1094#1077#1085#1090#1088#1077
+          Width = 142
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needambl'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1053#1091#1078'-'#1089#1103' '#1074' '#1072#1084#1073' '#1083#1077#1095#1077#1085#1080#1080
+          Width = 117
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needstcl'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1053#1091#1078'-'#1089#1103' '#1074' '#1089#1090#1072#1094' '#1083
+          Width = 115
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needlpit'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1053#1091#1078'-'#1089#1103' '#1074' '#1083#1077#1095' '#1087#1080#1090#1072#1085#1080#1080
+          Width = 102
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'skl'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1057#1050#1051
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'LookUpProfSan'
+          Footers = <>
+          Title.Caption = #1055#1088#1086#1092#1080#1083#1100' '#1089#1072#1085#1072#1090#1086#1088#1080#1103
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needd'
+          Footers = <>
+          Title.Caption = #1053#1091#1078'-'#1089#1103' '#1074' '#1044
+          Width = 82
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'needmse'
+          Footers = <>
+          PickList.Strings = (
+            #1076#1072
+            #1085#1077#1090
+            '')
+          Title.Caption = #1053#1091#1078#1076' '#1074' '#1052#1057#1069
+          Width = 72
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'PredDZ'
+          Footers = <>
+          Title.Caption = #1055#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1099#1081' '#1076#1080#1072#1075#1085#1086#1079' '#1087#1088#1086#1092#1079#1072#1073#1086#1083#1077#1074#1072#1085#1080#1103
+          Width = 97
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'prof'
+          Footers = <>
+          STFilter.KeyField = 'id'
+          STFilter.ListField = 'Naim'
+          STFilter.ListSource = fDM.DSProfPatolog
+          Title.Caption = #1055#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075
+          Width = 50
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'user'
+          Footers = <>
+          Width = 100
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'psih'
+          Footers = <>
+          Title.Caption = #1055#1089#1080#1093'.'#13#10#1042#1050
+          Width = 50
+        end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 744
+    Top = 16
+    object N2: TMenuItem
+      Caption = #1060#1072#1081#1083
+      object N21: TMenuItem
+        Caption = #1057#1074#1077#1088#1082#1072' '#1089#1087#1080#1089#1082#1072' '#1089#1086#1090#1088#1091#1076#1085#1080#1082#1086#1074' '#1089' '#1073#1072#1079#1086#1081
+        OnClick = N21Click
+      end
+    end
+    object N1: TMenuItem
+      Caption = #1054#1090#1095#1077#1090#1099
+      object N9: TMenuItem
+        Caption = #1047#1072#1082#1083#1102#1095#1080#1090#1077#1083#1100#1085#1099#1081' '#1072#1082#1090' ('#1087#1088#1080#1083' 9)'
+        OnClick = N9Click
+      end
+      object N10: TMenuItem
+        Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1091#1089#1083#1091#1075#1072#1084
+        OnClick = N10Click
+      end
+      object N11: TMenuItem
+        Caption = #1050#1086#1083'-'#1074#1086' '#1091#1089#1083#1091#1075' '#1087#1086' '#1076#1080#1089#1087' '#1075#1088#1091#1087#1087#1072#1084' ('#1046#1044')'
+        OnClick = N11Click
+      end
+      object N13: TMenuItem
+        Caption = #1054#1090#1095#1077#1090' '#1074' '#1089#1090#1072#1094#1080#1086#1085#1072#1088
+        OnClick = N13Click
+      end
+      object N28: TMenuItem
+        Caption = #1046#1091#1088#1085#1072#1083#1099
+        object N15: TMenuItem
+          Caption = #1046#1091#1088#1085#1072#1083' '#1091#1095#1077#1090#1072
+          OnClick = N15Click
+        end
+        object N2821: TMenuItem
+          Caption = #1046#1091#1088#1085#1072#1083' 282'
+          OnClick = N2821Click
+        end
+      end
+      object N20: TMenuItem
+        Caption = #1053#1091#1078#1076#1072#1102#1097#1080#1077#1089#1103' '#1074' '#1089#1082#1083
+        OnClick = N20Click
+      end
+      object N26: TMenuItem
+        Caption = #1056#1077#1077#1089#1090#1088#1099' '#1089#1090#1088#1072#1093#1086#1074#1099#1084
+        object N24: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1056#1045#1057#1054
+          OnClick = N24Click
+        end
+        object N23: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1057#1086#1075#1072#1079
+          OnClick = N23Click
+        end
+        object N22: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1048#1075#1086#1089#1090#1088#1072#1093
+          OnClick = N22Click
+        end
+        object N19: TMenuItem
+          Caption = #1054#1090#1095#1077#1090' '#1046#1040#1057#1054
+          OnClick = N19Click
+        end
+      end
+      object N27: TMenuItem
+        Caption = #1054#1090#1095#1077#1090' '#1087#1086' '#1091#1089#1083#1091#1075#1072#1084' '#1085#1086#1074#1099#1081
+        OnClick = N27Click
+      end
+    end
+    object N3: TMenuItem
+      Caption = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082#1080
+      object N5: TMenuItem
+        Caption = #1054#1088#1075#1072#1085#1080#1079#1072#1094#1080#1080
+        OnClick = N5Click
+      end
+      object N101: TMenuItem
+        Caption = #1052#1050#1041'10'
+      end
+      object N14: TMenuItem
+        Caption = #1055#1077#1088#1080#1086#1076#1099' '#1074#1099#1075#1088#1091#1079#1082#1080
+        OnClick = N14Click
+      end
+      object N18: TMenuItem
+        Caption = #1059#1089#1083#1091#1075#1080
+        OnClick = N18Click
+      end
+      object N4: TMenuItem
+        Caption = #1055#1088#1086#1092#1087#1072#1090#1086#1083#1086#1075#1080
+        OnClick = N4Click
+      end
+      object N25: TMenuItem
+        Caption = #1044#1086#1075#1086#1074#1086#1088#1099
+        OnClick = N25Click
+      end
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 672
+    Top = 16
+    object N7: TMenuItem
+      Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1076#1080#1072#1075#1085#1086#1079
+      OnClick = N7Click
+    end
+    object N8: TMenuItem
+      Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1077#1097#1077' '#1086#1076#1080#1085' '#1076#1080#1072#1075#1085#1086#1079
+      OnClick = N8Click
+    end
+    object N12: TMenuItem
+      Caption = #1059#1089#1083#1091#1075#1080
+      OnClick = N12Click
+    end
+    object N6: TMenuItem
+      Caption = #1048#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103
+      OnClick = N6Click
+    end
+    object N16: TMenuItem
+      Caption = #1060#1072#1082#1090#1086#1088#1099
+      OnClick = N16Click
+    end
+    object N17: TMenuItem
+      Caption = #1054#1090#1086#1073#1088#1072#1079#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1077' '#1094#1077#1085#1099' '#1074' '#1088#1077#1077#1089#1090#1088#1077
+      OnClick = N17Click
+    end
+  end
+  object ImageList1: TImageList
+    Left = 800
+    Top = 16
+    Bitmap = {
+      494C010107000800F80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000002000000001001800000000000018
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFDBC7BBD0BB
+      AFCFAD9AD4A589D4A684D4A582D6A27DD9A079DB9C73DD996CDF9666E19360D2
+      8857000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF9E6549D59A60DCAD7EE6C4A5EED6BDF9F0E5FFFFFFFF
+      FFFF000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFE4D3C7FCED
+      E3FBECE3FCEBE1FBEBDFFBE9DEFBE8DBFAE6D9FAE4D6FAE2D3FAE0CFF9DECCE1
+      92600000000000000703000F0A05110B07110C07120C07130C07130C07140D07
+      140D07150D07150D07120B05070300000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFDBBDABA49791884E33D29357CF8F54CF8F55CE8E54CF8F55D1945AD8
+      B390000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFE4D5CAEBD1
+      BFEFD8C9EED7C7D9B196E2C9B7E0C9B9D7B7A2D1AB90CDAD96E9CFBCFAE1D1DF
+      9464000000000000090400E5D0BBF1DAC5F1DAC5F1DAC5F1DAC5F1D9C4F0D9C4
+      F0D8C3F0D8C2EFD7C1ECD4BF0A0500000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFB97E5D4C332A6F3B22D39457CF8F55D08F55D08F55CF8F55CF8F55BB
+      784A000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFE5D8CFEDD5
+      C5EDD4C3ECD3C1DAB499FDF1EAF9F0E8EBD5C6E1C1AADAC2B0FBE7DAFAE4D7DE
+      986A0000009C9CA2F7F5F7A29EA1F0D7C0F0D7C0F0D7C0F0D7C0E8D0BAD9C2AD
+      DBC3AEEDD3BCEED3BCF0D7C20B0500000000FFFFFFFFFFFFFFFFFFFFFFFFF7F7
+      FBFFFFFFC085634E342B763F24D59458D08F55D09055D08F55D19055D19056BD
+      7B4C000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFE6DBD2EED8
+      C9FDF6F2FEF6F1DEBBA2FDF4EFF9F0E9D8B7A0D9B499DAC2B0FCEADFFBE8DBDB
+      9A7000000096969BF6F5F69B979AF1D9C2F1D9C1F1D8C1F1D8C1D5BFAAE9D1BB
+      F0D6BFD6BFAAEFD5BEF0D8C30B0500000000FFFFFFFFFFFFFFFFFFFFFFFF1C1A
+      B0C8C8F0D1976C50372D7B4628D6965AD29257D29257D19257D29257D29258C0
+      7E4F000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFE7DDD5F0DC
+      CDE8CBB7E6C9B4DDB99EFEF7F4E2C3ACF0E1D6E5C8B3D5B9A3FCEEE4FBEBE0DA
+      9E760000000000000A0400DBC9B6F2DBC5F1DAC3F1DAC3F2DAC2F1D9C1D6BFAB
+      D8C3ADE5CDB7ECD3BDF1D9C40B0500000000FFFFFFFFFFFFFFFFFFFFFFFF1C1A
+      B02328CF7D5160583C2E834A2CCA8B54D49559D29459D29459D29459D29459C1
+      8151000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000003480374D8B494C85414B803A4A7B
+      324A762C497126486F232E5800FAF0EAF2E0D4F9EDE5F8EBE1FCF0E8FCEDE4D7
+      A17D00000095959AF7F5F79A9699F4DFCAF2DDC7CCBAA9DAC6B3D2BEABCBB7A4
+      C9B5A2CFBAA6D0BAA6E2CBB90B05000000004953D02A38CF2B38CF2A38CF2B38
+      CF2B39D32733D5222276894F2FDCC8ACC78651D4985DD4975CD4985DD4975CC6
+      8755000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000036863ED9EDD8CBE7CAC0E5BEB5E2
+      B3ABE0A7A4DFA0AFE3AC2E5902FEFBF9F6E9E0FDF7F4EBD4C3FDF3ECFDF0E8D4
+      A48300000096969BF6F5F69B979AEAD9C7E6D5C2D9C7B7F4E0CCC0AF9ECEBBA9
+      B3A291BEAB99C9B4A1EFD8C40B05000000006F77D53147D43247D43146D43044
+      D33144D42E40D3495CDC4F2F6DE1B175DDAE77D8A167D69A5FD69A60D69A60C9
+      8B59000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000378C46D9EDD853AB702488364989
+      327BCD9D5BB97BF9FBF92F5D07E5C5AEE2C1A9E1C0A8DEBA9FFDF5F0FDF2ECD4
+      A7890000000000000A0500E6D9C9EBDCCCE0D0C1E0D0C0D2C3B3D5C5B3F4E0CB
+      EED9C3EED8C1F1D9C2F2DCC70B0500000000727DD95A73DC5B73DC5B71DC5E73
+      DC374FD5667CE03D409B955B3AE2B67EDFB27BE0B37CDDB078DBA66DD9A166CE
+      915E000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000037904BDAECD9C7E4C640791D539B
+      554BC78CDBF2E5C5EAC430610CFFFDFCF8EDE6FEFAF9EEDACBFDF7F2FDF4EFD1
+      AB8F000000919195EFEEEF969396F8EBDDF7E9DBE7D9CBF0E1D0F6E4D2F5E2CF
+      F2DEC9F3DDC7F2DAC3F3DCC70B05000000003D3DCD4E50D04C4FD04C50D0393E
+      CF6E89E261479F5940309A6441E4BC87E2B883E2B883E2B783E2B884E1B47FD0
+      9663000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000038944FDCEDDBD1E9CF90BA8944C4
+      8882CFA8EBF7EBBFE6BC306613F5E8DEF1DED0F3E4DAEAD0BDFEF8F4FDF6F1D0
+      AD9200000096969BF6F5F69B979BFAEFE4FAEEE2DDD2C7E0D3C6EBDCCDEBDAC9
+      D0BFAFE1CEB9F2DCC5F3DDC70B0500000000FFFFFFFFFFFFFFFFFFFFFFFF2E2D
+      CF767AE2E4B37F5C4334A46D47E8C18FE5BD8BE5BE8CE5BE8CE5BE8CE5BE8CD8
+      A675000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000003C9755DFEFDFD5EAD56CC78F45B0
+      73587144F0F3EED3ECD1316C1BF4E4D8F0DBCCF2E0D3C9BAAFB19783AB8E799C
+      8068000000050505110C08E8E3DCFCF4ECEAE2D9DFD6CCF8ECDFC5BAAEC4B6AA
+      BBAD9EDDCBB9F3DDC7F4DEC80B0500000000FFFFFFFFFFFFFFFFFFFFFFFF1E19
+      CFFFFFFFDDAB7E5C4536AC754DEBC999E8C595E8C595E8C595E8C595E8C596DC
+      AC7C000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006BAA71EDF5ED98CA9D3EA85DC6E1
+      CD597243788B66F9FAF8327223FFFEFDFFFDFCFFFCFBDAC5B6EFD6C5DABCA7A8
+      9B8E00000095959AF6F5F69A969AFAF6F2E6E3DEF0EAE5E7E1DAD1C9C1DDD2C7
+      DACDBFDDCCBCF3DEC8F4DEC90A0400000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFDFB0845D4837B27C52F0D0A4EDCCA0ECCCA0ECCBA0ECCCA0ECCB9FE0
+      B384000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000D2DBBDC6DFCAEBF5ECE3F1E3E1EF
+      E0E0EFDFDEEFDEE3F1E233782AF1DACAFEFEFDFFFDFBE1CFC3ECD7CAA99B8EFF
+      FFFF0000009D9DA2F6F5F6A29FA2FEFCFAEEE9E5E2DBD4DAD1C7F5E9DCF8E8D9
+      F9EBDCF9EEE1F7E6D6F3E0CD0A0500000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFE3B787604A39C38F60FBE0B7F4D9AFF1D6ACF0D6ACF1D6ACF0D6ACE4
+      BA8C000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFD2D9BC78B280519F6551A0
+      64509C604F98594E93534D8C4BFFFEFEFFFEFDFFFDFCDDCBBDBCAFA4FFFFFFFF
+      FFFF000000000000090500F5F1EFFDF9F7FCF7F3FBF4ECFAF1E6F8EDE1F8E9DB
+      F6E6D6F6E4D2F5E1CDF1DCC80B0500000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFE5BB8B7F60474F3E317A6350967D64AC9378D4B791E6C89FF2D8AFE7
+      C091000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFD1BFB1D1BF
+      B1D0BEB0CFBDAFCDBBADCDB9ACCBB8AACAB7A8C8B6A7E4DBD3FFFFFFFFFFFFFF
+      FFFF000000000000060300130D0915100C15100B15100B140F0B150F0A140E0A
+      140E09130D09130D08130C06060300000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFE7BF8FE6B47AE8B67BE9B77BE8B67BE9B77CE5B177E2AE75E0AA72E1
+      AD74000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF94BAA350A3742D995F2C975E2A925A1D6B3EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF784F30B59E8BB69E8AB59E8AB59E8AB59E8AB59E8AB59E8AB69E8BB59E8A
+      B59E8AB69F8AB59E8AB49D89B29B8880583CFFFFFF8C99C07789BAB2BCD9FFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF8C8AC51C1899201CAA1B16938C8AC5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFC6C5E218148C1F1BA31F1BA35350AAFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF94BAA374CF9E38BD7B39BD7A36B2721D6B3EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF7D5434F0ECE7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFF7F4EF937155FFFFFF6A7DB5071B61386EAE7DAE
+      D6A8BADBE4E8F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF201C932E2BC82C2ACF2926C31B17918D8BC7FFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFF1B17902522B62D2AD02A28D22925A9FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF94BAA373CF9E39BF7D39BF7C35B3731D6B3EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF8D6744F0ECE8FBFAF8F3F0EBF4F1EBF3F0EBF3F0EBF3F0EBF3F0EAF0ECE5
+      EEEBE4F0ECE7F1EDE7F5F1EDEEE8E1936E51FFFFFFFDFEFE5983B8A5E6F878D5
+      F347BBE95781C0F8F9FCFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF29259C5153CF2D2ECD2E30CE2B2CC4201D9F8E8CCBFFFFFFFFFFFFC7C5E5
+      1C18952727B62F30CF2D2FCE4244D34544B4FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF94BAA374D19F37C17F39C17E36B7761D6B3EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF9B7A57F1EDE8FBFAF9F5F2EEF5F2EEF5F2EEF4F1EEF4F1EEF5F2EEF4F1ED
+      F4F2EAF5F2EBF3F0EBF7F5F1ECE7E0936E51FFFFFFFFFFFFABC6E1CFEFFB5AD5
+      F42C8CCE2176C34A86C7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF1B15985250B7545AD52F35CD3036CD2D32C6201B9C8F8CCDFFFFFF1F1A9C
+      292CBC3137CF2F35CD4449D27273CD27219DFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF94BAA36CCF9D39C48239C38136B8781D6B3EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF9B7A57F0ECE8FBFBF9F4F2EEF5F2EEF5F2EEF5F2EEF5F2EEF6F3EFF5F2EF
+      F8F4F1F7F4F1F7F4F0F9F8F4EDE7E0936F51FFFFFFFFFFFFBCCBE4BBF3F833D9
+      EF2DBFEA288BCD2177C3487EC2EEF1F8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFF5B56B85351BB575FD3323BCE333ECF3037C62423AA221DA32B30BB
+      333DD0323CCE4650D35859C42621A1C6C5E62E82512874472975472975472975
+      4723704363C99639C68539C58336B9791D6B3E1D6B3E1D6B3E1D6B3E1D6B3E1D
+      6B3E9B7A57F1EDE8FBFAF9F4F1EEF5F2EEF5F2EEF5F2EEF5F2EFF6F4F1F7F3F0
+      FBF5F4FAF5F3FAF3F2F9F5F4EDE7E0936E51FFFFFFFFFFFFFFFFFF78BEDD3DF4
+      F733D3EE2DBEEA2984C91F74C14F81C3F5F7FBFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFF1D18A25455BE5764D63343CF3544CF3543CF3341CD3544D0
+      3443CF4856D3696BC8241EA5FFFFFFFFFFFF358D5A48D09637C28438C28437C1
+      8337C0824FCB913ACA8939C88637C18036B97A36BC7D36BC7C36BB7C36BA7B2D
+      9B629C7B57F1EDE8FBFBF9F5F2EEF5F2EEF4F1EDF5F1EEF7F2F0FAF5F3FBFAF4
+      FBFAF6FBF7F5F7F1EEF7F2EDEEE8E2947052FFFFFFFFFFFFFFFFFFF8FBFD55B2
+      D53EF3F632D5EE2EBDE92980C52177C35A8FCBFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFF5C58BF5655C14F5CD23748D0384AD0384AD03849D0
+      394BD05A5FC9241EAAC7C5E9FFFFFFFFFFFF35915E4EE2A93AD4973AD3953ACF
+      913AD0903ACF8F39CC8C3ACC8B39C98839C88739C78538C48238C4833AC48130
+      A367997C5EF0ECE8FCFBF9F6F3EFF5F2EEF7F4F1F9F5F3FAF6F3FAFCF6FAFAF8
+      FCF7F6F6F4EFF0E9E4F2EDE8ECE3DC947051FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF66CFE53FF3F732D4EE2DBDEA2885CA2278C46294CEFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFF221AAC3E44C3394ED13B4ED03B4FD03A4ED0
+      4355D12B27B1FFFFFFFFFFFFFFFFFFFFFFFF3797624CE6AD3AD89A3AD6993AD4
+      953AD3933AD1923BD0913ACE8E3ACE8D39CB8A39C98838C78738C68538C58330
+      A76BA0886DF0ECE7FEFEFDFBFBF8F9F9F4FAF9F8FAF9FBFAFAFAFBFBFBF9F8F7
+      F2F3EDF0E8E4E7E3DCE8E0D9E0D3C7946F50FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFF61CEE53BF0F430CFED2DBCEA2883C82278C35A87C5F8F9FCFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFC9C7ED251FB23641C73F54D23E52D23D52D13F53D2
+      3E53D12929B8928FDAFFFFFFFFFFFFFFFFFF399C666AF7C75DF0BC5DEDB85EED
+      B760E9B438D4953AD3953AD2933ACF9038CA895FE2AB5EE1A85EDFA75EDCA448
+      BC83AF937AF1EDE8FEFEFEFBFBF8FAFAFAF9F9FAFAFAFAFBFBFAFAF9F4F3F0E9
+      EEEAE4E8E1DBE1D8CFDED2C7D0C2B0936E4EFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFF4F9FC57C3E03AF0F531CFED2DB9E82880C71556A26C8DBDFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFF251FB73743C74158D34157D2435AD2495FD34056D2
+      4057D13B4ACC241DB5928FDBFFFFFFFFFFFF9ACEB29ACEB29ACEB29ACEB29ACE
+      B266B48A75E4B63BD79A3BD69738CB8D2C915A93C5AA93C5AA94C5AA93C5AA94
+      C5AAB7A085F0ECE8FEFEFEFAFBFBFAFAFAFAFAFBFAFBFAF8F9F4F5F3EDEFEAE3
+      DAD0C4D6C8BAD1BCADCBB7A4BBA48B916D4CFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFEEF5FA56CAE33BEEF432D2F02C99C7B2AEB1B6B4C07187CEFF
+      FFFFFFFFFFC9C7EF261FBB3A44C9455ED4445CD3576DD76B76D6656BD26476D8
+      435BD3465DD43E4ECC2926BE928FDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF98CBAF75E9BB3BDB9E3ADA9C39CF9230975EFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFBAA48CF0ECE8FCFEFEF9FBFBFAFBFBFAFCFBF7F7F1F2EEE7EFEAE5E3DAD0
+      BFA68DFEFEFEF2F0EDE7E2D9C3B09C967250FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFF5FDBEC39D1D89EB3B7D6D9DE141AB01429CCFF
+      FFFFFEFEFF2720C03C4ACD4962D4475FD45971D77D85D9312AC1211ABD5D5ECF
+      6C82DB465FD44861D44152CF2721BF928EDFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF98CBAF78ECBD3BDFA33BDDA13AD49830975FFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFBBA58FF0ECE8FEFEFEFAFBFCFCFBFAF7F6F3EEEBE7EBE2DBE8DCD4D5C5B6
+      B69E83F8F6F2E5DDD3B9A187C0AA93F6F3F0FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFF8FBFDC5D7DFDADFE40A2BB2111DD11D30CBFF
+      FFFF2821C33E4ACD4C66D64B65D55C75D9666CD5302AC4C8C7EFFFFFFF635DD2
+      6264D26B7FDA4A64D54C66D6475BD12C2AC6FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF97CBAF77EDBF3BDFA43BDFA33AD89C30975FFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFBCAA93F1EDE8FDFDFEF8FAF8F8F3EEF3E8E2E6E0D9E0D7CDDCCEC0CEB9A4
+      AE977AD4CBC0AC9073C7B4A1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF9FBFD548DBB327DE01C43D0C8CFF1FF
+      FFFF3A36CA5870D74B65D56079D98088DB3029C8FFFFFFFFFFFFFFFFFFFFFFFF
+      241CC46263D37389DC4C66D54A66D54D56D1FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF99CDB177F0C164EEBF64EEBF5FE9B6329962FFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFBDAC94EFEAE5F7F5F2F6F4F1EFEAE6E9E0D8E0D5CAD4C8B7CFBBA8BDA78E
+      9A7F5DAB8C6FDACDC0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFECF77BBAE6D3E1F3FFFFFFFF
+      FFFF2E28CA717CDA7A8EDF6C75D9352ECBC9C7F1FFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFF615BD75E60D57B8CDE7A8CDE4A49D0FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FF9ACEB23EB97B42C08042BF8040BD7E349C64FFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFBEAD96BEA993BCA790BCA78FBDA891BEA992BEA892BCA288B79F83A89171
+      997454FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFF2E27CC3E39CF2A23CBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFF251EC93A34CE342FCD938FE5424D3E000000000000003E000000
+      2800000040000000200000000100010000000000000100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000}
+  end
+end

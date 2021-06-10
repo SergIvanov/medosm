@@ -58,6 +58,8 @@ object fRepSogaz: TfRepSogaz
     Top = 81
     Width = 253
     Height = 21
+    DynProps = <>
+    DataField = ''
     EditButtons = <>
     KeyField = 'id_org'
     ListField = 'imya_org'

@@ -1,0 +1,88 @@
+object FormPrice: TFormPrice
+  Left = 0
+  Top = 0
+  Caption = #1055#1088#1072#1081#1089
+  ClientHeight = 481
+  ClientWidth = 1078
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object dbgrdh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 1078
+    Height = 481
+    Align = alClient
+    DataSource = dsPrice
+    DynProps = <>
+    TabOrder = 0
+    Columns = <
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'id'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'id_dog'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'kod_sfactor'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'naim'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'cena'
+        Footers = <>
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+  object dsPrice: TDataSource
+    DataSet = qryPrice
+    Left = 640
+    Top = 56
+  end
+  object qryPrice: TADOQuery
+    Connection = fDM.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'idDogovor'
+        Attributes = [paNullable]
+        DataType = ftWideString
+        NumericScale = 255
+        Precision = 255
+        Size = 510
+        Value = Null
+      end>
+    SQL.Strings = (
+      'Select * From SprPrice where SprPrice.id_dog= :idDogovor')
+    Left = 784
+    Top = 112
+  end
+end

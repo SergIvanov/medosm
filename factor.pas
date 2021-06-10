@@ -22,6 +22,7 @@ type
     WordApplication1: TWordApplication;
     WordDocument1: TWordDocument;
     Button2: TButton;
+
     procedure Edit1Change(Sender: TObject);
     procedure DBGridEh1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -33,13 +34,17 @@ type
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Button2Click(Sender: TObject);
 
+    procedure FormShow(Sender: TObject);
+
 
 
 
 
   private
     { Private declarations }
+
   public
+    datePr : TDate;
     { Public declarations }
   end;
 
@@ -188,9 +193,23 @@ begin
     fDM.TRab.FieldByName('id').AsString;
   fDM.TFactId.Active := true;
 
+
+
+
+
   while not(fDM.TFactId.Eof) do
   begin
+
+    if fFactor.datePr >= StrToDate('01.04.2021') then
+    begin
+    sfactn := sfactn + fDM.TFactId.FieldByName('code').AsString + '; ';
+    end
+
+    else
+    begin
     sfactn := sfactn + 'пр' + fDM.TFactId.FieldByName('code').AsString + '; ';
+    end;
+
     fDM.TFactId.Next;
   end;
 
@@ -275,5 +294,36 @@ end;
 
 
 
+
+
+procedure TfFactor.FormShow(Sender: TObject);
+begin
+
+
+fDM.TSFactor.Close;
+
+if fFactor.datePr >= StrToDate('01.04.2021') then
+begin
+fDM.TSFactor.CommandText := 'select * from sfactorN';
+end
+
+else
+begin
+fDM.TSFactor.CommandText := 'select * from sfactor';
+end;
+
+
+
+
+
+
+
+fDM.TSFactor.Open;
+
+
+
+
+
+end;
 
 end.

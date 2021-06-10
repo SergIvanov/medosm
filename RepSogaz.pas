@@ -29,12 +29,12 @@ var
 
 implementation
 uses
-    DM,DateUtils,repSogazPat;
+    DM,DateUtils;
 {$R *.dfm}
 
 procedure TfRepSogaz.btn2Click(Sender: TObject);
 begin
-fRepSogazPat.ShowModal;
+//fRepSogazPat.ShowModal;
 end;
 
 procedure TfRepSogaz.FormCreate(Sender: TObject);

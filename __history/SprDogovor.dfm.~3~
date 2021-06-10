@@ -1,0 +1,59 @@
+object FormDogovor: TFormDogovor
+  Left = 0
+  Top = 0
+  Caption = #1044#1086#1075#1086#1074#1086#1088#1099
+  ClientHeight = 486
+  ClientWidth = 588
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object dbgrdh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 588
+    Height = 486
+    Align = alClient
+    DataSource = fDM.dsDogovor
+    DrawMemoText = True
+    DynProps = <>
+    FooterParams.Color = clWindow
+    STFilter.InstantApply = True
+    STFilter.Local = True
+    STFilter.Visible = True
+    TabOrder = 0
+    Columns = <
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'id'
+        Footers = <>
+        Title.Caption = #1050#1086#1076
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'Naim'
+        Footers = <>
+        Title.Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+        Width = 374
+      end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+  object btn1: TBitBtn
+    Left = 472
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'btn1'
+    TabOrder = 1
+  end
+end

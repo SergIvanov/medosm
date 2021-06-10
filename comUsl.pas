@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DBGridEhGrouping, GridsEh, DBGridEh, StdCtrls, OleServer,
-  ComObj, DBGridEhImpExp;
+  ComObj, DBGridEhImpExp, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  DBAxisGridsEh;
 
 type
   TfCommonUsl = class(TForm)
@@ -16,11 +17,15 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    btn1: TButton;
+    btn2: TButton;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,11 +41,45 @@ uses DM;
 
 {$R *.dfm}
 
+procedure TfCommonUsl.btn1Click(Sender: TObject);
+begin
+
+fDM.QComUsl.SQL.Clear;
+  fDM.QComUsl.SQL.Add
+    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (Select organiz.id_org from organiz where organiz.zd = True))'
+    + ' AND (idusl=12) AND ((rabotnik.data_proh) Between :date And :date2)) AND (rabotnik.cat_osv not Like "п%") GROUP BY rabotnik.disp_gr');
+  fDM.QComUsl.Parameters.ParamByName('date').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QComUsl.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QComUsl.Active := true;
+  fDM.QComUsl.First;
+
+end;
+
+procedure TfCommonUsl.btn2Click(Sender: TObject);
+begin
+
+fDM.QComUsl.SQL.Clear;
+  fDM.QComUsl.SQL.Add
+    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (Select organiz.id_org from organiz where organiz.zd = True))'
+    + ' AND (idusl=15) AND ((rabotnik.data_proh) Between :date And :date2)) AND (rabotnik.cat_osv not Like "п%") GROUP BY rabotnik.disp_gr');
+  fDM.QComUsl.Parameters.ParamByName('date').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
+  fDM.QComUsl.Parameters.ParamByName('date2').Value :=
+    FormatDateTime('dd.mm.yyyy', DateTimePicker2.Date);
+  fDM.QComUsl.Active := true;
+  fDM.QComUsl.First;
+
+
+
+end;
+
 procedure TfCommonUsl.Button1Click(Sender: TObject);
 begin
   fDM.QComUsl.SQL.Clear;
   fDM.QComUsl.SQL.Add
-    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,27,28,31,32,34,35,36,38,40,43,44,56,57,63,71,76))'
+    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (Select organiz.id_org from organiz where organiz.zd = True))'
     + ' AND (idusl<>1000) AND ((rabotnik.data_proh) Between :date And :date2)) AND (rabotnik.cat_osv not Like "п%") GROUP BY rabotnik.disp_gr');
   fDM.QComUsl.Parameters.ParamByName('date').Value :=
     FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
@@ -54,7 +93,7 @@ procedure TfCommonUsl.Button2Click(Sender: TObject);
 begin
   fDM.QComUsl.SQL.Clear;
   fDM.QComUsl.SQL.Add
-    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,27,28,31,32,34,35,36,38,40,43,44,56,57,63,71,76))'
+    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (Select organiz.id_org from organiz where organiz.zd = True))'
     + ' AND (idusl=1000) AND ((rabotnik.data_proh) Between :date And :date2)) AND (rabotnik.cat_osv not Like "п%") GROUP BY rabotnik.disp_gr');
   fDM.QComUsl.Parameters.ParamByName('date').Value :=
     FormatDateTime('dd.mm.yyyy', DateTimePicker1.Date);
@@ -68,7 +107,7 @@ procedure TfCommonUsl.Button3Click(Sender: TObject);
 begin
   fDM.QComUsl.SQL.Clear;
   fDM.QComUsl.SQL.Add
-    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (1,2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,19,20,21,22,23,24,25,27,28,31,32,34,35,36,38,40,43,44,56,57,63,71,76))'
+    ('SELECT rabotnik.disp_gr AS [Д гр], Count(rabotnik.id) AS [Кол-во] FROM rabotnik WHERE (((rabotnik.id_org) In (Select organiz.id_org from organiz where organiz.zd = True))'
     + ' AND (firstb=+' + quotedstr('ДА') +
     ') AND ((rabotnik.data_proh) Between :date And :date2)) AND (rabotnik.cat_osv not Like "п%") GROUP BY rabotnik.disp_gr');
   fDM.QComUsl.Parameters.ParamByName('date').Value :=

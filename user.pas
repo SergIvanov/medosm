@@ -30,7 +30,7 @@ var
   us:string;
 implementation
 
-uses DM, RepUsl22;
+uses DM, RepUsl22,FormEkonom;
 
 {$R *.dfm}
 
@@ -65,8 +65,8 @@ begin
      if ComboBox1.Text='Экономист' then
       begin
       fUser.Hide;
-      RepUsl22.FormRepUsl22.ShowModal;
-
+//      RepUsl22.FormRepUsl22.ShowModal;
+      FormEkonom.frmEkonom.ShowModal;
      end;
 
      if ComboBox1.Text='Администратор' then

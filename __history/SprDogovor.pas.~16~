@@ -1,0 +1,45 @@
+unit SprDogovor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,GridsEh, DBGridEh, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, DBAxisGridsEh,
+  Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls,SprPrice;
+
+type
+  TFormDogovor = class(TForm)
+    dbgrdh1: TDBGridEh;
+    btn1: TBitBtn;
+    pnl1: TPanel;
+    pnl2: TPanel;
+    procedure btn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormDogovor: TFormDogovor;
+
+implementation
+ uses DM;
+{$R *.dfm}
+
+procedure TFormDogovor.btn1Click(Sender: TObject);
+var
+FormPrice : TFormPrice;
+begin
+
+
+
+  FormPrice := TFormPrice.Create(btn1);
+//  FormPrice.Iddogovor := VARTOSTR(dbgrdh1.DataSource.DataSet.FieldByName('id').Value);
+    FormPrice.Iddogovor := '1';
+  FormPrice.ShowModal;
+
+end;
+
+end.

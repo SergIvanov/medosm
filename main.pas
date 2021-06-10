@@ -65,6 +65,7 @@ type
     N27: TMenuItem;
     N28: TMenuItem;
     N2821: TMenuItem;
+    N29: TMenuItem;
     procedure Button4Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
@@ -107,6 +108,7 @@ type
     procedure N25Click(Sender: TObject);
     procedure N27Click(Sender: TObject);
     procedure N2821Click(Sender: TObject);
+    procedure N29Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -121,7 +123,8 @@ implementation
 
 uses DM, editor, edspravorg, pril9, pril5, addmkb, user, sumuslrep,
   comUsl, fys, stacrep, periodvigr, countdispgr, issl, journal, factor,
-  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,REPSOGAZ2,Reso,SprDogovor,RepUsl2,Jurnal282,RepUsl22;
+  ChengeCena, susl, RepJASO, repNidSkl, equalRab, SprProvpatolog,REPSOGAZ,Reso,SprDogovor,RepUsl2,Jurnal282,RepUsl22,
+  RepUslSTP;
 
 {$R *.dfm}
 
@@ -296,6 +299,7 @@ begin
   fFactor.Caption := 'Вредные факторы ' + fDM.TRab.FieldByName('fam').AsString +
     ' ' + fDM.TRab.FieldByName('imya').AsString + ' ' +
     fDM.TRab.FieldByName('fath').AsString;
+    fFactor.datePr := fDM.TRab.FieldByName('data_proh').AsDateTime;
   fFactor.ShowModal;
 end;
 
@@ -331,7 +335,7 @@ end;
 
 procedure TfMain.N23Click(Sender: TObject);
 begin
-REPSOGAZ2.Form1.ShowModal;
+//REPSOGAZ2.Form1.ShowModal;
 end;
 
 procedure TfMain.N24Click(Sender: TObject);
@@ -352,6 +356,11 @@ end;
 procedure TfMain.N2821Click(Sender: TObject);
 begin
 Jurnal282.Form2.ShowModal;
+end;
+
+procedure TfMain.N29Click(Sender: TObject);
+begin
+   RepUslSTP.RepUslSTM.ShowModal;
 end;
 
 procedure TfMain.N4Click(Sender: TObject);

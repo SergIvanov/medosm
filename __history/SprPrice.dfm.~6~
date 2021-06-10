@@ -1,0 +1,41 @@
+object FormPrice: TFormPrice
+  Left = 0
+  Top = 0
+  Caption = #1055#1088#1072#1081#1089
+  ClientHeight = 481
+  ClientWidth = 1078
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object dbgrdh1: TDBGridEh
+    Left = 0
+    Top = 0
+    Width = 1078
+    Height = 481
+    Align = alClient
+    DataSource = dsPrice
+    DynProps = <>
+    TabOrder = 0
+    object RowDetailData: TRowDetailPanelControlEh
+    end
+  end
+  object tblPrice: TADOTable
+    Active = True
+    Connection = fDM.ADOConnection1
+    CursorType = ctStatic
+    TableName = 'SprPrice'
+    Left = 688
+    Top = 56
+  end
+  object dsPrice: TDataSource
+    DataSet = tblPrice
+    Left = 640
+    Top = 56
+  end
+end

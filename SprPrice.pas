@@ -1,0 +1,40 @@
+unit SprPrice;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, Data.DB,
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, Data.Win.ADODB;
+
+type
+  TFormPrice = class(TForm)
+    dbgrdh1: TDBGridEh;
+    dsPrice: TDataSource;
+    qryPrice: TADOQuery;
+    atncfldPriceid: TAutoIncField;
+    wdstrngfldPriceid_dog: TWideStringField;
+    wdstrngfldPricekod_sfactor: TWideStringField;
+    wdstrngfldPricekod_price: TWideStringField;
+    wdstrngfldPricenaim: TWideStringField;
+    fltfldPricecena: TFloatField;
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormPrice: TFormPrice;
+
+implementation
+ uses DM;
+{$R *.dfm}
+
+
+
+
+
+end.

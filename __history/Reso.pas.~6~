@@ -1,0 +1,103 @@
+unit Reso;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, DBGridEh, Vcl.StdCtrls, Vcl.CheckLst,
+  Vcl.Mask, DBCtrlsEh, DBLookupEh, Vcl.ComCtrls, Vcl.ExtCtrls,ComObj,ShellApi;
+
+type
+  TFormReso = class(TForm)
+    pnl1: TPanel;
+    lbl1: TLabel;
+    lblдо: TLabel;
+    dtp1: TDateTimePicker;
+    dtp2: TDateTimePicker;
+    chk1: TCheckBox;
+    btn1: TButton;
+    cbb1: TDBLookupComboboxEh;
+    btn2: TButton;
+    pnl2: TPanel;
+    chklst1: TCheckListBox;
+    procedure chk1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormReso: TFormReso;
+
+implementation
+uses DM,DateUtils;
+{$R *.dfm}
+
+procedure TFormReso.btn1Click(Sender: TObject);
+var
+ExelTab: Variant;
+  st_in, st, q, sId: string;
+  i, k, c: integer;
+  sum, sumall : Real;
+begin
+
+  st_in := ExtractFilePath(Application.ExeName);
+  ExelTab := CreateOleObject('Excel.Application');
+  ExelTab.Workbooks.Open[st_in + '\Шаблоны\reestrSogaz2.xls'];
+
+  ExelTab.ActiveWorkbook.SaveAs(st_in + 'Журнал\экономист\Согаз\' +
+    fDM.TOrg.FieldByName('imya_org').AsString + FormatDateTime('_yyyy_mm_dd',
+    Date) + FormatDateTime('_hh_mm', time) + '.xls', EmptyParam, EmptyParam,
+    EmptyParam, EmptyParam, EmptyParam, EmptyParam, false, EmptyParam,
+    EmptyParam, EmptyParam);
+  ExelTab.Quit;
+  ShellExecute(Self.Handle, 'open', Pchar(st_in + '\Журнал\экономист\Согаз\'),
+    nil, nil, SW_SHOWNORMAL);
+
+end;
+
+procedure TFormReso.btn2Click(Sender: TObject);
+begin
+chklst1.CheckAll(cbChecked, false, true);
+end;
+
+procedure TFormReso.chk1Click(Sender: TObject);
+var
+  i: integer;
+  q: String;
+begin
+  if  chk1.Checked then
+  begin
+    i := 0;
+    chklst1.Items.Clear;
+    fDM.Query.SQL.Clear;
+    fDM.Query.Close;
+    q := 'SELECT rabotnik.id, rabotnik.fam, rabotnik.imya, rabotnik.fath, rabotnik.data_r, rabotnik.date_of '
+      + 'FROM rabotnik WHERE rabotnik.id_org = '+ fDM.TOrg.FieldByName('id_org').AsString
+      + ' AND (date_of BETWEEN :date AND :date2)';
+    fDM.Query.SQL.Add(q);
+    fDM.Query.Parameters.ParamByName('date').Value :=
+      FormatDateTime('dd.mm.yyyy', dtp1.Date);
+    fDM.Query.Parameters.ParamByName('date2').Value :=
+      FormatDateTime('dd.mm.yyyy', dtp2.Date);
+    fDM.Query.Open;
+
+    fDM.Query.First;
+    while not(fDM.Query.Eof) do
+    begin
+      chklst1.Items.Add(fDM.Query.FieldByName('id').AsString + ' ' +
+        fDM.Query.FieldByName('fam').AsString + ' ' + fDM.Query.FieldByName
+        ('imya').AsString + ' ' + fDM.Query.FieldByName('fath').AsString + ' ' +
+        fDM.Query.FieldByName('data_r').AsString+ ' Дата оформления: '+fDM.Query.FieldByName('date_of').AsString);
+      fDM.Query.Next;
+      inc(i);
+    end;
+  end
+  else
+    chklst1.Items.Clear;
+end;
+
+end.

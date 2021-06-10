@@ -1,0 +1,700 @@
+unit RepUsl2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, DBGridEh, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask,
+  DBCtrlsEh, Data.DB, Data.Win.ADODB,ShellApi, OleServer, ComObj;
+
+type
+  TFormRepUsl2 = class(TForm)
+    qry1: TADOQuery;
+    btn1: TButton;
+    dtp1: TDateTimePicker;
+    dtp2: TDateTimePicker;
+    dblkcbb1: TDBLookupComboBox;
+    txt1: TStaticText;
+    txt2: TStaticText;
+    txt3: TStaticText;
+    txt4: TStaticText;
+    dblkcbb2: TDBLookupComboBox;
+    btn2: TButton;
+    dbgrdh1: TDBGridEh;
+    ds1: TDataSource;
+    txt5: TStaticText;
+    qry2: TADOQuery;
+    dbgrdh2: TDBGridEh;
+    ds2: TDataSource;
+    btn3: TButton;
+    btn4: TButton;
+    dbgrdh3: TDBGridEh;
+    qry3: TADOQuery;
+    ds3: TDataSource;
+    procedure FormCreate(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormRepUsl2: TFormRepUsl2;
+
+implementation
+ uses DM;
+{$R *.dfm}
+
+ procedure TFormRepUsl2.FormCreate(Sender: TObject);
+begin
+  dtp1.Date := Date;
+  dtp2.Date := Date;
+
+end;
+
+procedure TFormRepUsl2.btn1Click(Sender: TObject);
+begin
+
+     qry1.Active := False;
+
+{
+
+
+SELECT rabotnik.data_proh, rabotnik.id, rabotnik.id_org, rabotnik.fam, rabotnik.imya, rabotnik.fath, rabotnik.sex, rabotnik.data_r, rabotnik.profes, factor.code, factor.naim, SprPrice.id_dog, SprPrice.kod_sfactor,SprPrice.kod_price, SprPrice.naim, SprPrice.cena
+FROM (rabotnik LEFT JOIN factor ON rabotnik.id = factor.id_rab) LEFT JOIN SprPrice ON factor.code = SprPrice.kod_sfactor
+WHERE (((factor.code) Is Not Null) AND ((SprPrice.kod_sfactor) Is Not Null) AND ((SprPrice.cena)=(select MAX(cena) from factor INNER JOIN SprPrice ON factor.code = SprPrice.kod_sfactor where rabotnik.id=factor.id_rab  GROUP BY factor.id_rab ))) and (data_proh BETWEEN :date AND :date2) and (rabotnik.id_org=:org) AND (SprPrice.id_dog = :Dogovor)
+ORDER BY factor.naim, rabotnik.fam;
+
+
+}
+
+
+//qry1.SQL.Clear;
+ // .qry1.SQL.Add
+ //   ('SELECT fam, imya, fath, sex, profes, vredn_fact,cat_osv, idusl, iduslold, extest,extestold FROM rabotnik WHERE (data_proh BETWEEN :date AND :date2) AND  ((UCase(cat_osv) Not Like "П%") or (IsNull(cat_osv))) AND (id_org=:org) ORDER BY fam');
+
+    qry1.Parameters.ParamByName('date').Value :=  FormatDateTime('dd.mm.yyyy', dtp1.Date);
+    qry1.Parameters.ParamByName('date2').Value := FormatDateTime('dd.mm.yyyy', dtp2.Date);
+//    qry1.Parameters.ParamByName('org').Value := fDM.TOrg.FieldByName('id_org').AsString;
+//    qry1.Parameters.ParamByName('Dogovor').Value := Fdm.tblTDogovor.FieldByName('id').AsInteger;
+//  qry1.Parameters.ParamByName('date').Value :=  VarToDateTime('2011-11-10 10:36:09');
+//  qry1.Parameters.ParamByName('date2').Value := Date;
+
+
+    qry1.Parameters.ParamByName('org').Value := fDM.TOrg.FieldByName('id_org').AsString;
+    qry1.Parameters.ParamByName('Dogovor').Value := Fdm.tblTDogovor.FieldByName('id').AsInteger;
+
+
+
+    qry1.Active := true;
+    qry1.First;
+
+
+//    where (data_proh BETWEEN :date AND :date2) and (rabotnik.id_org=:org) AND (SprPrice.id_dog = :Dogovor) AND
+//(rabotnik.idusl=1001) AND (rabotnik.idusl=1002)
+    qry2.Active := False;
+    qry2.Parameters.ParamByName('date').Value :=  FormatDateTime('dd.mm.yyyy', dtp1.Date);
+    qry2.Parameters.ParamByName('date2').Value := FormatDateTime('dd.mm.yyyy', dtp2.Date);
+
+    qry2.Parameters.ParamByName('org').Value := fDM.TOrg.FieldByName('id_org').AsString;
+
+
+    qry2.Active := true;
+    qry2.First;
+
+
+
+    qry3.Active := False;
+    qry3.Parameters.ParamByName('date').Value :=  FormatDateTime('dd.mm.yyyy', dtp1.Date);
+    qry3.Parameters.ParamByName('date2').Value := FormatDateTime('dd.mm.yyyy', dtp2.Date);
+
+    qry3.Parameters.ParamByName('org').Value := fDM.TOrg.FieldByName('id_org').AsString;
+    qry3.Parameters.ParamByName('Dogovor').Value := Fdm.tblTDogovor.FieldByName('id').AsInteger;
+
+
+
+    qry3.Active := true;
+    qry3.First;
+
+
+
+end;
+
+
+ Function Ifexist(a : Integer;qry2 :TADOQuery) : Integer;
+begin
+Result := 0;
+ if a=1 then
+    begin
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+        if (qry2.FieldByName('sex').Value = 'муж') and (qry2.FieldByName('voz').Value < 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+          Result := 1; Exit;
+        end;
+        qry2.Next;
+      end;
+
+    end;
+
+    if a=2 then
+    begin
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+       if (qry2.FieldByName('sex').Value = 'муж') and (qry2.FieldByName('voz').Value >= 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+          Result := 1; Exit;
+        end;
+        qry2.Next;
+      end;
+
+    end;
+    if a=3 then
+    begin
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+        if (qry2.FieldByName('sex').Value = 'жен') and (qry2.FieldByName('voz').Value < 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+          Result := 1; Exit;
+        end;
+        qry2.Next;
+      end;
+
+    end;
+    if a=4 then
+    begin
+    //проверяем во втором запросе
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+       if (qry2.FieldByName('sex').Value = 'жен') and (qry2.FieldByName('voz').Value >= 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+          Result := 1;  Exit;
+        end;
+        qry2.Next;
+      end;
+
+      end;
+    if a=5 then
+    begin
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+       if (qry2.FieldByName('idusl').Value = 10) then
+        begin
+
+          Result := 1; Exit;
+        end;
+        qry2.Next;
+      end;
+
+    end;
+    if a=6 then
+    begin
+         qry2.First;
+      while not (qry2.Eof) do
+      begin
+        if (qry2.FieldByName('idusl').Value = 11) then
+        begin
+
+          Result := 1; Exit;
+        end;
+        qry2.Next;
+      end;
+
+    end;
+
+    if a=7 then
+    begin
+       //проверяем в первом запросе
+        qry2.First;
+      while not (qry2.Eof) do
+      begin
+       if (qry2.FieldByName('sex').Value = 'жен') and (qry2.FieldByName('voz').Value >= 40) and (qry2.FieldByName('idusl').Value = 1000) then
+        begin
+
+          Result := 1;  Exit;
+        end;
+        qry2.Next;
+      end;
+    end;
+
+
+end;
+
+procedure TFormRepUsl2.btn2Click(Sender: TObject);
+var
+
+  ExelTab: Variant;
+  st_in,st: string;
+  i,n,k,g,KolAll: integer;
+  sumall: Real;
+  
+begin
+
+  st_in := ExtractFilePath(Application.ExeName);
+  ExelTab := CreateOleObject('Excel.Application');
+  ExelTab.Workbooks.Open[st_in + '\Шаблоны\AktSverki.xlsx'];
+  g:=0;
+  n:=1;
+  k:=1;
+  i:=9;
+  KolAll:=0;
+
+  //ExelTab.Visible :=true;
+
+  ExelTab.Cells.Item[4, 1].Value := 'C '+DateToStr(dtp1.Date)+' по '+DateToStr(dtp2.Date);
+  ExelTab.Cells.Item[5, 4].Value := fDM.TOrg.FieldByName('imya_poln').AsString;
+  ExelTab.Cells[5,4].WrapText := True;
+
+     qry1.First;
+            //Пропускаем женщин больше 40 с 6с
+     While (qry1.FieldByName('sex').Value = 'жен') and (qry1.FieldByName('voz').Value >= 40) and (qry1.FieldByName('idusl').Value = 1000) do
+     begin
+     qry1.Next
+     end;
+
+
+
+          st:=qry1.FieldByName('factor.naim').AsString;
+          ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+          ExelTab.Cells.Item[i, 1].Value := n; n:=n+1;
+          ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('kod_price').AsString;
+          ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('kod_sfactor').AsString;
+          ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('factor.naim').AsString;
+          ExelTab.Cells[i,4].WrapText := True;
+          ExelTab.Cells.Item[i, 8].Value := qry1.FieldByName('cena').AsCurrency;
+
+
+          ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+          ExelTab.Selection.Borders.LineStyle := 1;
+          ExelTab.rows[i].font.bold:=True;
+
+        //  if qry1.FieldByName('sex').AsString = 'жен' then g:=g+1;
+
+
+          i:=i+1;
+
+  while not (qry1.Eof) do
+  begin
+  //rabotnik.data_proh, rabotnik.id, rabotnik.fam, rabotnik.imya,rabotnik.fath, rabotnik.data_r, rabotnik.profes, factor.code, factor.naim, SprPrice.id_dog, SprPrice.kod_sfactor, SprPrice.naim, SprPrice.cena
+
+
+
+   if st<>qry1.FieldByName('factor.naim').AsString then
+   begin
+          ExelTab.Cells.Item[i-k, 7].Value := k-1; KolAll:=KolAll+(k-1);
+          ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+          sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+          k:=1;
+
+          ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+          ExelTab.Cells.Item[i, 1].Value := n; n:=n+1;
+          ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('kod_price').AsString;
+          ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('kod_sfactor').AsString;
+          ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('factor.naim').AsString;
+          ExelTab.Cells[i,4].WrapText := True;
+          ExelTab.Cells.Item[i, 8].Value := qry1.FieldByName('cena').AsCurrency;
+  
+          ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+          ExelTab.Selection.Borders.LineStyle := 1;
+          ExelTab.rows[i].font.bold:=True;
+
+          st:=qry1.FieldByName('factor.naim').AsString;
+          i:=i+1;
+   end;     
+  
+    
+    
+      ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+    ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
+    ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
+    ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
+    ExelTab.Cells[i,4].WrapText := True;
+    ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('data_r').AsString;
+    ExelTab.Cells.Item[i, 6].Value := qry1.FieldByName('profes').AsString;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+
+    if qry1.FieldByName('sex').AsString = 'жен' then g:=g+1;
+
+     i:=i+1;
+     qry1.Next;
+               //Пропускаем женщин больше 40 с 6с
+     While (qry1.FieldByName('sex').Value = 'жен') and (qry1.FieldByName('voz').Value >= 40) and (qry1.FieldByName('idusl').Value = 1000)  and (qry1.Eof <> True ) do
+     begin
+     qry1.Next
+     end;
+  end;
+
+  ExelTab.Cells.Item[i-k, 7].Value := k-1;  KolAll:=KolAll+(k-1);
+  ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+             sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   //Выводим женщин
+   if g<>0 then
+   begin
+   ExelTab.Cells.Item[i, 1].Value := n; n:=n+1;
+   ExelTab.Cells.Item[i, 2].Value := '6.1';
+   ExelTab.Cells.Item[i, 4].Value := 'Профилактический прием врача-акушера-гинеколога';
+   ExelTab.Cells.Item[i, 7].Value := g; KolAll:=KolAll+g;
+   ExelTab.Cells.Item[i, 8].Value := 226.87;
+   ExelTab.Cells.Item[i, 9].Value := 226.87*g;            sumall:=sumall+ ExelTab.Cells.Item[i, 9].Value;
+   ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+   ExelTab.Selection.Borders.LineStyle := 1;
+   ExelTab.rows[i].font.bold:=True;
+    i:=i+1;
+   end;
+   //Выводим чистый 6с и повторный
+  //1)
+   if Ifexist(1,qry2)=1 then
+   begin
+      ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+      ExelTab.Selection.MergeCells:=True;
+
+      ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+      ExelTab.Cells.Item[i, 2].Value := '2.1';
+      ExelTab.Cells.Item[i, 8].Value := 3986.2;
+
+
+      ExelTab.Cells.Item[i, 4].Value := 'Периодический медицинский осмотр (ВЭК) работников, обеспечивающих движение поездов (мужчины до 40 лет) - 6Ц';
+      ExelTab.Cells[i,4].WrapText := True;
+
+        ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+        ExelTab.Selection.Borders.LineStyle := 1;
+        ExelTab.rows[i].font.bold:=True;
+      i:=i+1; k:=1;
+      qry2.First;
+      while not (qry2.Eof) do
+      begin
+        if (qry2.FieldByName('sex').Value = 'муж') and (qry2.FieldByName('voz').Value < 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+         ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+        ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+        ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+        ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+        ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+        ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+        ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+        ExelTab.Selection.Borders.LineStyle := 1;
+
+
+             i:=i+1;
+        end;
+        qry2.Next;
+      end;
+      ExelTab.Cells.Item[i-k, 7].Value := k-1;  KolAll:=KolAll+(k-1);
+      ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+                sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   end;
+   //2)
+   if Ifexist(2,qry2)=1 then
+   begin
+   ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+    ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+  ExelTab.Cells.Item[i, 2].Value := '2.2';
+  ExelTab.Cells.Item[i, 8].Value := 3986.2;
+  ExelTab.Cells.Item[i, 4].Value := 'Периодический медицинский осмотр (ВЭК) работников, обеспечивающих движение поездов (мужчины после 40 лет) - 6Ц';
+    ExelTab.Cells[i,4].WrapText := True;
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+    ExelTab.rows[i].font.bold:=True;
+  i:=i+1; k:=1;
+  qry2.First;
+  while not (qry2.Eof) do
+  begin
+    if (qry2.FieldByName('sex').Value = 'муж') and (qry2.FieldByName('voz').Value >= 40) and (qry2.FieldByName('idusl').Value = 1002) then
+    begin
+
+     ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+    ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+    ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+    ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+    ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+    ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+
+
+         i:=i+1;
+    end;
+    qry2.Next;
+  end;
+  ExelTab.Cells.Item[i-k, 7].Value := k-1; KolAll:=KolAll+(k-1);
+  ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+            sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   end;
+  //3)
+  if Ifexist(3,qry2)=1 then
+   begin
+  ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+    ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+  ExelTab.Cells.Item[i, 2].Value := '2.3';
+  ExelTab.Cells.Item[i, 8].Value := 4070.76;
+  ExelTab.Cells.Item[i, 4].Value := 'Периодический медицинский осмотр (ВЭК) работников, обеспечивающих движение поездов (женщины до 40 лет) - 6Ц';
+    ExelTab.Cells[i,4].WrapText := True;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+    ExelTab.rows[i].font.bold:=True;
+  i:=i+1; k:=1;
+  qry2.First;
+  while not (qry2.Eof) do
+  begin
+    if (qry2.FieldByName('sex').Value = 'жен') and (qry2.FieldByName('voz').Value < 40) and (qry2.FieldByName('idusl').Value = 1002) then
+    begin
+
+     ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+    ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+    ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+    ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+    ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+    ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+
+
+         i:=i+1;
+    end;
+    qry2.Next;
+  end;
+  ExelTab.Cells.Item[i-k, 7].Value := k-1;  KolAll:=KolAll+(k-1);
+  ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+            sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   end;
+  //4)
+
+  if (Ifexist(4,qry2)=1) or (Ifexist(7,qry1)=1) then
+   begin
+      ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+      ExelTab.Selection.MergeCells:=True;
+
+      ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+      ExelTab.Cells.Item[i, 2].Value := '2.4';
+      ExelTab.Cells.Item[i, 8].Value := 4528.18;
+      ExelTab.Cells.Item[i, 4].Value := 'Периодический медицинский осмотр (ВЭК) работников, обеспечивающих движение поездов (женщины после 40 лет) - 6Ц';
+        ExelTab.Cells[i,4].WrapText := True;
+
+        ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+        ExelTab.Selection.Borders.LineStyle := 1;
+        ExelTab.rows[i].font.bold:=True;
+      i:=i+1; k:=1;
+
+      qry2.First;
+      while not (qry2.Eof) do
+      begin
+        if (qry2.FieldByName('sex').Value = 'жен') and (qry2.FieldByName('voz').Value >= 40) and (qry2.FieldByName('idusl').Value = 1002) then
+        begin
+
+           ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+          ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+          ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+          ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+          ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+          ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+          ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+          ExelTab.Selection.Borders.LineStyle := 1;
+
+
+               i:=i+1;
+        end;
+        qry2.Next;
+      end;
+      //ExelTab.Cells.Item[i-k, 7].Value := k-1; KolAll:=KolAll+(k-1);
+      //ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+      //sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+       //k:=k-1;
+      //по первому запросу
+      qry1.First;
+      while not (qry1.Eof) do
+      begin
+        if (qry1.FieldByName('sex').Value = 'жен') and (qry1.FieldByName('voz').Value >= 40) and (qry1.FieldByName('idusl').Value = 1000) then
+        begin
+
+           ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+          ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
+          ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
+          ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
+          ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('data_r').AsString;
+          ExelTab.Cells.Item[i, 6].Value := qry1.FieldByName('profes').AsString;
+
+          ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+          ExelTab.Selection.Borders.LineStyle := 1;
+
+
+               i:=i+1;
+        end;
+        qry1.Next;
+      end;
+      ExelTab.Cells.Item[i-k, 7].Value := k-1; KolAll:=KolAll+(k-1);
+      ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+      sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+
+
+
+   end;
+  //5)
+  if Ifexist(5,qry2)=1 then
+   begin
+  ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+    ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+  ExelTab.Cells.Item[i, 2].Value := '6.2';
+  ExelTab.Cells.Item[i, 8].Value := 4719;
+  ExelTab.Cells.Item[i, 4].Value := 'Профилактический медицинский осмотр 1 раз в 5 лет в амбулаторно-поликлинических условиях';
+    ExelTab.Cells[i,4].WrapText := True;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+    ExelTab.rows[i].font.bold:=True;
+  i:=i+1; k:=1;
+  qry2.First;
+  while not (qry2.Eof) do
+  begin
+    if (qry2.FieldByName('idusl').Value = 10) then
+    begin
+
+     ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+    ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+    ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+    ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+    ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+    ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+
+
+         i:=i+1;
+    end;
+    qry2.Next;
+  end;
+  ExelTab.Cells.Item[i-k, 7].Value := k-1;  KolAll:=KolAll+(k-1);
+  ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+            sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   end;
+
+  //6)
+  if Ifexist(6,qry2)=1 then
+   begin
+  ExelTab.Range[ExelTab.Cells[i, 4], ExelTab.Cells[i, 6]].Select;
+          ExelTab.Selection.MergeCells:=True;
+
+    ExelTab.Cells.Item[i, 1].Value := n;  n := n + 1;
+  ExelTab.Cells.Item[i, 2].Value := '6.3';
+  ExelTab.Cells.Item[i, 8].Value := 6540;
+  ExelTab.Cells.Item[i, 4].Value := 'Профилактический медицинский осмотр 1 раз в 5 лет в  условиях круглосуточного стационара';
+    ExelTab.Cells[i,4].WrapText := True;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+    ExelTab.rows[i].font.bold:=True;
+  i:=i+1; k:=1;
+  qry2.First;
+  while not (qry2.Eof) do
+  begin
+    if (qry2.FieldByName('idusl').Value = 11) then
+    begin
+
+     ExelTab.Cells.Item[i, 1].Value := k; k:=k+1;
+    ExelTab.Cells.Item[i, 2].Value := qry2.FieldByName('fam').AsString;
+    ExelTab.Cells.Item[i, 3].Value := qry2.FieldByName('imya').AsString;
+    ExelTab.Cells.Item[i, 4].Value := qry2.FieldByName('fath').AsString;
+    ExelTab.Cells.Item[i, 5].Value := qry2.FieldByName('data_r').AsString;
+    ExelTab.Cells.Item[i, 6].Value := qry2.FieldByName('profes').AsString;
+
+    ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+
+
+         i:=i+1;
+    end;
+    qry2.Next;
+  end;
+  ExelTab.Cells.Item[i-k, 7].Value := k-1;  KolAll:=KolAll+(k-1);
+  ExelTab.Cells.Item[i-k, 9].Value := '=G'+IntToStr(i-k)+'*H'+IntToStr(i-k);
+            sumall:=sumall+ ExelTab.Cells.Item[i-k, 9].Value;
+   end;
+
+  //Выводим итого
+
+  ExelTab.Cells.Item[i, 6].Value := 'Итого';
+  ExelTab.Cells.Item[i, 7].Value := KolAll;
+  ExelTab.Cells.Item[i, 9].Value := sumall;
+  ExelTab.rows[i].font.bold:=True;
+
+   ExelTab.Range[ExelTab.Cells[i, 1], ExelTab.Cells[i, 9]].Select;
+    ExelTab.Selection.Borders.LineStyle := 1;
+  //Выводим подписи
+  i:=i+3;
+
+  ExelTab.Cells.Item[i, 2].Value := 'Врач терапевт:____________(_________________)';
+  ExelTab.Cells.Item[i, 6].Value := 'Специалист по управлению персоналом:__________________(_________________)';
+  ExelTab.Cells[i,6].WrapText := False;
+  i:=i+1;
+  ExelTab.Cells.Item[i, 2].Value := '                                подпись                ФИО';
+  ExelTab.Cells.Item[i, 7].Value := 'подпись';
+  ExelTab.Cells.Item[i, 8].Value := '             ФИО';
+  i:=i+1;
+  ExelTab.Cells.Item[i, 3].Value := 'МП';
+  ExelTab.Cells.Item[i, 7].Value := 'МП';
+
+
+
+
+
+  ExelTab.ActiveWorkbook.SaveAs(st_in + 'Журнал\экономист\акты\' + fDM.TOrg.FieldByName('imya_org').AsString + FormatDateTime('_yyyy_mm_dd', Date) + FormatDateTime('_hh_mm', time) + '.xlsx', EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, false, EmptyParam, EmptyParam, EmptyParam);
+  ExelTab.ActiveWorkbook.Close;
+  ExelTab.Quit;
+  ExelTab := Unassigned;
+  ShellExecute(Self.Handle, 'open', Pchar(st_in + '\Журнал\экономист\акты\'), nil, nil, SW_SHOWNORMAL);
+
+end;
+
+
+procedure TFormRepUsl2.btn3Click(Sender: TObject);
+begin
+
+  fDM.TOrg.First;
+  btn1Click(Sender);
+  if (qry1.RecordCount <> 0) or (qry2.RecordCount <> 0) then  btn2Click(Sender);
+
+  while not (fDM.TOrg.Eof) do
+  begin
+
+
+
+    btn1Click(Sender);
+    if (qry1.RecordCount <> 0) or (qry2.RecordCount <> 0) then  btn2Click(Sender);
+    fDM.TOrg.Next;
+  end;
+
+end;
+
+end.

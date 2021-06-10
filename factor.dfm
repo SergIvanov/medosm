@@ -12,6 +12,7 @@ object fFactor: TfFactor
   Font.Style = []
   OldCreateOrder = False
   Position = poOwnerFormCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -151,12 +152,16 @@ object fFactor: TfFactor
           FieldName = 'code'
           Footers = <>
           Title.Caption = #1050#1086#1076
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 70
+          Width = 80
+        end
+        item
+          CellButtons = <>
+          DynProps = <>
+          EditButtons = <>
+          FieldName = 'naim'
+          Footers = <>
+          Title.Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+          Width = 400
         end
         item
           CellButtons = <>
@@ -164,13 +169,7 @@ object fFactor: TfFactor
           EditButtons = <>
           FieldName = 'vrach'
           Footers = <>
-          Title.Caption = #1057#1087#1077#1094#1080#1072#1083#1080#1089#1090#1099
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 300
+          Width = 100
         end
         item
           CellButtons = <>
@@ -178,13 +177,7 @@ object fFactor: TfFactor
           EditButtons = <>
           FieldName = 'issl'
           Footers = <>
-          Title.Caption = #1048#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'Tahoma'
-          Title.Font.Style = [fsBold]
-          Width = 300
+          Width = 100
         end>
       object RowDetailData: TRowDetailPanelControlEh
       end

@@ -257,9 +257,6 @@ type
     wdstrngfldTRabmrd: TWideStringField;
     wdstrngfldTRabmrk: TWideStringField;
     wdstrngfldTRabmrkv: TWideStringField;
-    con1: TFDConnection;
-    fdphysfbdrvrlnk1: TFDPhysFBDriverLink;
-    fdqry1: TFDQuery;
     wdmfldTJournalvredn_fact: TWideMemoField;
     tblTDogovor: TADOTable;
     atncfldTDogovorid: TAutoIncField;
@@ -300,7 +297,7 @@ uses user, main;
 procedure TfDM.DataModuleCreate(Sender: TObject);
 begin
 
-fdphysfbdrvrlnk1.VendorLib:= ExtractFileDir(ParamStr(0))+'\32\fbclient.dll';
+//fdphysfbdrvrlnk1.VendorLib:= ExtractFileDir(ParamStr(0))+'\32\fbclient.dll';
 
 TMKB.Active := True;
 TOrgNew.Active := True;
@@ -417,3 +414,4 @@ begin
 end;
 
 end.
+

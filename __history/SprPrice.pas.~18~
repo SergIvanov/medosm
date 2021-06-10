@@ -1,0 +1,46 @@
+unit SprPrice;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, Data.DB,
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBGridEh, Data.Win.ADODB;
+
+type
+  TFormPrice = class(TForm)
+    dbgrdh1: TDBGridEh;
+    dsPrice: TDataSource;
+    qryPrice: TADOQuery;
+    procedure btn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Iddogovor : Integer;
+
+  end;
+
+var
+  FormPrice: TFormPrice;
+
+implementation
+ uses DM;
+{$R *.dfm}
+
+procedure TFormPrice.btn1Click(Sender: TObject);
+begin
+ShowMessage(IntToStr(Iddogovor));
+end;
+
+procedure TFormPrice.FormCreate(Sender: TObject);
+begin
+ qryPrice.Active :=False;
+ qryPrice.Parameters.ParamByName('idDogovor').Value:=Iddogovor;
+ //qryPrice.SQL.Text := 'Select * From SprPrice where SprPrice.id_dog = :idDogovor';
+ qryPrice.Active :=True;
+end;
+
+end.

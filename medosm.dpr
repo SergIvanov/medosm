@@ -28,14 +28,14 @@ uses
   equalRab in 'equalRab.pas' {fEqualRab},
   SprProvpatolog in 'SprProvpatolog.pas' {SprProf},
   RepSogaz in 'RepSogaz.pas' {fRepSogaz},
-  repSogazPat in 'repSogazPat.pas' {FrepSogazPat},
-  RepSogaz2 in 'RepSogaz2.pas' {Form1},
   Reso in 'Reso.pas' {FormReso},
   SprDogovor in 'SprDogovor.pas' {FormDogovor},
   SprPrice in 'SprPrice.pas' {FormPrice},
   RepUsl2 in 'RepUsl2.pas' {FormRepUsl2},
   Jurnal282 in 'Jurnal282.pas' {Form2},
-  RepUsl22 in 'RepUsl22.pas' {FormRepUsl22};
+  RepUsl22 in 'RepUsl22.pas' {FormRepUsl22},
+  FormEkonom in 'FormEkonom.pas' {frmEkonom},
+  RepUslSTP in 'RepUslSTP.pas' {RepUslSTM};
 
 {$R *.res}
 
@@ -67,13 +67,13 @@ begin
   Application.CreateForm(TfEqualRab, fEqualRab);
   Application.CreateForm(TSprProf, SprProf);
   Application.CreateForm(TfRepSogaz, fRepSogaz);
-  Application.CreateForm(TFrepSogazPat, FrepSogazPat);
-  Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TFormReso, FormReso);
   Application.CreateForm(TFormDogovor, FormDogovor);
   Application.CreateForm(TFormPrice, FormPrice);
   Application.CreateForm(TFormRepUsl2, FormRepUsl2);
   Application.CreateForm(TForm2, Form2);
   Application.CreateForm(TFormRepUsl22, FormRepUsl22);
+  Application.CreateForm(TfrmEkonom, frmEkonom);
+  Application.CreateForm(TRepUslSTM, RepUslSTM);
   Application.Run;
 end.
