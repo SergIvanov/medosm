@@ -34,6 +34,7 @@ type
 
 var
   RepUslSTM: TRepUslSTM;
+procedure FIO(var ExelTab: OleVariant;var i:Integer;var qry1:TADOQuery;r:Integer);
 
 implementation
   uses DM;
@@ -78,6 +79,16 @@ qry1.Active := true;
 
 end;
 
+procedure FIO(var ExelTab: OleVariant;var i:Integer;var qry1:TADOQuery;r:Integer);
+begin
+  ExelTab.Cells.Item[i, r].Value := 1;
+ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString+' '+qry1.FieldByName('imya').AsString+' '+qry1.FieldByName('fath').AsString;
+ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('profes').AsString;
+ExelTab.Cells.Item[i, 17].Value := 1;
+i:=i+1;
+end;
+
+
 procedure TRepUslSTM.btn2Click(Sender: TObject);
 var
 
@@ -100,38 +111,41 @@ begin
    begin
 
 
-   ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString+' '+qry1.FieldByName('imya').AsString+' '+qry1.FieldByName('fath').AsString;
-   ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('profes').AsString;
 
    if qry1.FieldByName('sex').AsString = 'муж' then
     begin
+
+
    case qry1.FieldByName('idusl').AsInteger of
-      16 : ExelTab.Cells.Item[i, 4].Value := 1;
-      17 : ExelTab.Cells.Item[i, 6].Value := 1;
-      18 : ExelTab.Cells.Item[i, 8].Value := 1;
-      19 : ExelTab.Cells.Item[i, 10].Value := 1;
-      20 : ExelTab.Cells.Item[i, 12].Value := 1;
-      9 : ExelTab.Cells.Item[i, 14].Value := 1;
-      10 : ExelTab.Cells.Item[i, 15].Value := 1;
-      11 : ExelTab.Cells.Item[i, 16].Value := 1;
+      16 : FIO(ExelTab,i,qry1,4);
+      17 : FIO(ExelTab,i,qry1,6);
+      18 : FIO(ExelTab,i,qry1,8);
+      19 : FIO(ExelTab,i,qry1,10);
+      20 : FIO(ExelTab,i,qry1,12);
+      9 : FIO(ExelTab,i,qry1,14);
+      10 : FIO(ExelTab,i,qry1,15);
+      11 : FIO(ExelTab,i,qry1,16);
+
    end;
+
+
    end
     else
    begin
-      case qry1.FieldByName('idusl').AsInteger of
-      16 : ExelTab.Cells.Item[i, 5].Value := 1;
-      17 : ExelTab.Cells.Item[i, 7].Value := 1;
-      18 : ExelTab.Cells.Item[i, 9].Value := 1;
-      19 : ExelTab.Cells.Item[i, 11].Value := 1;
-      20 : ExelTab.Cells.Item[i, 13].Value := 1;
-      9 : ExelTab.Cells.Item[i, 14].Value := 1;
-      10 : ExelTab.Cells.Item[i, 15].Value := 1;
-      11 : ExelTab.Cells.Item[i, 16].Value := 1;
-   end;
-   end;
-      ExelTab.Cells.Item[i, 17].Value := 1;
 
-     i:=i+1;
+      case qry1.FieldByName('idusl').AsInteger of
+      16 :FIO(ExelTab,i,qry1,5);
+      17 : FIO(ExelTab,i,qry1,7);
+      18 : FIO(ExelTab,i,qry1,9);
+      19 : FIO(ExelTab,i,qry1,11);
+      20 : FIO(ExelTab,i,qry1,12);
+      9 : FIO(ExelTab,i,qry1,14);
+      10 : FIO(ExelTab,i,qry1,15);
+      11 : FIO(ExelTab,i,qry1,16);
+   end;
+
+   end;
+
     qry1.Next;
    end;
 
@@ -174,11 +188,7 @@ begin
    begin
 
 
-   ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
-   ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
-   ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
 
-   ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('profes').AsString;
 
 
 
@@ -186,15 +196,38 @@ begin
          if qry1.FieldByName('idusl').AsInteger = 1001 then
           begin
              ExelTab.Cells.Item[i, 7].Value := 1;ExelTab.Cells.Item[i, 8].Value := 1;
+
+               ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
+            ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
+            ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
+
+            ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('profes').AsString;
+            i:=i+1;
           end;
         if qry1.FieldByName('idusl').AsInteger = 1002 then
           begin
-             ExelTab.Cells.Item[i, 6].Value := 1;ExelTab.Cells.Item[i, 8].Value := 1;
+            ExelTab.Cells.Item[i, 6].Value := 1;ExelTab.Cells.Item[i, 8].Value := 1;
+            ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
+            ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
+            ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
+
+            ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('profes').AsString;
+            i:=i+1;
+          end;
+
+           if qry1.FieldByName('idusl').AsInteger = 12 then
+          begin
+            ExelTab.Cells.Item[i, 6].Value := 1;ExelTab.Cells.Item[i, 8].Value := 1;
+            ExelTab.Cells.Item[i, 2].Value := qry1.FieldByName('fam').AsString;
+            ExelTab.Cells.Item[i, 3].Value := qry1.FieldByName('imya').AsString;
+            ExelTab.Cells.Item[i, 4].Value := qry1.FieldByName('fath').AsString;
+
+            ExelTab.Cells.Item[i, 5].Value := qry1.FieldByName('profes').AsString;
+            i:=i+1;
           end;
 
 
 
-     i:=i+1;
     qry1.Next;
    end;
 
@@ -203,7 +236,7 @@ begin
 
 
 
-  ExelTab.ActiveWorkbook.SaveAs(st_in + 'Журнал\экономист\акты\' + fDM.TOrg.FieldByName('imya_org').AsString + FormatDateTime('_yyyy_mm_dd', Date) + FormatDateTime('_hh_mm', time) + '6ц'+'.xls', EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, false, EmptyParam, EmptyParam, EmptyParam);
+  ExelTab.ActiveWorkbook.SaveAs(st_in + 'Журнал\экономист\акты\' + fDM.TOrg.FieldByName('imya_org').AsString + FormatDateTime('_yyyy_mm_dd', Date) + FormatDateTime('_hh_mm', time) + '_6ц'+'.xls', EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, EmptyParam, false, EmptyParam, EmptyParam, EmptyParam);
   ExelTab.ActiveWorkbook.Close;
   ExelTab.Quit;
 
